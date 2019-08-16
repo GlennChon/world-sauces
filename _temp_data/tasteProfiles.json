@@ -1,0 +1,11 @@
+{
+  "tasteProfiles": [
+    { "desc": "Bitter" },
+    { "desc": "Málà" },
+    { "desc": "Salty" },
+    { "desc": "Sour" },
+    { "desc": "Spicy" },
+    { "desc": "Sweet" },
+    { "desc": "Umami" }
+  ]
+}
