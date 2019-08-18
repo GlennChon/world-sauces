@@ -1,0 +1,28 @@
+.App {
+  text-align: center;
+  color: #3d414a;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+}
+
+.App-header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin: 0;
+  padding: 0;
+}
+
+h1,
+h2 {
+  font-family: "Playfair Display", "Museo Sans Rounded", "Roboto Condensed",
+    "Roboto", "Arial", "sans-serif";
+}
+h3,
+h4 {
+  font-family: "Museo Sans Rounded", "Roboto Condensed", "Roboto", "Arial",
+    "sans-serif";
+}
