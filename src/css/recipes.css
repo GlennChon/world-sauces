@@ -1,0 +1,75 @@
+.recipe-short-container {
+  align-items: flex-start;
+  display: flex;
+  flex-direction: row;
+  flex-flow: row wrap;
+  margin: 5%;
+}
+
+.recipe-short-wrapper {
+  background-color: white;
+  align-items: center;
+  align-content: stretch;
+  display: flex;
+  flex-grow: 1;
+  flex-direction: column;
+  width: 30%;
+  height: inherit;
+  padding-bottom: 40px;
+  margin: 10px;
+}
+
+.recipe-short-wrapper > h1,
+h2,
+h3 {
+  margin: 0;
+}
+.recipe-short-wrapper > h2 {
+  margin: 20px 0 0 0;
+}
+.recipe-short-image-container {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+.cover {
+  max-width: 100%;
+  max-height: 100%;
+  height: auto;
+}
+
+.profile-container {
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: row;
+  margin-top: -20px;
+  font-family: "effra", "Avenir", "Helvetica Neue", "Helvetica", "Arial",
+    "sans-serif";
+}
+
+.profile-wrapper {
+  border-color: white;
+  color: white;
+  border: 1px solid;
+  background: #30a2cc;
+  padding: 5px;
+}
+
+.profile-item {
+  margin: 2px;
+  font-weight: bold;
+  font-family: "Museo Sans Rounded", "Roboto Condensed", "Roboto", "Arial",
+    "sans-serif";
+}
+@media only screen and (max-width: 1200px) {
+  .recipe-short-wrapper {
+    width: 45%;
+  }
+}
+@media only screen and (max-width: 810px) {
+  .recipe-short-wrapper {
+    width: 90%;
+  }
+}
