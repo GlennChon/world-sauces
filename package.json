@@ -4,6 +4,7 @@
   "private": true,
   "dependencies": {
     "@react-native-community/async-storage": "^1.6.1",
+    "babel-standalone": "^6.26.0",
     "bootstrap": "^4.3.1",
     "react": "^16.9.0",
     "react-dom": "^16.9.0",
