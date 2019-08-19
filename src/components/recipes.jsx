@@ -27,7 +27,14 @@ class Recipes extends Component {
           {this.state.recipes.map((recipe, i) => (
             <div className="recipe-short-wrapper" key={i}>
               <div className="recipe-short-image-container">
-                <img src={recipe.imageLink} className="cover" />
+                <img
+                  src={
+                    recipe.imageLink
+                      ? recipe.imageLink
+                      : require("../images/vegetables.svg")
+                  }
+                  className="cover"
+                />
               </div>
               <span className="profile-container">
                 <div className="profile-wrapper">
