@@ -4,7 +4,10 @@ import App from "./App";
 import * as serviceWorker from "./serviceWorker";
 import WebFont from "webfontloader";
 import "bootstrap/dist/css/bootstrap.min.css";
+
+import "./css/recipes.css";
 import "./index.css";
+
 WebFont.load({
   google: {
     families: [
