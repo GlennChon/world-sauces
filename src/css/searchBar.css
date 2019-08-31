@@ -1,0 +1,31 @@
+.search-wrapper {
+  width: 50%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+input {
+  width: 75%;
+  font-size: 24px;
+  /*starts cursor a bit further right*/
+  padding-left: 10px;
+}
+
+.search-btn {
+  text-align: center;
+  padding: 0;
+  width: 25%;
+  margin-left: 5px;
+}
+
+@media (max-width: 368px) {
+  input {
+    font-size: 20px;
+    width: 70%;
+  }
+  .search-btn {
+    width: 30%;
+  }
+}
