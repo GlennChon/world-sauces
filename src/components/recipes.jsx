@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { getRecipes } from "../services/fakeRecipeService";
-import "../css/recipes.css";
+
 class Recipes extends Component {
   state = {
     recipes: []
@@ -18,14 +18,20 @@ class Recipes extends Component {
     });
   };
 
-  handleClick = recipe => {};
+  handleClick = recipe => {
+    console.log(recipe.title + " clicked");
+  };
 
   render() {
     return (
       <React.Fragment>
         <div className="recipe-short-container">
           {this.state.recipes.map((recipe, i) => (
-            <div className="recipe-short-wrapper" key={i}>
+            <div
+              className="recipe-short-wrapper"
+              key={i}
+              onClick={this.handleClick}
+            >
               <div className="recipe-short-image-container">
                 <img
                   src={
