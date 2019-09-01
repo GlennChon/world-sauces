@@ -16,14 +16,14 @@ import NotFound from "./components/notFound";
 // import SearchBar from "./components/searchBar";
 import LoginForm from "./components/loginForm";
 // import RecipeForm from "./components/recipeForm";
-// import RegisterForm from "./components/registerForm";
+import RegisterForm from "./components/registerForm";
 // import TasteProfiles from "./components/tasteProfiles";
 // CSS
 import "./css/App.css";
 import "react-toastify/dist/ReactToastify.css";
 
 class App extends Component {
-  state = { logoIsSmall: true };
+  state = { user: "" };
 
   componentDidMount() {
     const user = auth.getCurrentUser();
@@ -34,12 +34,15 @@ class App extends Component {
   };
 
   render() {
+    const { user } = this.state;
     return (
       <React.Fragment>
-        <NavBar />
+        <ToastContainer />
+        <NavBar user={user} />
         <main className="container">
           <Switch>
             <Route path="/login" component={LoginForm} />
+            <Route path="/register" component={RegisterForm} />
             <Route path="/not-found" component={NotFound} />
             <Redirect from="/" exact to="/recipes" />
             <Redirect to="/not-found" />
