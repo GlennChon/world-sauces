@@ -1,12 +1,16 @@
 import React, { Component } from "react";
 import Joi from "joi-browser";
 
+import Checkbox from "./checkbox";
+import Select from "./select";
 import Input from "./input";
 
 class Form extends Component {
   state = {
     data: {},
-    errors: {}
+    checkedItems: new Map(),
+    errors: {},
+    fields: []
   };
 
   validate = () => {
@@ -60,25 +64,80 @@ class Form extends Component {
     this.setState({ data, errors });
   };
 
+  handleCheckboxChange = ({ currentTarget: input }) => {
+    const data = { ...this.state.data };
+    const item = input.name;
+    const isChecked = input.checked;
+    // add or remove from taste array
+    if (isChecked) {
+      data["taste_profile"].push(item);
+    } else {
+      let index = data["taste_profile"].indexOf(item);
+      data["taste_profile"].splice(index, 1);
+    }
+    this.setState(
+      prevState => (
+        {
+          checkedItems: prevState.checkedItems.set(item, isChecked)
+        },
+        { data }
+      )
+    );
+  };
+
   renderButton(label) {
     return (
-      <button className="btn btn-primary" disabled={this.validate()}>
-        {label}
-      </button>
+      <React.Fragment>
+        <button className="btn btn-primary">{label}</button>
+      </React.Fragment>
     );
   }
 
   renderInput(name, label, type = "text") {
     const { data, errors } = this.state;
     return (
-      <Input
+      <React.Fragment>
+        <Input
+          name={name}
+          type={type}
+          label={label}
+          value={data[name]}
+          error={errors[name]}
+          onChange={this.handleChange}
+        />
+      </React.Fragment>
+    );
+  }
+
+  renderSelect(name, label, options) {
+    const { data, errors } = this.state;
+    return (
+      <Select
         name={name}
-        type={type}
-        label={label}
         value={data[name]}
-        error={errors[name]}
+        label={label}
+        options={options}
         onChange={this.handleChange}
+        error={errors[name]}
       />
+    );
+  }
+
+  renderCheckboxes(label, options) {
+    return (
+      <React.Fragment>
+        {label}
+        <br />
+        {options.map(taste => (
+          <React.Fragment key={taste._id}>
+            <Checkbox
+              name={taste.name}
+              checked={this.state.checkedItems.get(taste.name)}
+              onChange={this.handleCheckboxChange}
+            />
+          </React.Fragment>
+        ))}
+      </React.Fragment>
     );
   }
 }
