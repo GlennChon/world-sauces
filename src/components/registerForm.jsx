@@ -1,11 +1,13 @@
-import React, { Component } from "react";
+import React from "react";
 import Joi from "joi-browser";
 
 import Form from "./common/form";
+import * as userService from "../services/userService";
+import authService from "../services/authService";
 
 class RegisterForm extends Form {
   state = {
-    data: { username: "", password: "" },
+    data: { email: "", username: "", password: "" },
     errors: {}
   };
 
@@ -28,24 +30,36 @@ class RegisterForm extends Form {
     lastName: Joi.string().label("Last Name")
   };
 
-  doSubmit = () => {
+  doSubmit = async () => {
     // Call the server
-    console.log("Form Submitted.");
+    try {
+      const response = await userService.register(this.state.data);
+      authService.loginWithJwt(response.headers["x-auth-token"]);
+      window.location = "/";
+    } catch (ex) {
+      if (ex.response && ex.response.status === 400) {
+        const errors = { ...this.state.errors };
+        if (ex.response.data.ex === "Email") {
+          errors.email = ex.response.data.message;
+        } else {
+          errors.username = ex.response.data.message;
+        }
+        this.setState({ errors });
+      }
+    }
   };
 
   render() {
-    // object destructuring to preven writing this.state....
     return (
-      <div>
+      <React.Fragment>
         <h1>Register</h1>
         <form onSubmit={this.handleSubmit}>
           {this.renderInput("email", "Email")}
           {this.renderInput("username", "Username")}
           {this.renderInput("password", "Password", "password")}
-
           {this.renderButton("Register")}
         </form>
-      </div>
+      </React.Fragment>
     );
   }
 }
