@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React from "react";
 import { Link, NavLink } from "react-router-dom";
 
 const NavBar = ({ user }) => {
@@ -23,12 +23,7 @@ const NavBar = ({ user }) => {
           <NavLink className="nav-item nav-link" to="/recipes">
             Recipes
           </NavLink>
-          <NavLink className="nav-item nav-link" to="/login">
-            Login
-          </NavLink>
-          <NavLink className="nav-item nav-link" to="/logout">
-            Logout
-          </NavLink>
+
           {!user && (
             <React.Fragment>
               <NavLink className="nav-item nav-link" to="/login">
@@ -42,7 +37,7 @@ const NavBar = ({ user }) => {
           {user && (
             <React.Fragment>
               <NavLink className="nav-item nav-link" to="/profile">
-                {user.name}
+                {user.username}
               </NavLink>
               <NavLink className="nav-item nav-link" to="/logout">
                 Logout
