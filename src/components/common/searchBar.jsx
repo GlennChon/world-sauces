@@ -27,6 +27,19 @@ class SearchBar extends Component {
         <form onSubmit={this.handleSubmit}>
           <div className="form-group">
             <div className="input-group">
+              <select
+                name="Countries"
+                id="Countries"
+                onChange={this.handleCountryChange}
+                className="form-control"
+              >
+                <option value="any">Any Country</option>
+                {this.props.countries.map(option => (
+                  <option key={option.code} value={option.code}>
+                    {option.name}
+                  </option>
+                ))}
+              </select>
               <input
                 name="recipe-search"
                 type="search"
@@ -35,23 +48,10 @@ class SearchBar extends Component {
                 value={this.state.searchQuery}
                 className="form-control"
               />
-              <button className="btn" onClick={this.handleSubmit}>
+              <button className="btn" type="submit" onClick={this.handleSubmit}>
                 <FontAwesomeIcon icon={faSearch} />
               </button>
             </div>
-            <select
-              name="Countries"
-              id="Countries"
-              onChange={this.handleCountryChange}
-              className="form-control"
-            >
-              <option value="any">Any Country</option>
-              {this.props.countries.map(option => (
-                <option key={option.code} value={option.code}>
-                  {option.name}
-                </option>
-              ))}
-            </select>
           </div>
         </form>
       </React.Fragment>
