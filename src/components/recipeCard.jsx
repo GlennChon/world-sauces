@@ -19,7 +19,9 @@ const RecipeCard = ({ recipe }) => {
         </div>
       </span>
       <h3>{title}</h3>
-      <h4>Origin: {origin_country.name}</h4>
+      <h5>
+        Origin: {origin_country.name == null ? " ~ " : origin_country.name}
+      </h5>
     </React.Fragment>
   );
 };
