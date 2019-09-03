@@ -19,6 +19,16 @@ export function getRecipes(
   return http.get(url);
 }
 
+export function getPopular() {
+  let url = apiEndpoint + "/popular";
+  return http.get(url);
+}
+
+export function getRandom() {
+  let url = apiEndpoint + "/random";
+  return http.get(url);
+}
+
 export function getRecipe(recipeId) {
   return http.get(recipeUrl(recipeId));
 }
