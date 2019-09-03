@@ -1,15 +1,21 @@
-import React, { Component } from "react";
-import RecipeCard from "./recipeCard";
+import React from "react";
 
-class Recipe extends Component {
-  state = {};
-  render() {
-    return (
-      <React.Fragment>
-        <RecipeCard />
-      </React.Fragment>
-    );
-  }
-}
+const RecipeCard = () => {
+  return (
+    <React.Fragment>
+      <h2>Recipe Card</h2>
+      <ul>
+        <li>Recipes</li>
+      </ul>
+      <ul>
+        <li>item 1</li>
+        <li>item 2</li>
+        <li>item 3</li>
+        <li>item 4</li>
+        <li>item 5</li>
+      </ul>
+    </React.Fragment>
+  );
+};
 
-export default Recipe;
+export default RecipeCard;
