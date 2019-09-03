@@ -33,10 +33,9 @@ class Recipes extends Component {
   };
 
   popularRecipes = async () => {
-    let searchSort = "likes-asc";
-    let json = await recipeService.getRecipes("", "", "", searchSort);
+    let json = await recipeService.getPopular();
     console.log(json.data);
-    this.setState({ recipes: json, searchSort });
+    this.setState({ recipes: json });
   };
 
   handleLike = recipe => {
@@ -89,7 +88,7 @@ class Recipes extends Component {
 
   searchRecipes = async (searchQuery, searchCountry) => {
     if (!searchQuery) searchQuery = "";
-    if (!searchCountry || searchCountry === "Any") searchCountry = "";
+    if (!searchCountry || searchCountry === "any") searchCountry = "";
     let json = await recipeService.getRecipes(
       searchQuery,
       searchCountry,
