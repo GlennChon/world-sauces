@@ -7,8 +7,16 @@ function recipeUrl(id) {
   return `${apiEndpoint}/${id}`;
 }
 
-export function getRecipes() {
-  return http.get(apiEndpoint);
+export function getRecipes(
+  search = "",
+  country = "",
+  author = "",
+  sort = "title-asc"
+) {
+  let url =
+    apiEndpoint +
+    `/?search=${search}&country=${country}&author=${author}&sort=${sort}`;
+  return http.get(url);
 }
 
 export function getRecipe(recipeId) {
