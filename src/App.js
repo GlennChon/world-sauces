@@ -10,17 +10,13 @@ import Home from "./components/home";
 // import Logo from "./components/logo";
 // import Users from "./components/users";
 import NavBar from "./components/navBar";
-
 import Recipes from "./components/recipes";
-import RecipeForm from "./components/recipeForm";
 // import Footer from "./components/footer";
-
 import Logout from "./components/logout";
 import NotFound from "./components/notFound";
-// import Countries from "./components/countries";
-// import SearchBar from "./components/searchBar";
 import LoginForm from "./components/loginForm";
-// import RecipeForm from "./components/recipeForm";
+import RecipeForm from "./components/recipeForm";
+import RecipeDisplay from "./components/recipeDisplay";
 
 import Profile from "./components/profile";
 import ProfileForm from "./components/profileForm";
@@ -55,15 +51,17 @@ class App extends Component {
           <Switch>
             <Route path="/login" component={LoginForm} />
             <Route path="/logout" component={Logout} />
-            <ProtectedRoute path="/recipes/:id" component={RecipeForm} />
+            <ProtectedRoute path="/recipe/edit/:id" component={RecipeForm} />
+
+            <Route path="/recipe/:id" component={RecipeDisplay} />
             <Route
               path="/recipes"
               render={props => <Recipes {...props} user={this.state.user} />}
             />
             <Route path="/not-found" component={NotFound} />
 
-            <Route path="/profile" component={Profile} />
             <Route path="/profile/edit" component={ProfileForm} />
+            <Route path="/profile" component={Profile} />
             <Route path="/register" component={RegisterForm} />
             <Route path="/" exact component={Home} />
             <Redirect from="/home" to="/" />
