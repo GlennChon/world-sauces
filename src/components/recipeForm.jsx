@@ -1,9 +1,10 @@
 import React from "react";
 import Joi from "joi-browser";
+import { Redirect } from "react-router-dom";
 
 import Form from "./common/form";
 
-import auth from "../services/authService";
+import * as authService from "../services/authService";
 import { getCountries } from "../services/countryService";
 import { getTasteProfiles } from "../services/tasteProfileService";
 import * as recipeService from "../services/recipeService";
@@ -84,7 +85,7 @@ class RecipeForm extends Form {
   }
   setAuthor = async () => {
     // set author
-    const user = auth.getCurrentUser();
+    const user = authService.getCurrentUser();
     let data = this.state.data;
     data.author = user.username;
     this.setState({ data });
@@ -151,6 +152,8 @@ class RecipeForm extends Form {
   };
 
   render() {
+    if (!authService.getCurrentUser()) return <Redirect to="/" />;
+
     //const { data: recipe, countries, taste_profiles } = this.state.data;
     const ingredientList = "ingredients";
     const instructionList = "instructions";
