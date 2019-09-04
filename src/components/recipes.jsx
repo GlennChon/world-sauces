@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import { Link } from "react-router-dom";
 import _ from "lodash";
 
 import * as recipeService from "../services/recipeService";
@@ -99,8 +98,7 @@ class Recipes extends Component {
   };
 
   render() {
-    const { pageSize, currentPage, searchQuery } = this.state;
-    const { user } = this.props;
+    const { pageSize, currentPage } = this.state;
 
     const searchPlaceHolder = "Search ...";
     return (
