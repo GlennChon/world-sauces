@@ -1,10 +1,11 @@
 import React, { Component } from "react";
 import * as recipeService from "../services/recipeService";
 import _ from "lodash";
+import { Redirect } from "react-router-dom";
 
 import RecipeCard from "./recipeCard";
-import { faUmbrella } from "@fortawesome/free-solid-svg-icons";
-import { async } from "q";
+import RegisterForm from "./registerForm";
+import authService from "../services/authService";
 
 class Home extends Component {
   state = {
@@ -25,6 +26,22 @@ class Home extends Component {
     let json = await recipeService.getRandom();
     this.setState({ random: json });
   };
+
+  renderLoggedOutInMsg = () => {
+    let msg = "Join the community!";
+    if (authService.getCurrentUser()) {
+      return;
+    } else {
+      return (
+        <React.Fragment>
+          <h1>{msg}</h1>
+          <RegisterForm></RegisterForm>
+        </React.Fragment>
+      );
+    }
+  };
+
+  renderLoggedInMsg = () => {};
 
   renderPopular() {
     let recipes = this.state.popular.data;
@@ -69,6 +86,7 @@ class Home extends Component {
         <br />
         <h1>Random</h1>
         <div className="recipe-short-container">{this.renderRandom()}</div>
+        {this.renderLoggedOutInMsg()}
       </React.Fragment>
     );
   }
