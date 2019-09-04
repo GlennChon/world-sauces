@@ -88,12 +88,7 @@ class Recipes extends Component {
   searchRecipes = async (searchQuery, searchCountry) => {
     if (!searchQuery) searchQuery = "";
     if (!searchCountry || searchCountry === "any") searchCountry = "";
-    let json = await recipeService.getRecipes(
-      searchQuery,
-      searchCountry,
-      "",
-      ""
-    );
+    let json = await recipeService.getRecipes(searchQuery, searchCountry);
     this.setState({ recipes: json, searchQuery });
   };
 
