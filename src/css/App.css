@@ -6,7 +6,6 @@
   display: flex;
   justify-content: center;
 }
-
 .App-header {
   display: flex;
   flex-direction: row;
@@ -15,7 +14,6 @@
   margin: 0;
   padding: 0;
 }
-
 h1,
 h2 {
   font-family: "Playfair Display", "Museo Sans Rounded", "Roboto Condensed",
@@ -25,4 +23,24 @@ h3,
 h4 {
   font-family: "Museo Sans Rounded", "Roboto Condensed", "Roboto", "Arial",
     "sans-serif";
+}
+li.borderless {
+  border: 0 none;
+}
+li.ingredient {
+  margin: 3px 0 6px 8px;
+  padding: 0;
+}
+ul.ingredients-list {
+  padding: 10px;
+  margin-top: 10px;
+  border: solid 1px;
+  border-radius: 5px;
+  border-color: #dfdfdf;
+  background-color: white;
+  font-size: 1.2em;
+}
+
+ol.instructions-list {
+  font-size: 1.2em;
 }
