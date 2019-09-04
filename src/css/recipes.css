@@ -44,7 +44,7 @@ h3 {
   padding: 0;
   display: flex;
   flex-direction: row;
-  margin-top: -15px;
+  margin-top: -18px;
   font-family: "effra", "Avenir", "Helvetica Neue", "Helvetica", "Arial",
     "sans-serif";
 }
@@ -63,6 +63,33 @@ h3 {
   font-family: "Museo Sans Rounded", "Roboto Condensed", "Roboto", "Arial",
     "sans-serif";
 }
+
+.likes {
+  margin: 0;
+  padding: 0;
+  width: 90px;
+  height: 80px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  position: relative;
+  top: -100%;
+  left: calc(100% - 90px);
+  background-color: rgba(255, 255, 255, 0.9);
+  border-left: 20px double;
+  border-bottom: 2px double;
+
+  border-color: coral;
+  border-bottom-left-radius: 100%;
+  color: coral;
+}
+.likes > h5,
+.likes > .card-icon {
+  float: right;
+  margin-left: 25%;
+}
+
 @media only screen and (max-width: 1200px) {
   .recipe-short-wrapper {
     width: 45%;
