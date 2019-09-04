@@ -1,4 +1,8 @@
 import React, { Component } from "react";
+import Img from "react-image";
+import vegetableImg from "../../images/vegetables.svg";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faHeart } from "@fortawesome/free-solid-svg-icons";
 
 class Display extends Component {
   state = { data: {} };
@@ -8,73 +12,106 @@ class Display extends Component {
     console.log("edit btn clicked");
   };
 
-  renderEditButton = () => {
-    // check if user is recipe author
-    // if true, render edit btn
+  renderLikes = (likes = 0) => {
     return (
       <React.Fragment>
-        <button className="btn btn-primary">Edit</button>
-      </React.Fragment>
-    );
-  };
-  renderImg = () => {
-    // take img src
-    // use IMG component
-    return (
-      <React.Fragment>
-        <Img></Img>
+        <div className="likes">
+          <FontAwesomeIcon icon={faHeart} className="card-icon" />
+          <h5>{likes}</h5>
+        </div>
       </React.Fragment>
     );
   };
 
-  renderMainTitle = () => {
+  renderEditButton = (name, onClick, btnClassName = "") => {
     return (
       <React.Fragment>
-        <h1>Main Title</h1>
+        <button className={"btn btn-primary " + btnClassName} onClick={onClick}>
+          Edit
+        </button>
       </React.Fragment>
     );
   };
 
-  renderChildTitle = () => {
+  renderImg = name => {
+    const data = this.state.data;
     return (
       <React.Fragment>
-        <h4>Child Title</h4>
+        <Img src={[data[name], vegetableImg]} className="cover" />
       </React.Fragment>
     );
   };
 
-  renderTasteProfiles = () => {
-    // iterate over each profile in array
-    // display
+  renderMainTitle = name => {
+    const data = { ...this.state.data };
     return (
       <React.Fragment>
-        <div>Taste Profiles Array</div>
+        <h1>{data[name]}</h1>
       </React.Fragment>
     );
   };
-  renderIngredients = () => {
-    // iterate over each ingredient in array
-    // display each in list
+
+  renderChildTitle = (name, name2 = null, label = null) => {
+    const data = { ...this.state.data };
+    let item;
+    if (name2) {
+      item = data[name][name2];
+    } else {
+      item = data[name];
+    }
     return (
       <React.Fragment>
-        <ul style="list-style-type:none;">
-          <li>Coffee</li>
-          <li>Tea</li>
-          <li>Milk</li>
+        <h4>{label === "" ? item : label + " : " + item}</h4>
+      </React.Fragment>
+    );
+  };
+
+  renderHorizontalList = name => {
+    const data = { ...this.state.data };
+    return (
+      <React.Fragment>
+        {data[name].map((item, k) => (
+          <span className="profile-item" key={k}>
+            {item}
+          </span>
+        ))}
+      </React.Fragment>
+    );
+  };
+
+  renderList = (name, label = "", groupClassName = "", itemClassName = "") => {
+    const data = { ...this.state.data };
+    return (
+      <React.Fragment>
+        <h2>{label}</h2>
+        <ul className={"list-group " + groupClassName}>
+          {data[name].map((item, k) => (
+            <li className={"list-group-item " + itemClassName} key={k}>
+              {item}
+            </li>
+          ))}
         </ul>
       </React.Fragment>
     );
   };
 
-  renderInstructions = () => {
-    // iterate over each instruction in array
-    // display each in numbered list
+  renderNumberedList = (
+    name,
+    label = "",
+    groupClassName = "",
+    itemClassName = ""
+  ) => {
+    const data = { ...this.state.data };
+
     return (
       <React.Fragment>
-        <ol>
-          <li>Coffee</li>
-          <li>Tea</li>
-          <li>Milk</li>
+        <h2>{label}</h2>
+        <ol className={"list-group " + groupClassName}>
+          {data[name].map((item, k) => (
+            <li className={"list-group-item " + itemClassName} key={k}>
+              {k + 1 + ".\t" + item}
+            </li>
+          ))}
         </ol>
       </React.Fragment>
     );
