@@ -13,8 +13,8 @@ const RecipeCard = ({ recipe }) => {
     <React.Fragment>
       <div className="recipe-short-image-container">
         <Img src={[image_link, vegetableImg]} className="cover" />
-        <div className="likes">
-          <FontAwesomeIcon icon={faHeart} className="card-icon" />{" "}
+        <div className="recipe-card-likes">
+          <FontAwesomeIcon icon={faHeart} className="card-icon" />
           <h5>{likes}</h5>
         </div>
       </div>
