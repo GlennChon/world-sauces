@@ -1,5 +1,6 @@
 import React from "react";
 import Joi from "joi-browser";
+import { Redirect } from "react-router-dom";
 
 import Form from "./common/form";
 import * as userService from "../services/userService";
@@ -50,6 +51,7 @@ class RegisterForm extends Form {
   };
 
   render() {
+    if (authService.getCurrentUser()) return <Redirect to="/" />;
     return (
       <React.Fragment>
         <h1>Register</h1>
