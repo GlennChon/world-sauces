@@ -64,7 +64,7 @@ h3 {
     "sans-serif";
 }
 
-.likes {
+.recipe-card-likes {
   margin: 0;
   padding: 0;
   width: 90px;
@@ -84,8 +84,8 @@ h3 {
   border-bottom-left-radius: 100%;
   color: coral;
 }
-.likes > h5,
-.likes > .card-icon {
+.recipe-card-likes > h5,
+.recipe-card-likes > .card-icon {
   float: right;
   margin-left: 25%;
 }
