@@ -1,1 +1,1 @@
-{ "apiUrl": "http://localhost:3333/api", "tokenKey": "token" }
+{ "apiUrl": "http://192.168.1.54:3333/api", "tokenKey": "token" }
