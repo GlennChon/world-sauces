@@ -23,10 +23,13 @@ class Display extends Component {
     );
   };
 
-  renderEditButton = (name, onClick, btnClassName = "") => {
+  renderEditButton = (onClick, btnClassName = "") => {
     return (
       <React.Fragment>
-        <button className={"btn btn-primary " + btnClassName} onClick={onClick}>
+        <button
+          className={"btn btn-primary " + btnClassName}
+          onClick={e => this.handleEditClick(e)}
+        >
           Edit
         </button>
       </React.Fragment>
@@ -51,7 +54,7 @@ class Display extends Component {
     );
   };
 
-  renderChildTitle = (name, name2 = null, label = null) => {
+  renderChildTitle = (name, label = null, name2 = null) => {
     const data = { ...this.state.data };
     let item;
     if (name2) {
@@ -72,7 +75,7 @@ class Display extends Component {
       <React.Fragment>
         {data[name].map((item, k) => (
           <span className="profile-item" key={k}>
-            {item}
+            {item.name}
           </span>
         ))}
       </React.Fragment>
@@ -87,7 +90,7 @@ class Display extends Component {
         <ul className={"list-group " + groupClassName}>
           {data[name].map((item, k) => (
             <li className={"list-group-item " + itemClassName} key={k}>
-              {item}
+              {item.value}
             </li>
           ))}
         </ul>
@@ -109,7 +112,7 @@ class Display extends Component {
         <ol className={"list-group " + groupClassName}>
           {data[name].map((item, k) => (
             <li className={"list-group-item " + itemClassName} key={k}>
-              {k + 1 + ".\t" + item}
+              {k + 1 + ".\t" + item.value}
             </li>
           ))}
         </ol>
