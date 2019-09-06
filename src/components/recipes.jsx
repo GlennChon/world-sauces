@@ -33,7 +33,6 @@ class Recipes extends Component {
 
   popularRecipes = async () => {
     let json = await recipeService.getPopular();
-    console.log(json.data);
     this.setState({ recipes: json });
   };
 
@@ -81,10 +80,6 @@ class Recipes extends Component {
     return { totalCount: filtered.length, data: movies };
   };
 
-  handleClick = i => {
-    console.log(this.state.recipes[i]);
-  };
-
   searchRecipes = async (searchQuery, searchCountry) => {
     if (!searchQuery) searchQuery = "";
     if (!searchCountry || searchCountry === "any") searchCountry = "";
@@ -93,9 +88,6 @@ class Recipes extends Component {
   };
 
   render() {
-    const { pageSize, currentPage } = this.state;
-
-    const searchPlaceHolder = "Search ...";
     return (
       <React.Fragment>
         {/*Search*/}
@@ -105,11 +97,6 @@ class Recipes extends Component {
         />
         {/*Recipe List */}
         <RecipeList recipes={this.state.recipes.data} />
-        <Pagination
-          pageSize={pageSize}
-          currentPage={currentPage}
-          onPageChange={this.handlePageChange}
-        />
       </React.Fragment>
     );
   }
