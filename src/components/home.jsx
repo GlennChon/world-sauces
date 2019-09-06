@@ -16,7 +16,12 @@ class Home extends Component {
     await this.loadPopularRecipes();
     await this.loadRandomRecipes();
   }
+  handleCardClick = (recipeId, e) => {
+    e.preventDefault();
+    console.log("clicked: " + recipeId);
 
+    this.props.history.push("/recipe/" + recipeId);
+  };
   loadPopularRecipes = async () => {
     let json = await recipeService.getPopular();
     this.setState({ popular: json });
@@ -51,7 +56,11 @@ class Home extends Component {
     } else {
       for (let i = 0; i < 3; i++) {
         popular.push(
-          <div key={i} className="recipe-short-wrapper">
+          <div
+            key={i}
+            className="recipe-short-wrapper"
+            onClick={e => this.handleCardClick(recipes._id, e)}
+          >
             <RecipeCard key={recipes[i].id} recipe={recipes[i]} />
           </div>
         );
@@ -68,7 +77,11 @@ class Home extends Component {
     } else {
       for (let i = 0; i < 3; i++) {
         random.push(
-          <div key={i} className="recipe-short-wrapper">
+          <div
+            key={i}
+            className="recipe-short-wrapper"
+            onClick={e => this.handleCardClick(recipes[i]._id, e)}
+          >
             <RecipeCard key={recipes[i].id} recipe={recipes[i]} />
           </div>
         );
