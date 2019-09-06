@@ -3,15 +3,6 @@ import Display from "./common/display";
 import * as authService from "../services/authService";
 import * as recipeService from "../services/recipeService";
 
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {
-  faAppleAlt,
-  faEgg,
-  faCarrot,
-  faLemon,
-  faPepperHot
-} from "@fortawesome/free-solid-svg-icons";
-
 class RecipeDisplay extends Display {
   state = {
     data: {
@@ -29,7 +20,6 @@ class RecipeDisplay extends Display {
   };
 
   mapToViewModel(recipe) {
-    console.log(recipe);
     return {
       _id: recipe._id,
       title: recipe.title,
@@ -48,7 +38,6 @@ class RecipeDisplay extends Display {
     try {
       const recipeId = this.props.match.params.id;
       const { data: recipe } = await recipeService.getRecipe(recipeId);
-      console.log(recipe);
       this.setState({ data: this.mapToViewModel(recipe) });
     } catch (ex) {
       if (ex.response && ex.response.status === 404)
@@ -70,7 +59,9 @@ class RecipeDisplay extends Display {
         {this.renderImg("image_link")}
         {this.renderLikes()}
         {this.renderHorizontalList("taste_profile")}
-        {this.renderChildTitle("origin_country", "name", "Country")}
+        {this.renderChildTitle("origin_country", "Country", "name")}
+
+        {this.renderChildTitle("description", "Description")}
         <div className="row">
           <div className="col-sm-8">
             {this.renderList(
