@@ -1,12 +1,24 @@
 import React, { Component } from "react";
 import RecipeCard from "./recipeCard";
 
+import { withRouter } from "react-router-dom";
+
 class RecipeList extends Component {
+  handleCardClick = (recipeId, e) => {
+    e.preventDefault();
+    console.log("clicked: " + recipeId);
+
+    this.props.history.push("/recipe/" + recipeId);
+  };
   mapRecipeList = () => {
     try {
       return this.props.recipes.map((recipe, i) => (
-        <div key={i} className="recipe-short-wrapper">
-          <RecipeCard key={recipe.id} recipe={recipe} />
+        <div
+          key={i}
+          className="recipe-short-wrapper"
+          onClick={e => this.handleCardClick(recipe._id, e)}
+        >
+          <RecipeCard recipe={recipe} />
         </div>
       ));
     } catch (err) {
@@ -25,4 +37,4 @@ class RecipeList extends Component {
   }
 }
 
-export default RecipeList;
+export default withRouter(RecipeList);
