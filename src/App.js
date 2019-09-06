@@ -52,7 +52,7 @@ class App extends Component {
             <Route path="/login" component={LoginForm} />
             <Route path="/logout" component={Logout} />
             <ProtectedRoute path="/recipe/edit/:id" component={RecipeForm} />
-
+            <ProtectedRoute path="/recipe/new" component={RecipeForm} />
             <Route path="/recipe/:id" component={RecipeDisplay} />
             <Route
               path="/recipes"
@@ -60,7 +60,7 @@ class App extends Component {
             />
             <Route path="/not-found" component={NotFound} />
 
-            <Route path="/profile/edit" component={ProfileForm} />
+            <ProtectedRoute path="/profile/edit" component={ProfileForm} />
             <Route path="/profile" component={Profile} />
             <Route path="/register" component={RegisterForm} />
             <Route path="/" exact component={Home} />
