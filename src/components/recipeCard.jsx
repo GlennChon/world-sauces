@@ -9,6 +9,7 @@ const RecipeCard = ({ recipe }) => {
   const { image_link, taste_profile, title, origin_country, likes } = {
     ...recipe
   };
+
   return (
     <React.Fragment>
       <div className="recipe-short-image-container">
@@ -22,7 +23,7 @@ const RecipeCard = ({ recipe }) => {
         <div className="profile-wrapper">
           {taste_profile.map((desc, k) => (
             <span className="profile-item" key={k}>
-              {desc}
+              {desc.name}
             </span>
           ))}
         </div>

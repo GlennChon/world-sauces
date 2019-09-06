@@ -42,7 +42,7 @@ class RecipeForm extends Form {
       .min(2)
       .max(2)
       .required()
-      .label("Origin Country"),
+      .label("Country"),
     author: Joi.string()
       .required()
       .label("Author"),
@@ -52,13 +52,16 @@ class RecipeForm extends Form {
     image_link: Joi.string().label("Image Link"),
     description: Joi.string().label("Description"),
     taste_profile: Joi.array()
-      .items(Joi.string().required())
+      .min(1)
+      .required()
       .label("Taste Profile"),
     ingredients: Joi.array()
-      .items(Joi.string().required())
+      .min(1)
+      .required()
       .label("Ingredients"),
     instructions: Joi.array()
-      .items(Joi.string().required())
+      .min(1)
+      .required()
       .label("Instructions")
   };
 
@@ -102,7 +105,7 @@ class RecipeForm extends Form {
 
   populateRecipe = async () => {
     try {
-      const recipeId = this.props.match.params.id;
+      const recipeId = this.props.match.params._id;
       if (recipeId === "new") return;
 
       const { data: recipe } = await recipeService.getRecipe(recipeId);
@@ -122,13 +125,15 @@ class RecipeForm extends Form {
     this.setState({ data });
   };
 
-  removeClick = (i, listName) => {
+  removeClick = (i, listName, e) => {
+    e.preventDefault();
     const data = this.state.data;
     data[listName].splice(i, 1);
     this.setState({ data });
   };
 
-  addClick = listName => {
+  addClick = (listName, e) => {
+    e.preventDefault();
     let data = this.state.data;
     data[listName].push({ value: null });
     console.log(this.state);
@@ -137,9 +142,11 @@ class RecipeForm extends Form {
 
   doSubmit = async () => {
     // Call the server
+    console.log(this.state.data);
     try {
-      await recipeService.saveRecipe(this.state.data);
-      this.props.history.push("/recipes");
+      console.log(this.state.data);
+      let result = await recipeService.saveRecipe(this.state.data);
+      this.props.history.push("/recipe/" + result.data._id);
     } catch (ex) {
       if (ex.response && ex.response.status === 400) {
         const errors = { ...this.state.errors };
@@ -162,20 +169,26 @@ class RecipeForm extends Form {
         <h1>Recipe</h1>
         <form onSubmit={this.handleSubmit}>
           {this.renderInput("title", "Title")}
-          {this.renderCheckboxes("Taste Profiles", this.state.taste_profiles)}
+          {this.renderCheckboxes(
+            "taste_profile",
+            "Taste Profile",
+            this.state.taste_profiles
+          )}
           {this.renderSelect(
             "origin_country_code",
             "Country",
             this.state.countries
           )}
           {this.renderInput("description", "Description")}
-          {this.renderInput("image_link", "Image Url")}
-          Ingredients <br />
+          {this.renderInput("image_link", "Image Link")}
           {/* Dynamic Ingredients*/}
+          <label htmlFor="ingredients">Ingredients</label>
+          <br />
           {this.state.data.ingredients.map((el, i) => (
             <div key={i}>
               <div className="input-group">
                 <input
+                  name="ingredients"
                   placeholder="e.g. 1/4 Cup Vinegar"
                   className="form-control"
                   type="text"
@@ -184,7 +197,7 @@ class RecipeForm extends Form {
                 />
                 <button
                   className="btn btn-danger"
-                  onClick={() => this.removeClick(i, ingredientList)}
+                  onClick={e => this.removeClick(i, ingredientList, e)}
                 >
                   <FontAwesomeIcon icon={faMinusCircle} />
                 </button>
@@ -195,17 +208,19 @@ class RecipeForm extends Form {
           ))}
           <button
             className="btn btn-success"
-            onClick={() => this.addClick(ingredientList)}
+            onClick={e => this.addClick(ingredientList, e)}
           >
             <FontAwesomeIcon icon={faPlusCircle} />
           </button>
           <br />
-          Instructions <br />
-          {/* Dynamic Ingredients*/}
+          {/* Dynamic Instructions*/}
+          <label htmlFor="instructions">Instructions</label>
+          <br />
           {this.state.data.instructions.map((el, i) => (
             <div key={i}>
               <div className="input-group">
                 <input
+                  name="instructions"
                   placeholder="e.g. Toast dry spices"
                   className="form-control"
                   type="text"
@@ -216,7 +231,7 @@ class RecipeForm extends Form {
                 />
                 <button
                   className="btn btn-danger"
-                  onClick={() => this.removeClick(i, instructionList)}
+                  onClick={e => this.removeClick(i, instructionList, e)}
                 >
                   <FontAwesomeIcon icon={faMinusCircle} />
                 </button>
@@ -227,7 +242,7 @@ class RecipeForm extends Form {
           ))}
           <button
             className="btn btn-success"
-            onClick={() => this.addClick(instructionList)}
+            onClick={e => this.addClick(instructionList, e)}
           >
             <FontAwesomeIcon icon={faPlusCircle} />
           </button>
@@ -240,21 +255,3 @@ class RecipeForm extends Form {
 }
 
 export default RecipeForm;
-
-// {this.state.taste_profiles.map(taste => {
-//   this.renderCheckBox(
-//     taste._id,
-//     taste.name,
-//     this.state.checkedItems.get(taste.name)
-//   );
-// })}
-// <div className="taste-profile-wrapper">
-// {this.state.taste_profiles.map(taste => (
-//   <Checkbox
-//     key={taste._id}
-//     name={taste.name}
-//     checked={this.state.checkedItems.get(taste.name)}
-//     onChange={this.handleCheckboxChange}
-//   />
-// ))}
-// </div>
