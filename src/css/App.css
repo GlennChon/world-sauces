@@ -18,11 +18,15 @@ h1,
 h2 {
   font-family: "Playfair Display", "Museo Sans Rounded", "Roboto Condensed",
     "Roboto", "Arial", "sans-serif";
+  color: #30a2cc;
 }
 h3,
 h4 {
   font-family: "Museo Sans Rounded", "Roboto Condensed", "Roboto", "Arial",
     "sans-serif";
+}
+h4 {
+  color: coral;
 }
 li.borderless {
   border: 0 none;
