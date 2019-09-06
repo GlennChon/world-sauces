@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import Joi from "joi-browser";
 
-import Checkbox from "./checkbox";
+import Checkboxes from "./checkboxes";
 import Select from "./select";
 import Input from "./input";
 
@@ -9,8 +9,7 @@ class Form extends Component {
   state = {
     data: {},
     checkedItems: new Map(),
-    errors: {},
-    fields: []
+    errors: {}
   };
 
   validate = () => {
@@ -50,6 +49,7 @@ class Form extends Component {
     // Clone all in state.errors
     const errors = { ...this.state.errors };
     const errorMessage = this.validateProperty(input);
+    console.log(input);
     if (errorMessage) {
       errors[input.name] = errorMessage;
     } else {
@@ -65,6 +65,17 @@ class Form extends Component {
   };
 
   handleCheckboxChange = ({ currentTarget: input }) => {
+    // Clone all in state.errors
+    const errors = { ...this.state.errors };
+
+    //hardcoded input here, TODO figure out how to abstract this.
+    const obj = { name: "taste_profile", value: input.checked };
+    const errorMessage = this.validateProperty(obj);
+    if (errorMessage) {
+      errors[obj] = errorMessage;
+    } else {
+      delete errors[obj];
+    }
     const data = { ...this.state.data };
     const item = input.name;
     const isChecked = input.checked;
@@ -87,25 +98,26 @@ class Form extends Component {
 
   renderButton(label) {
     return (
-      <React.Fragment>
-        <button className="btn btn-primary">{label}</button>
-      </React.Fragment>
+      <button
+        disabled={this.validate()}
+        className="btn btn-primary form-control"
+      >
+        {label}
+      </button>
     );
   }
 
   renderInput(name, label, type = "text") {
     const { data, errors } = this.state;
     return (
-      <React.Fragment>
-        <Input
-          name={name}
-          type={type}
-          label={label}
-          value={data[name]}
-          error={errors[name]}
-          onChange={this.handleChange}
-        />
-      </React.Fragment>
+      <Input
+        name={name}
+        type={type}
+        label={label}
+        value={data[name]}
+        error={errors[name]}
+        onChange={this.handleChange}
+      />
     );
   }
 
@@ -123,22 +135,19 @@ class Form extends Component {
     );
   }
 
-  renderCheckboxes(label, options) {
+  renderCheckboxes(name, label, options) {
     return (
-      <React.Fragment>
-        {label}
-        <br />
-        {options.map(taste => (
-          <React.Fragment key={taste._id}>
-            <Checkbox
-              name={taste.name}
-              checked={this.state.checkedItems.get(taste.name)}
-              onChange={this.handleCheckboxChange}
-            />
-          </React.Fragment>
-        ))}
-      </React.Fragment>
+      <Checkboxes
+        name={name}
+        label={label}
+        options={options}
+        checked={this.state.checkedItems}
+        onChange={this.handleCheckboxChange}
+      />
     );
+  }
+  renderListInput(name, label, type = "text") {
+    return <h1></h1>;
   }
 }
 
