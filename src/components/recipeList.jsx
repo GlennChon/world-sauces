@@ -6,8 +6,6 @@ import { withRouter } from "react-router-dom";
 class RecipeList extends Component {
   handleCardClick = (recipeId, e) => {
     e.preventDefault();
-    console.log("clicked: " + recipeId);
-
     this.props.history.push("/recipe/" + recipeId);
   };
   mapRecipeList = () => {
