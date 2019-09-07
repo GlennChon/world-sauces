@@ -16,7 +16,7 @@ class RecipeForm extends Form {
   state = {
     data: {
       title: "",
-      origin_country_code: "",
+      origin_country: "",
       author: "",
       likes: 0,
       image_link: "",
@@ -28,7 +28,8 @@ class RecipeForm extends Form {
     countries: [],
     taste_profiles: [],
     checkedItems: new Map(),
-    errors: {}
+    errors: {},
+    disabled: false
   };
 
   schema = {
@@ -38,9 +39,9 @@ class RecipeForm extends Form {
       .max(255)
       .required()
       .label("Title"),
-    origin_country_code: Joi.string()
+    origin_country: Joi.string()
       .min(2)
-      .max(2)
+      .max(50)
       .required()
       .label("Country"),
     author: Joi.string()
@@ -66,25 +67,27 @@ class RecipeForm extends Form {
   };
 
   mapToViewModel = recipe => {
+    const data = recipe.data;
     return {
-      _id: recipe._id,
-      title: recipe.title,
-      origin_country_code: recipe.origin_country_code,
-      author: recipe.author,
-      likes: recipe.likes,
-      image_link: recipe.image_link,
-      description: recipe.description,
-      taste_profile: recipe.taste_profile,
-      ingredients: recipe.ingredients,
-      instructions: recipe.instructions
+      _id: data._id,
+      title: data.title,
+      origin_country: data.origin_country,
+      author: data.author,
+      likes: data.likes,
+      image_link: data.image_link,
+      description: data.description,
+      taste_profile: data.taste_profile,
+      ingredients: data.ingredients,
+      instructions: data.instructions
     };
   };
 
   async componentDidMount() {
     await this.populateTasteProfiles();
     await this.populateCountries();
-    await this.setAuthor();
     await this.populateRecipe();
+    await this.fillCheckedItems();
+    await this.setAuthor();
   }
   setAuthor = async () => {
     // set author
@@ -98,6 +101,21 @@ class RecipeForm extends Form {
     this.setState({ countries });
   };
 
+  fillCheckedItems = () => {
+    const tasteProfiles = this.state.taste_profiles;
+    const tasteProfile = this.state.data.taste_profile;
+    let checkedItems = this.state.checkedItems;
+
+    tasteProfiles.forEach(obj => {
+      if (tasteProfile.includes(obj.name)) {
+        checkedItems[obj.name] = true;
+      } else {
+        checkedItems[obj.name] = false;
+      }
+    });
+    this.setState({ checkedItems });
+  };
+
   populateTasteProfiles = async () => {
     const { data: taste_profiles } = await getTasteProfiles();
     this.setState({ taste_profiles });
@@ -105,11 +123,11 @@ class RecipeForm extends Form {
 
   populateRecipe = async () => {
     try {
-      const recipeId = this.props.match.params._id;
-      if (recipeId === "new") return;
+      const { id } = this.props.match.params;
+      if (id === "new") return;
 
-      const { data: recipe } = await recipeService.getRecipe(recipeId);
-      this.setState({ data: this.mapToViewModel(recipe) });
+      const recipe = await recipeService.getRecipe(id);
+      this.setState({ data: this.mapToViewModel(recipe), disabled: true });
     } catch (ex) {
       if (ex.response && ex.response.status === 404) {
         this.props.history.replace("/not-found");
@@ -136,7 +154,6 @@ class RecipeForm extends Form {
     e.preventDefault();
     let data = this.state.data;
     data[listName].push({ value: null });
-    console.log(this.state);
     this.setState({ data });
   };
 
@@ -144,14 +161,12 @@ class RecipeForm extends Form {
     // Call the server
     console.log(this.state.data);
     try {
-      console.log(this.state.data);
       let result = await recipeService.saveRecipe(this.state.data);
       this.props.history.push("/recipe/" + result.data._id);
     } catch (ex) {
       if (ex.response && ex.response.status === 400) {
-        const errors = { ...this.state.errors };
-
-        errors.push(ex.response.data.message);
+        let errors = { ...this.state.errors };
+        console.log(ex.response);
 
         this.setState({ errors });
       }
@@ -164,6 +179,7 @@ class RecipeForm extends Form {
     //const { data: recipe, countries, taste_profiles } = this.state.data;
     const ingredientList = "ingredients";
     const instructionList = "instructions";
+    const isDisabled = this.state.disabled;
     return (
       <React.Fragment>
         <h1>Recipe</h1>
@@ -172,12 +188,14 @@ class RecipeForm extends Form {
           {this.renderCheckboxes(
             "taste_profile",
             "Taste Profile",
-            this.state.taste_profiles
+            this.state.taste_profiles,
+            this.state.checkedItems
           )}
           {this.renderSelect(
-            "origin_country_code",
+            "origin_country",
             "Country",
-            this.state.countries
+            this.state.countries,
+            isDisabled
           )}
           {this.renderInput("description", "Description")}
           {this.renderInput("image_link", "Image Link")}
