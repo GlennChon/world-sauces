@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import * as recipeService from "../services/recipeService";
 import _ from "lodash";
-import { Redirect } from "react-router-dom";
+import { withRouter } from "react-router-dom";
 
 import RecipeCard from "./recipeCard";
 import RegisterForm from "./registerForm";
@@ -18,8 +18,6 @@ class Home extends Component {
   }
   handleCardClick = (recipeId, e) => {
     e.preventDefault();
-    console.log("clicked: " + recipeId);
-
     this.props.history.push("/recipe/" + recipeId);
   };
   loadPopularRecipes = async () => {
@@ -59,9 +57,9 @@ class Home extends Component {
           <div
             key={i}
             className="recipe-short-wrapper"
-            onClick={e => this.handleCardClick(recipes._id, e)}
+            onClick={e => this.handleCardClick(recipes[i]._id, e)}
           >
-            <RecipeCard key={recipes[i].id} recipe={recipes[i]} />
+            <RecipeCard recipe={recipes[i]} />
           </div>
         );
       }
@@ -105,4 +103,4 @@ class Home extends Component {
   }
 }
 
-export default Home;
+export default withRouter(Home);
