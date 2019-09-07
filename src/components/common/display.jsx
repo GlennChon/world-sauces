@@ -1,15 +1,16 @@
 import React, { Component } from "react";
 import Img from "react-image";
-import vegetableImg from "../../images/vegetables.svg";
+import { defaultImg } from "../../config.json";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faHeart } from "@fortawesome/free-solid-svg-icons";
 
 class Display extends Component {
   state = { data: {} };
 
-  handleEditClick = () => {
+  handleEditClick = e => {
+    e.preventDefault();
     // take recipe id and open recipeForm
-    console.log("edit btn clicked");
+    this.doEdit();
   };
 
   renderLikes = (likes = 0) => {
@@ -40,7 +41,7 @@ class Display extends Component {
     const data = this.state.data;
     return (
       <React.Fragment>
-        <Img src={[data[name], vegetableImg]} className="cover" />
+        <Img src={[data[name], defaultImg]} className="cover" />
       </React.Fragment>
     );
   };
@@ -75,7 +76,7 @@ class Display extends Component {
       <React.Fragment>
         {data[name].map((item, k) => (
           <span className="profile-item" key={k}>
-            {item.name}
+            {item}
           </span>
         ))}
       </React.Fragment>
