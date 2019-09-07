@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React from "react";
 import Display from "./common/display";
 import * as authService from "../services/authService";
 import * as recipeService from "../services/recipeService";
@@ -8,7 +8,7 @@ class RecipeDisplay extends Display {
     data: {
       _id: "",
       title: "",
-      origin_country: {},
+      origin_country: "",
       author: "",
       likes: 0,
       image_link: "",
@@ -49,6 +49,10 @@ class RecipeDisplay extends Display {
     await this.populateRecipe();
   }
 
+  doEdit = async () => {
+    this.props.history.push("/recipe/edit/" + this.state.data._id);
+  };
+
   render() {
     const user = authService.getCurrentUser();
 
@@ -59,7 +63,7 @@ class RecipeDisplay extends Display {
         {this.renderImg("image_link")}
         {this.renderLikes()}
         {this.renderHorizontalList("taste_profile")}
-        {this.renderChildTitle("origin_country", "Country", "name")}
+        {this.renderChildTitle("origin_country", "Country")}
 
         {this.renderChildTitle("description", "Description")}
         <div className="row">
