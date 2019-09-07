@@ -30,6 +30,7 @@ export function getRandom() {
 }
 
 export function getRecipe(recipeId) {
+  console.log(recipeUrl(recipeId));
   return http.get(recipeUrl(recipeId));
 }
 
@@ -45,4 +46,10 @@ export function saveRecipe(recipe) {
 
 export function deleteRecipe(recipeId) {
   return http.delete(recipeUrl(recipeId));
+}
+
+export function getRecipesLikedByUser(likes) {
+  return http.get(apiEndpoint + "/likes", {
+    likes: likes
+  });
 }
