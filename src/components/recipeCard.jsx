@@ -3,13 +3,13 @@ import Img from "react-image";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faHeart } from "@fortawesome/free-solid-svg-icons";
+import { defaultImg } from "../config.json";
 
 const RecipeCard = ({ recipe }) => {
   const { image_link, taste_profile, title, origin_country, likes } = {
     ...recipe
   };
-  const defaultImg =
-    "https://upload.wikimedia.org/wikipedia/commons/a/a8/Emojione_BW_1F372.svg";
+  console.log(origin_country);
 
   return (
     <React.Fragment>
@@ -24,15 +24,13 @@ const RecipeCard = ({ recipe }) => {
         <div className="profile-wrapper">
           {taste_profile.map((desc, k) => (
             <span className="profile-item" key={k}>
-              {desc.name}
+              {desc}
             </span>
           ))}
         </div>
       </span>
       <h3>{title}</h3>
-      <h5>
-        Origin: {origin_country.name == null ? " ~ " : origin_country.name}
-      </h5>
+      <h5>Origin: {origin_country == null ? " ~ " : origin_country}</h5>
     </React.Fragment>
   );
 };
