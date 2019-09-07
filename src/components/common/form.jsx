@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import Joi from "joi-browser";
 
-import Checkboxes from "./checkboxes";
 import Select from "./select";
 import Input from "./input";
 
@@ -9,7 +8,8 @@ class Form extends Component {
   state = {
     data: {},
     checkedItems: new Map(),
-    errors: {}
+    errors: {},
+    disabled: false
   };
 
   validate = () => {
@@ -79,6 +79,7 @@ class Form extends Component {
     const data = { ...this.state.data };
     const item = input.name;
     const isChecked = input.checked;
+    let checkedItems = this.state.checkedItems;
     // add or remove from taste array
     if (isChecked) {
       data["taste_profile"].push(item);
@@ -86,14 +87,8 @@ class Form extends Component {
       let index = data["taste_profile"].indexOf(item);
       data["taste_profile"].splice(index, 1);
     }
-    this.setState(
-      prevState => (
-        {
-          checkedItems: prevState.checkedItems.set(item, isChecked)
-        },
-        { data }
-      )
-    );
+    checkedItems[item] = isChecked;
+    this.setState({ checkedItems, data });
   };
 
   renderButton(label) {
@@ -121,7 +116,7 @@ class Form extends Component {
     );
   }
 
-  renderSelect(name, label, options) {
+  renderSelect(name, label, options, isDisabled) {
     const { data, errors } = this.state;
     return (
       <Select
@@ -131,19 +126,39 @@ class Form extends Component {
         options={options}
         onChange={this.handleChange}
         error={errors[name]}
+        isDisabled={isDisabled}
       />
     );
   }
 
-  renderCheckboxes(name, label, options) {
+  renderCheckboxes(name, label, options, checkedItems, type = "checkbox") {
+    const { errors } = this.state;
     return (
-      <Checkboxes
-        name={name}
-        label={label}
-        options={options}
-        checked={this.state.checkedItems}
-        onChange={this.handleCheckboxChange}
-      />
+      <React.Fragment>
+        <div className="form-group">
+          <label htmlFor={name}>{label}</label>
+          <br />
+          {options.map(taste => (
+            <div className="form-check form-check-inline" key={taste._id}>
+              <label htmlFor={taste.name} className="form-check-label">
+                {taste.name}
+              </label>
+              <input
+                key={taste._id}
+                id={taste.name}
+                checked={!!checkedItems[taste.name]}
+                name={taste.name}
+                onChange={this.handleCheckboxChange}
+                className="form-check-input"
+                type={type}
+              />
+            </div>
+          ))}
+          {errors[name] && (
+            <div className="alert alert-danger">{errors[name]}</div>
+          )}
+        </div>
+      </React.Fragment>
     );
   }
   renderListInput(name, label, type = "text") {
