@@ -56,7 +56,7 @@ class Home extends Component {
         popular.push(
           <div
             key={i}
-            className="recipe-short-wrapper"
+            className="recipe-card-wrapper"
             onClick={e => this.handleCardClick(recipes[i]._id, e)}
           >
             <RecipeCard recipe={recipes[i]} />
@@ -77,7 +77,7 @@ class Home extends Component {
         random.push(
           <div
             key={i}
-            className="recipe-short-wrapper"
+            className="recipe-card-wrapper"
             onClick={e => this.handleCardClick(recipes[i]._id, e)}
           >
             <RecipeCard key={recipes[i].id} recipe={recipes[i]} />
@@ -91,12 +91,11 @@ class Home extends Component {
   render() {
     return (
       <React.Fragment>
-        <br />
         <h1>Most Popular</h1>
-        <div className="recipe-short-container">{this.renderPopular()}</div>
+        <div className="recipe-card-container">{this.renderPopular()}</div>
         <br />
         <h1>Random</h1>
-        <div className="recipe-short-container">{this.renderRandom()}</div>
+        <div className="recipe-card-container">{this.renderRandom()}</div>
         {this.renderLoggedOutInMsg()}
       </React.Fragment>
     );

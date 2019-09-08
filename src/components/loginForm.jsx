@@ -44,14 +44,14 @@ class LoginForm extends Form {
     if (authService.getCurrentUser()) return <Redirect to="/" />;
     // object destructuring to preven writing this.state....
     return (
-      <div>
+      <React.Fragment>
         <h1>Login</h1>
         <form onSubmit={this.handleSubmit}>
           {this.renderInput("username", "Username")}
           {this.renderInput("password", "Password", "password")}
           {this.renderButton("Login")}
         </form>
-      </div>
+      </React.Fragment>
     );
   }
 }

@@ -35,7 +35,7 @@ class SearchBar extends Component {
               >
                 <option value="any">Any Country</option>
                 {this.props.countries.map(option => (
-                  <option key={option.code} value={option.code}>
+                  <option key={option.name} value={option.name}>
                     {option.name}
                   </option>
                 ))}

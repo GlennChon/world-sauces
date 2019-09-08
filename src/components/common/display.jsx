@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import Img from "react-image";
-import { defaultImg } from "../../config.json";
+import { defaultImg, loaderImg } from "../../config.json";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faHeart } from "@fortawesome/free-solid-svg-icons";
 
@@ -24,11 +24,11 @@ class Display extends Component {
     );
   };
 
-  renderEditButton = (onClick, btnClassName = "") => {
+  renderEditButton = (btnClassName = "") => {
     return (
       <React.Fragment>
         <button
-          className={"btn btn-primary " + btnClassName}
+          className={"btn " + btnClassName}
           onClick={e => this.handleEditClick(e)}
         >
           Edit
@@ -41,7 +41,14 @@ class Display extends Component {
     const data = this.state.data;
     return (
       <React.Fragment>
-        <Img src={[data[name], defaultImg]} className="cover" />
+        <Img
+          src={data[name]}
+          loader={
+            <img src={window.location.origin + loaderImg} className="cover" />
+          }
+          unloader={<img src={defaultImg} className="cover" />}
+          className="cover"
+        />
       </React.Fragment>
     );
   };
@@ -65,32 +72,32 @@ class Display extends Component {
     }
     return (
       <React.Fragment>
-        <h4>{label === "" ? item : label + " : " + item}</h4>
+        <label>{label ? label : ""}</label>
+        <p>{item}</p>
       </React.Fragment>
     );
   };
 
-  renderHorizontalList = name => {
+  renderHorizontalList = (name, groupClassName = "", itemClassName = "") => {
     const data = { ...this.state.data };
     return (
       <React.Fragment>
-        {data[name].map((item, k) => (
-          <span className="profile-item" key={k}>
-            {item}
-          </span>
-        ))}
-      </React.Fragment>
-    );
-  };
-
-  renderList = (name, label = "", groupClassName = "", itemClassName = "") => {
-    const data = { ...this.state.data };
-    return (
-      <React.Fragment>
-        <h2>{label}</h2>
-        <ul className={"list-group " + groupClassName}>
+        <div className={groupClassName}>
           {data[name].map((item, k) => (
-            <li className={"list-group-item " + itemClassName} key={k}>
+            <span className={itemClassName}>{item}</span>
+          ))}
+        </div>
+      </React.Fragment>
+    );
+  };
+
+  renderList = (name, groupClassName = "", itemClassName = "") => {
+    const data = { ...this.state.data };
+    return (
+      <React.Fragment>
+        <ul className={groupClassName}>
+          {data[name].map((item, k) => (
+            <li className={itemClassName} key={k}>
               {item.value}
             </li>
           ))}
@@ -99,21 +106,15 @@ class Display extends Component {
     );
   };
 
-  renderNumberedList = (
-    name,
-    label = "",
-    groupClassName = "",
-    itemClassName = ""
-  ) => {
+  renderNumberedList = (name, groupClassName = "", itemClassName = "") => {
     const data = { ...this.state.data };
 
     return (
       <React.Fragment>
-        <h2>{label}</h2>
-        <ol className={"list-group " + groupClassName}>
+        <ol className={groupClassName}>
           {data[name].map((item, k) => (
-            <li className={"list-group-item " + itemClassName} key={k}>
-              {k + 1 + ".\t" + item.value}
+            <li className={itemClassName} key={k}>
+              {item.value}
             </li>
           ))}
         </ol>

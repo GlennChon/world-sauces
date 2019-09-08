@@ -6,8 +6,12 @@ import * as serviceWorker from "./serviceWorker";
 import { BrowserRouter } from "react-router-dom";
 
 import "bootstrap/dist/css/bootstrap.min.css";
-import "./css/recipes.css";
+import "react-toastify/dist/ReactToastify.css";
 import "./index.css";
+// CSS
+import "./css/App.css";
+import "./css/recipeCard.css";
+import "./css/recipeDisplay.css";
 
 WebFont.load({
   google: {

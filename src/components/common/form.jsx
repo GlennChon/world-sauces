@@ -3,6 +3,7 @@ import Joi from "joi-browser";
 
 import Select from "./select";
 import Input from "./input";
+import TextArea from "./textArea";
 
 class Form extends Component {
   state = {
