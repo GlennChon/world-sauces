@@ -21,12 +21,7 @@ import RecipeDisplay from "./components/recipeDisplay";
 import Profile from "./components/profile";
 import ProfileForm from "./components/profileForm";
 import RegisterForm from "./components/registerForm";
-// import TasteProfiles from "./components/tasteProfiles";
 import ProtectedRoute from "./components/common/protectedRoute";
-
-// CSS
-import "./css/App.css";
-import "react-toastify/dist/ReactToastify.css";
 
 class App extends Component {
   state = {};
@@ -47,7 +42,8 @@ class App extends Component {
       <React.Fragment>
         <ToastContainer />
         <NavBar user={user} />
-        <main className="container">
+        <header className="page-header header container-fluid"></header>
+        <main className="container-fluid">
           <Switch>
             <Route path="/login" component={LoginForm} />
             <Route path="/logout" component={Logout} />
