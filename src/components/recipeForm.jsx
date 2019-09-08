@@ -57,10 +57,12 @@ class RecipeForm extends Form {
       .required()
       .label("Taste Profile"),
     ingredients: Joi.array()
+      .items(Joi.object({ value: Joi.string().min(3) }).min(1))
       .min(1)
       .required()
       .label("Ingredients"),
     instructions: Joi.array()
+      .items(Joi.object({ value: Joi.string().min(3) }).min(1))
       .min(1)
       .required()
       .label("Instructions")
@@ -83,11 +85,11 @@ class RecipeForm extends Form {
   };
 
   async componentDidMount() {
+    await this.setAuthor();
     await this.populateTasteProfiles();
     await this.populateCountries();
     await this.populateRecipe();
     await this.fillCheckedItems();
-    await this.setAuthor();
   }
   setAuthor = async () => {
     // set author
@@ -154,6 +156,7 @@ class RecipeForm extends Form {
     e.preventDefault();
     let data = this.state.data;
     data[listName].push({ value: null });
+    console.log(this.state.data);
     this.setState({ data });
   };
 
