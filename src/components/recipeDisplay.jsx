@@ -58,31 +58,57 @@ class RecipeDisplay extends Display {
 
     return (
       <React.Fragment>
-        <div className="container"> </div>
-        {this.renderMainTitle("title")}
-        {this.renderImg("image_link")}
-        {this.renderLikes()}
-        {this.renderHorizontalList("taste_profile")}
-        {this.renderChildTitle("origin_country", "Country")}
-
-        {this.renderChildTitle("description", "Description")}
-        <div className="row">
-          <div className="col-sm-8">
-            {this.renderList(
-              "ingredients",
-              "Ingredients",
-              "ingredients-list",
-              "borderless ingredient"
+        <div className="recipe-display-container">
+          {this.renderImg("image_link")}
+          <span className="display-profile-container">
+            {this.renderHorizontalList(
+              "taste_profile",
+              "display-profile-wrapper",
+              "display-profile-item"
             )}
+          </span>
+          {this.renderMainTitle("title")}
+          {this.renderLikes()}
+          <h2 className="display-information-title">Information</h2>
+
+          <div className="row">
+            <div className="col-md-6">
+              {this.renderChildTitle("origin_country", "Country")}
+            </div>
+            <div className="col-md-6">
+              {this.renderChildTitle("author", "Author")}
+            </div>
+          </div>
+
+          <div className="row">
+            <div className="col-md">
+              {this.renderChildTitle("description", "Description")}
+            </div>
+          </div>
+          <div className="row">
+            <div className="col-md-4">
+              <h2 className="display-ingredients-title">Ingredients</h2>
+              {this.renderList(
+                "ingredients",
+                "list-unstyled ingredient-container",
+                "ingredient-wrapper"
+              )}
+            </div>
+            <div className="col-md-8">
+              <h2 className="display-instructions-title">Instructions</h2>
+              {this.renderNumberedList(
+                "instructions",
+                "list-styled instruction-container",
+                "instruction-wrapper"
+              )}
+            </div>
           </div>
         </div>
-        {this.renderNumberedList(
-          "instructions",
-          "Instructions",
-          "instructions-list"
-        )}
-        {user &&
-          (user.username === this.state.data.author && this.renderEditButton())}
+        <div className="btn-edit">
+          {user &&
+            (user.username === this.state.data.author &&
+              this.renderEditButton("btn-warning"))}
+        </div>
       </React.Fragment>
     );
   }
