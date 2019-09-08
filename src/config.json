@@ -1,5 +1,6 @@
 {
   "apiUrl": "http://192.168.1.54:3333/api",
   "tokenKey": "token",
-  "defaultImg": "https://upload.wikimedia.org/wikipedia/commons/a/a8/Emojione_BW_1F372.svg"
+  "defaultImg": "https://upload.wikimedia.org/wikipedia/commons/a/a8/Emojione_BW_1F372.svg",
+  "loaderImg": "/img/loader.gif"
 }
