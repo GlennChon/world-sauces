@@ -14,37 +14,31 @@
   margin: 0;
   padding: 0;
 }
+
 h1,
-h2 {
-  font-family: "Playfair Display", "Museo Sans Rounded", "Roboto Condensed",
-    "Roboto", "Arial", "sans-serif";
-  color: #30a2cc;
-}
+h2,
 h3,
 h4 {
-  font-family: "Museo Sans Rounded", "Roboto Condensed", "Roboto", "Arial",
-    "sans-serif";
-}
-h4 {
-  color: coral;
-}
-li.borderless {
-  border: 0 none;
-}
-li.ingredient {
-  margin: 3px 0 6px 8px;
-  padding: 0;
-}
-ul.ingredients-list {
-  padding: 10px;
-  margin-top: 10px;
-  border: solid 1px;
-  border-radius: 5px;
-  border-color: #dfdfdf;
-  background-color: white;
-  font-size: 1.2em;
+  font-weight: bold;
+  font-family: "Playfair Display", "Museo Sans Rounded", "Roboto Condensed",
+    "Roboto", "Arial", "sans-serif";
 }
 
-ol.instructions-list {
+h1 {
+  color: black;
+}
+
+h2,
+h3 {
+  color: #30a2cc;
+}
+label,
+h4 {
   font-size: 1.2em;
+  color: coral;
+}
+li,
+p {
+  font-family: "Museo Sans Rounded", "Roboto Condensed", "Roboto", "Arial",
+    "sans-serif";
 }

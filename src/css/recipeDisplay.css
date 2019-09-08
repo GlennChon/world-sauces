@@ -1,0 +1,77 @@
+.recipe-display-container {
+  margin: 5% 15% 0 15%;
+  padding-bottom: 5%;
+  width: 70%;
+  background-color: white;
+}
+
+.display-profile-container {
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: row;
+  margin-top: -18px;
+  justify-content: center;
+}
+
+.display-profile-wrapper {
+  border-color: white;
+  color: white;
+  border: 1px solid;
+  background: #30a2cc;
+  padding: 5px;
+}
+
+.display-profile-item {
+  margin: 2px;
+  font-weight: bold;
+}
+
+.display-information-title {
+  padding: 0 0 0 0;
+}
+.display-ingredients-title {
+  padding: 0 0 0 10%;
+}
+.display-instructions-title {
+  padding: 0 0 0 5%;
+}
+.ingredient-container {
+  margin: 0 0 0 10%;
+}
+
+.ingredient-wrapper {
+  padding: 6px 0;
+}
+
+.instruction-container {
+  padding: 0;
+  margin: 0 5%;
+}
+.instruction-wrapper {
+  padding: 6px 0;
+  margin: 0 20px;
+}
+
+li.borderless {
+  border: 0 none;
+}
+
+.instruction-container > li {
+  font-size: 1.15em;
+}
+.ingredient-container > li {
+  font-size: 1em;
+}
+
+ol > li::marker {
+  font-weight: bold;
+}
+
+.btn-edit {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  margin: 20px;
+}
