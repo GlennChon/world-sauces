@@ -3,7 +3,7 @@ import Img from "react-image";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faHeart } from "@fortawesome/free-solid-svg-icons";
-import { defaultImg } from "../config.json";
+import { defaultImg, loaderImg } from "../config.json";
 
 const RecipeCard = ({ recipe }) => {
   const { image_link, taste_profile, title, origin_country, likes } = {
@@ -13,17 +13,24 @@ const RecipeCard = ({ recipe }) => {
 
   return (
     <React.Fragment>
-      <div className="recipe-short-image-container">
-        <Img src={[image_link, defaultImg]} className="cover" />
+      <div className="recipe-card-image-container">
+        <Img
+          src={image_link}
+          loader={
+            <img src={window.location.origin + loaderImg} className="cover" />
+          }
+          unloader={<img src={defaultImg} className="cover" />}
+          className="cover"
+        />
         <div className="recipe-card-likes">
           <FontAwesomeIcon icon={faHeart} className="card-icon" />
           <h5>{likes}</h5>
         </div>
       </div>
-      <span className="profile-container">
-        <div className="profile-wrapper">
+      <span className="card-profile-container">
+        <div className="card-profile-wrapper">
           {taste_profile.map((desc, k) => (
-            <span className="profile-item" key={k}>
+            <span className="card-profile-item" key={k}>
               {desc}
             </span>
           ))}
