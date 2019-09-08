@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import RecipeCard from "./recipeCard";
-
+import VisibilitySensor from "react-visibility-sensor";
 import { withRouter } from "react-router-dom";
 
 class RecipeList extends Component {
@@ -11,13 +11,15 @@ class RecipeList extends Component {
   mapRecipeList = () => {
     try {
       return this.props.recipes.map((recipe, i) => (
-        <div
-          key={i}
-          className="recipe-short-wrapper"
-          onClick={e => this.handleCardClick(recipe._id, e)}
-        >
-          <RecipeCard recipe={recipe} />
-        </div>
+        <VisibilitySensor>
+          <div
+            key={i}
+            className="recipe-card-wrapper"
+            onClick={e => this.handleCardClick(recipe._id, e)}
+          >
+            <RecipeCard recipe={recipe} />
+          </div>
+        </VisibilitySensor>
       ));
     } catch (err) {
       console.log(err);
@@ -27,7 +29,7 @@ class RecipeList extends Component {
   render() {
     return (
       <React.Fragment>
-        <div className="recipe-short-container">
+        <div className="recipe-card-container">
           {this.mapRecipeList(this.props.recipes)}
         </div>
       </React.Fragment>
