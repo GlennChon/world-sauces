@@ -19,6 +19,9 @@
   padding-bottom: 40px;
   margin: 10px;
 }
+.recipe-card-wrapper:hover {
+  cursor: pointer;
+}
 
 .recipe-card-wrapper > h1,
 h2,

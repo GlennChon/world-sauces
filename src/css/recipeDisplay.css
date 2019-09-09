@@ -4,6 +4,9 @@
   width: 70%;
   background-color: white;
 }
+.recipe-display-wrapper {
+  padding: 5%;
+}
 
 .display-profile-container {
   margin: 0;
@@ -31,10 +34,16 @@
   padding: 0 0 0 0;
 }
 .display-ingredients-title {
-  padding: 0 0 0 10%;
+  padding: 0 0 0 0;
 }
 .display-instructions-title {
-  padding: 0 0 0 5%;
+  padding: 0 0 0 0;
+}
+
+.display-information-title,
+.display-ingredients-title,
+.display-instructions-title {
+  margin-bottom: 10px;
 }
 .ingredient-container {
   margin: 0 0 0 10%;
@@ -45,8 +54,8 @@
 }
 
 .instruction-container {
-  padding: 0;
-  margin: 0 5%;
+  padding: 0 0 0 18px;
+  margin: 0;
 }
 .instruction-wrapper {
   padding: 6px 0;
@@ -57,11 +66,14 @@ li.borderless {
   border: 0 none;
 }
 
-.instruction-container > li {
-  font-size: 1.15em;
-}
 .ingredient-container > li {
   font-size: 1em;
+  margin: 0 0 0 -10%;
+}
+
+.instruction-container > li {
+  font-size: 1.15em;
+  margin: 0 0 0 0%;
 }
 
 ol > li::marker {
@@ -74,4 +86,13 @@ ol > li::marker {
   justify-content: center;
   padding: 0;
   margin: 20px;
+}
+.btn-likes {
+  color: coral;
+}
+.btn-likes:hover {
+  color: #e83c3c;
+}
+.btn-likes:focus {
+  box-shadow: none !important;
 }

@@ -2,10 +2,14 @@ import React, { Component } from "react";
 import Img from "react-image";
 import { defaultImg, loaderImg } from "../../config.json";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faHeart } from "@fortawesome/free-solid-svg-icons";
+import * as solid from "@fortawesome/free-solid-svg-icons";
+import * as regular from "@fortawesome/free-regular-svg-icons";
+
+const { faHeart: heartSolid } = solid;
+const { faHeart: heartRegular } = regular;
 
 class Display extends Component {
-  state = { data: {} };
+  state = { data: {}, isLiked: false };
 
   handleEditClick = e => {
     e.preventDefault();
@@ -13,13 +17,25 @@ class Display extends Component {
     this.doEdit();
   };
 
+  handleLikeClick = e => {
+    e.preventDefault();
+    const isLiked = this.state.isLiked;
+    this.setState({ isLiked: !isLiked });
+  };
+
   renderLikes = (likes = 0) => {
+    const { isLiked } = this.state;
+    let icon = isLiked ? heartSolid : heartRegular;
     return (
       <React.Fragment>
-        <div className="likes">
-          <FontAwesomeIcon icon={faHeart} className="card-icon" />
+        <button
+          className="btn btn-likes"
+          onClick={e => this.handleLikeClick(e)}
+        >
+          <FontAwesomeIcon icon={icon} className="card-icon" />
+
           <h5>{likes}</h5>
-        </div>
+        </button>
       </React.Fragment>
     );
   };
@@ -84,7 +100,9 @@ class Display extends Component {
       <React.Fragment>
         <div className={groupClassName}>
           {data[name].map((item, k) => (
-            <span className={itemClassName}>{item}</span>
+            <span className={itemClassName} key={k}>
+              {item}
+            </span>
           ))}
         </div>
       </React.Fragment>

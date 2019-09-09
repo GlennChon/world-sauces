@@ -22,8 +22,8 @@ class Recipes extends Component {
   };
 
   async componentDidMount() {
-    await this.popularRecipes();
     await this.populateCountries();
+    await this.popularRecipes();
   }
 
   populateCountries = async () => {

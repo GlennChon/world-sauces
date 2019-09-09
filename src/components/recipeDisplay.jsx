@@ -2,6 +2,8 @@ import React from "react";
 import Display from "./common/display";
 import * as authService from "../services/authService";
 import * as recipeService from "../services/recipeService";
+import * as userService from "../services/userService";
+import { async } from "q";
 
 class RecipeDisplay extends Display {
   state = {
@@ -15,8 +17,11 @@ class RecipeDisplay extends Display {
       description: "",
       taste_profile: [],
       ingredients: [],
-      instructions: []
-    }
+      instructions: [],
+      liked: false
+    },
+    isLiked: false,
+    user: {}
   };
 
   mapToViewModel(recipe) {
@@ -34,7 +39,23 @@ class RecipeDisplay extends Display {
     };
   }
 
-  async populateRecipe() {
+  updateCurrentUser = async () => {
+    const user = await authService.getCurrentUser();
+    this.setState({ user });
+  };
+
+  checkUserLikes = async username => {
+    const { _id: recipeId } = this.state.data;
+    const userInfo = await userService.getMeInfo(username);
+    const userLikes = userInfo.data.likes;
+    let isLiked = false;
+    if (userLikes.includes(recipeId)) {
+      isLiked = true;
+    }
+    this.setState({ isLiked });
+  };
+
+  populateRecipe = async () => {
     try {
       const recipeId = this.props.match.params.id;
       const { data: recipe } = await recipeService.getRecipe(recipeId);
@@ -43,23 +64,25 @@ class RecipeDisplay extends Display {
       if (ex.response && ex.response.status === 404)
         this.props.history.replace("/not-found");
     }
-  }
+  };
 
-  async componentDidMount() {
+  componentDidMount = async () => {
     await this.populateRecipe();
-  }
+    await this.updateCurrentUser();
+    await this.checkUserLikes(this.state.user.username);
+  };
 
   doEdit = async () => {
     this.props.history.push("/recipe/edit/" + this.state.data._id);
   };
 
   render() {
-    const user = authService.getCurrentUser();
-
     return (
       <React.Fragment>
         <div className="recipe-display-container">
+          {/*IMAGE*/}
           {this.renderImg("image_link")}
+          {/*TASTE PROFILE*/}
           <span className="display-profile-container">
             {this.renderHorizontalList(
               "taste_profile",
@@ -67,46 +90,56 @@ class RecipeDisplay extends Display {
               "display-profile-item"
             )}
           </span>
-          {this.renderMainTitle("title")}
-          {this.renderLikes()}
-          <h2 className="display-information-title">Information</h2>
-
-          <div className="row">
-            <div className="col-md-6">
-              {this.renderChildTitle("origin_country", "Country")}
+          {/*RECIPE WRAPPER*/}
+          <div className="recipe-display-wrapper">
+            {/*RECIPE NAME*/}
+            {this.renderMainTitle("title")}
+            {/*LIKES*/}
+            {this.renderLikes(this.state.data.likes)}
+            {/*INFORMATION*/}
+            <div className="row">
+              <div className="col">
+                <h2 className="display-information-title">Information</h2>
+              </div>
             </div>
-            <div className="col-md-6">
-              {this.renderChildTitle("author", "Author")}
+            <div className="row">
+              <div className="col-md-6">
+                {this.renderChildTitle("origin_country", "Country")}
+              </div>
+              <div className="col-md-6">
+                {this.renderChildTitle("author", "Author")}
+              </div>
             </div>
-          </div>
-
-          <div className="row">
-            <div className="col-md">
-              {this.renderChildTitle("description", "Description")}
+            <div className="row">
+              <div className="col-md">
+                {this.renderChildTitle("description", "Description")}
+              </div>
             </div>
-          </div>
-          <div className="row">
-            <div className="col-md-4">
-              <h2 className="display-ingredients-title">Ingredients</h2>
-              {this.renderList(
-                "ingredients",
-                "list-unstyled ingredient-container",
-                "ingredient-wrapper"
-              )}
-            </div>
-            <div className="col-md-8">
-              <h2 className="display-instructions-title">Instructions</h2>
-              {this.renderNumberedList(
-                "instructions",
-                "list-styled instruction-container",
-                "instruction-wrapper"
-              )}
+            {/*INGREDIENTS*/}
+            <div className="row">
+              <div className="col-md-4">
+                <h2 className="display-ingredients-title">Ingredients</h2>
+                {this.renderList(
+                  "ingredients",
+                  "list-unstyled ingredient-container",
+                  "ingredient-wrapper"
+                )}
+              </div>
+              {/*INSTRUCTIONS*/}
+              <div className="col-md-8">
+                <h2 className="display-instructions-title">Instructions</h2>
+                {this.renderNumberedList(
+                  "instructions",
+                  "list-styled instruction-container",
+                  "instruction-wrapper"
+                )}
+              </div>
             </div>
           </div>
         </div>
         <div className="btn-edit">
-          {user &&
-            (user.username === this.state.data.author &&
+          {this.state.user &&
+            (this.state.user.username === this.state.data.author &&
               this.renderEditButton("btn-warning"))}
         </div>
       </React.Fragment>
