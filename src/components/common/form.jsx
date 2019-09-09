@@ -56,6 +56,8 @@ class Form extends Component {
       delete errors[input.name];
     }
 
+    console.log(errors);
+
     // Clone state data
     const data = { ...this.state.data };
     // Takes name of target inputs and sets value based on name
@@ -66,17 +68,7 @@ class Form extends Component {
 
   handleCheckboxChange = ({ currentTarget: input }) => {
     // Clone all in state.errors
-    const errors = { ...this.state.errors };
-
-    //hardcoded input here, TODO figure out how to abstract this.
-    const obj = { name: "taste_profile", value: input.checked };
-    const errorMessage = this.validateProperty(obj);
-    if (errorMessage) {
-      errors[obj] = errorMessage;
-    } else {
-      delete errors[obj];
-    }
-    const data = { ...this.state.data };
+    const { errors, data } = this.state;
     const item = input.name;
     const isChecked = input.checked;
     let checkedItems = this.state.checkedItems;
@@ -88,7 +80,16 @@ class Form extends Component {
       data["taste_profile"].splice(index, 1);
     }
     checkedItems[item] = isChecked;
-    this.setState({ checkedItems, data });
+    const obj = { name: "taste_profile", value: data["taste_profile"] };
+    const errorMessage = this.validateProperty(obj);
+    if (errorMessage) {
+      errors["taste_profile"] = errorMessage;
+    } else {
+      delete errors["taste_profile"];
+    }
+
+    console.log(errors);
+    this.setState({ checkedItems, data, errors });
   };
 
   renderButton(label) {
