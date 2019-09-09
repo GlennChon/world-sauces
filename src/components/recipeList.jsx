@@ -2,6 +2,8 @@ import React, { Component } from "react";
 import RecipeCard from "./recipeCard";
 import VisibilitySensor from "react-visibility-sensor";
 import { withRouter } from "react-router-dom";
+import { loaderImg } from "../config.json";
+import Img from "react-image";
 
 class RecipeList extends Component {
   handleCardClick = (recipeId, e) => {
@@ -11,9 +13,8 @@ class RecipeList extends Component {
   mapRecipeList = () => {
     try {
       return this.props.recipes.map((recipe, i) => (
-        <VisibilitySensor>
+        <VisibilitySensor key={i}>
           <div
-            key={i}
             className="recipe-card-wrapper"
             onClick={e => this.handleCardClick(recipe._id, e)}
           >
@@ -30,7 +31,11 @@ class RecipeList extends Component {
     return (
       <React.Fragment>
         <div className="recipe-card-container">
-          {this.mapRecipeList(this.props.recipes)}
+          {this.props.recipes ? (
+            this.mapRecipeList(this.props.recipes)
+          ) : (
+            <Img src={loaderImg} className="cover" />
+          )}
         </div>
       </React.Fragment>
     );

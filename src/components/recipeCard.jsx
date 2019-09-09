@@ -9,7 +9,6 @@ const RecipeCard = ({ recipe }) => {
   const { image_link, taste_profile, title, origin_country, likes } = {
     ...recipe
   };
-  console.log(origin_country);
 
   return (
     <React.Fragment>

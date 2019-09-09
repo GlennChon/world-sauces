@@ -11,10 +11,8 @@ export function register(user) {
   });
 }
 
-export function getSelfInfoById(id) {
-  return http.get(apiEndpoint + "/me", {
-    _id: id
-  });
+export async function getMeInfo(username) {
+  return http.post(apiEndpoint + "/me", { username: username });
 }
 
 export function getUserInfoById(id) {
@@ -32,9 +30,12 @@ export function updateUser(user) {
 }
 
 export function saveLike(userId, recipeId) {
-  return http.put(apiEndpoint + "/like", { _id: userId, recipeId });
+  return http.put(apiEndpoint + "/like", { _id: userId, recipe_id: recipeId });
 }
 
 export function removeLike(userId, recipeId) {
-  return http.put(apiEndpoint + "/unlike", { _id: userId, recipeId });
+  return http.put(apiEndpoint + "/unlike", {
+    _id: userId,
+    recipe_id: recipeId
+  });
 }
