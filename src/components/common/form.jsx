@@ -3,11 +3,14 @@ import Joi from "joi-browser";
 
 import Select from "./select";
 import Input from "./input";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faTimesCircle } from "@fortawesome/free-regular-svg-icons";
 
 class Form extends Component {
   state = {
     data: {},
     checkedItems: new Map(),
+    dynamicInputs: new Map(),
     errors: {},
     disabled: false
   };
@@ -49,14 +52,11 @@ class Form extends Component {
     // Clone all in state.errors
     const errors = { ...this.state.errors };
     const errorMessage = this.validateProperty(input);
-    console.log(input);
     if (errorMessage) {
       errors[input.name] = errorMessage;
     } else {
       delete errors[input.name];
     }
-
-    console.log(errors);
 
     // Clone state data
     const data = { ...this.state.data };
@@ -66,7 +66,60 @@ class Form extends Component {
     this.setState({ data, errors });
   };
 
-  handleCheckboxChange = ({ currentTarget: input }) => {
+  handleDynamicInputAdd = input => {
+    input.preventDefault();
+    const { data, errors, dynamicInputs } = this.state;
+    const name = input.currentTarget.name;
+    //get dynamic input field from map and push value
+    const list = data[name];
+    const text = dynamicInputs[name];
+    list.push({ value: text });
+    dynamicInputs[name] = "";
+    const obj = { name: name, value: data[name] };
+    const errorMessage = this.validateProperty(obj);
+    if (errorMessage) {
+      errors[name] = errorMessage;
+    } else {
+      delete errors[name];
+    }
+    this.setState({ errors, data, dynamicInputs });
+  };
+
+  handleDynamicInputRemove = (e, name, key) => {
+    e.preventDefault();
+    const { data, errors } = this.state;
+    const items = data[name];
+    if (items[key]) {
+      items.splice(key, 1);
+    }
+
+    const obj = { name: name, value: items };
+    const errorMessage = this.validateProperty(obj);
+    if (errorMessage) {
+      errors[name] = errorMessage;
+    } else {
+      delete errors[name];
+    }
+    this.setState({ errors, data });
+  };
+  keyPress(e) {
+    if (e.keyCode === 13) {
+      this.handleDynamicInputAdd(e);
+    }
+  }
+
+  handleDynamicInputChange = ({ currentTarget: input }) => {
+    // change dynamic input field
+    const { dynamicInputs } = this.state;
+    const item = input.name;
+    if (!dynamicInputs.has(item)) {
+      dynamicInputs.set(item, "");
+    }
+    dynamicInputs[item] = input.value;
+    this.setState({ dynamicInputs });
+  };
+
+  handleCheckboxChange = ({ currentTarget: input }, checkboxGroupName) => {
     // Clone all in state.errors
     const { errors, data } = this.state;
     const item = input.name;
@@ -74,21 +127,20 @@ class Form extends Component {
     let checkedItems = this.state.checkedItems;
     // add or remove from taste array
     if (isChecked) {
-      data["taste_profile"].push(item);
+      data[checkboxGroupName].push(item);
     } else {
-      let index = data["taste_profile"].indexOf(item);
-      data["taste_profile"].splice(index, 1);
+      let index = data[checkboxGroupName].indexOf(item);
+      data[checkboxGroupName].splice(index, 1);
     }
     checkedItems[item] = isChecked;
-    const obj = { name: "taste_profile", value: data["taste_profile"] };
+    const obj = { name: checkboxGroupName, value: data[checkboxGroupName] };
     const errorMessage = this.validateProperty(obj);
     if (errorMessage) {
-      errors["taste_profile"] = errorMessage;
+      errors[checkboxGroupName] = errorMessage;
     } else {
-      delete errors["taste_profile"];
+      delete errors[checkboxGroupName];
     }
 
-    console.log(errors);
     this.setState({ checkedItems, data, errors });
   };
 
@@ -132,6 +184,47 @@ class Form extends Component {
     );
   }
 
+  renderDynamicInputs(name, label, options, placeholder = "", type = "text") {
+    const { errors, dynamicInputs } = this.state;
+    return (
+      <React.Fragment>
+        <div className="form-group">
+          <label htmlFor={name}>{label}</label>
+          <div className="input-group">
+            <input
+              name={name}
+              placeholder={"Press 'enter' to add: " + placeholder}
+              className="form-control"
+              type={type}
+              value={dynamicInputs[name] || ""}
+              onKeyDown={e => this.keyPress(e)}
+              onChange={e => this.handleDynamicInputChange(e)}
+            />
+          </div>
+          <ul className="list-group">
+            {options.map((item, i) => (
+              <li
+                key={i}
+                className="list-group-item d-flex justify-content-between align-items-center dynamic-input-list-item"
+              >
+                {item.value}
+                <button
+                  className="btn dynamic-input-btn"
+                  onClick={e => this.handleDynamicInputRemove(e, name, i)}
+                >
+                  <FontAwesomeIcon icon={faTimesCircle} />
+                </button>
+              </li>
+            ))}
+          </ul>
+          {errors[name] && (
+            <div className="alert alert-danger">{errors[name]}</div>
+          )}
+        </div>
+      </React.Fragment>
+    );
+  }
+
   renderCheckboxes(name, label, options, checkedItems, type = "checkbox") {
     const { errors } = this.state;
     return (
@@ -139,17 +232,17 @@ class Form extends Component {
         <div className="form-group">
           <label htmlFor={name}>{label}</label>
           <br />
-          {options.map(taste => (
-            <div className="form-check form-check-inline" key={taste._id}>
-              <label htmlFor={taste.name} className="form-check-label">
-                {taste.name}
+          {options.map(item => (
+            <div className="form-check form-check-inline" key={item._id}>
+              <label htmlFor={item.name} className="form-check-label">
+                {item.name}
               </label>
               <input
-                key={taste._id}
-                id={taste.name}
-                checked={!!checkedItems[taste.name]}
-                name={taste.name}
-                onChange={this.handleCheckboxChange}
+                key={item._id}
+                id={item.name}
+                checked={!!checkedItems[item.name]}
+                name={item.name}
+                onChange={e => this.handleCheckboxChange(e, name)}
                 className="form-check-input"
                 type={type}
               />
