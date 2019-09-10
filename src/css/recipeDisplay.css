@@ -17,6 +17,10 @@
   justify-content: center;
 }
 
+.display-img {
+  max-height: 500px;
+}
+
 .display-profile-wrapper {
   border-color: white;
   color: white;
