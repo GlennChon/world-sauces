@@ -4,6 +4,7 @@ import { defaultImg, loaderImg } from "../../config.json";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import * as solid from "@fortawesome/free-solid-svg-icons";
 import * as regular from "@fortawesome/free-regular-svg-icons";
+import * as userService from "../../services/userService";
 
 const { faHeart: heartSolid } = solid;
 const { faHeart: heartRegular } = regular;
@@ -17,10 +18,20 @@ class Display extends Component {
     this.doEdit();
   };
 
-  handleLikeClick = e => {
+  handleLikeClick = async e => {
     e.preventDefault();
+    const user = this.state.user;
+    if (!user) return;
+
     const isLiked = this.state.isLiked;
-    this.setState({ isLiked: !isLiked });
+    if (isLiked === true) {
+      await userService.removeLike(this.state.user._id, this.state.data._id);
+      this.setState({ isLiked: false });
+    } else {
+      await userService.saveLike(this.state.user._id, this.state.data._id);
+      this.setState({ isLiked: true });
+    }
+    this.doLike();
   };
 
   renderLikes = (likes = 0) => {
@@ -53,17 +64,27 @@ class Display extends Component {
     );
   };
 
-  renderImg = name => {
+  renderImg = (name, imgClassName) => {
     const data = this.state.data;
     return (
       <React.Fragment>
         <Img
           src={data[name]}
           loader={
-            <img src={window.location.origin + loaderImg} className="cover" />
+            <img
+              src={window.location.origin + loaderImg}
+              className={"cover " + imgClassName}
+              alt="sauce"
+            />
           }
-          unloader={<img src={defaultImg} className="cover" />}
-          className="cover"
+          unloader={
+            <img
+              src={defaultImg}
+              className={"cover " + imgClassName}
+              alt="placeholder"
+            />
+          }
+          className={"cover " + imgClassName}
         />
       </React.Fragment>
     );
