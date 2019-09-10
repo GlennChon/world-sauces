@@ -16,9 +16,15 @@ const RecipeCard = ({ recipe }) => {
         <Img
           src={image_link}
           loader={
-            <img src={window.location.origin + loaderImg} className="cover" />
+            <img
+              src={window.location.origin + loaderImg}
+              className="cover"
+              alt="sauce"
+            />
           }
-          unloader={<img src={defaultImg} className="cover" />}
+          unloader={
+            <img src={defaultImg} className="cover" alt="placeholder" />
+          }
           className="cover"
         />
         <div className="recipe-card-likes">
