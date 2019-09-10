@@ -9,9 +9,6 @@ import { getCountries } from "../services/countryService";
 import { getTasteProfiles } from "../services/tasteProfileService";
 import * as recipeService from "../services/recipeService";
 
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faMinusCircle, faPlusCircle } from "@fortawesome/free-solid-svg-icons";
-
 class RecipeForm extends Form {
   state = {
     data: {
