@@ -3,7 +3,6 @@ import Display from "./common/display";
 import * as authService from "../services/authService";
 import * as recipeService from "../services/recipeService";
 import * as userService from "../services/userService";
-import { async } from "q";
 
 class RecipeDisplay extends Display {
   state = {
@@ -39,14 +38,25 @@ class RecipeDisplay extends Display {
     };
   }
 
+  componentDidMount = async () => {
+    await this.populateRecipe();
+    await this.updateCurrentUser();
+    if (this.state.user) {
+      await this.checkUserLikes(this.state.user.username);
+    }
+  };
+
+  doLike = async () => {
+    await this.populateRecipe();
+  };
   updateCurrentUser = async () => {
     const user = await authService.getCurrentUser();
     this.setState({ user });
   };
 
   checkUserLikes = async username => {
-    const { _id: recipeId } = this.state.data;
     const userInfo = await userService.getMeInfo(username);
+    const { _id: recipeId } = this.state.data;
     const userLikes = userInfo.data.likes;
     let isLiked = false;
     if (userLikes.includes(recipeId)) {
@@ -66,12 +76,6 @@ class RecipeDisplay extends Display {
     }
   };
 
-  componentDidMount = async () => {
-    await this.populateRecipe();
-    await this.updateCurrentUser();
-    await this.checkUserLikes(this.state.user.username);
-  };
-
   doEdit = async () => {
     this.props.history.push("/recipe/edit/" + this.state.data._id);
   };
@@ -81,7 +85,7 @@ class RecipeDisplay extends Display {
       <React.Fragment>
         <div className="recipe-display-container">
           {/*IMAGE*/}
-          {this.renderImg("image_link")}
+          {this.renderImg("image_link", "display-img")}
           {/*TASTE PROFILE*/}
           <span className="display-profile-container">
             {this.renderHorizontalList(
