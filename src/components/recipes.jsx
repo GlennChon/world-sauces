@@ -3,7 +3,6 @@ import _ from "lodash";
 
 import * as recipeService from "../services/recipeService";
 import { paginate } from "../utils/paginate";
-import Pagination from "./common/pagination";
 import { getCountries } from "../services/countryService";
 import SearchBar from "./common/searchBar";
 import RecipeList from "./recipeList";
@@ -34,14 +33,6 @@ class Recipes extends Component {
   popularRecipes = async () => {
     let json = await recipeService.getPopular();
     this.setState({ recipes: json });
-  };
-
-  handleLike = recipe => {
-    const recipes = [...this.state.recipes];
-    const index = recipes.indexOf(recipe);
-    recipes[index] = { ...recipes[index] };
-    recipes[index].liked = !recipes[index].liked;
-    this.setState({ recipes });
   };
 
   handlePageChange = page => {
