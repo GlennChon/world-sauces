@@ -255,9 +255,6 @@ class Form extends Component {
       </React.Fragment>
     );
   }
-  renderListInput(name, label, type = "text") {
-    return <h1></h1>;
-  }
 }
 
 export default Form;
