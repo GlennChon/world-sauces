@@ -12,6 +12,7 @@ import "./index.css";
 import "./css/App.css";
 import "./css/recipeCard.css";
 import "./css/recipeDisplay.css";
+import "./css/recipeForm.css";
 
 WebFont.load({
   google: {
