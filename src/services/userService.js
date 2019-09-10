@@ -30,12 +30,15 @@ export function updateUser(user) {
 }
 
 export function saveLike(userId, recipeId) {
-  return http.put(apiEndpoint + "/like", { _id: userId, recipe_id: recipeId });
+  return http.put(apiEndpoint + "/like", {
+    userId: userId,
+    recipeId: recipeId
+  });
 }
 
 export function removeLike(userId, recipeId) {
   return http.put(apiEndpoint + "/unlike", {
-    _id: userId,
-    recipe_id: recipeId
+    userId: userId,
+    recipeId: recipeId
   });
 }
