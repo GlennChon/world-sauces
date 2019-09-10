@@ -34,19 +34,8 @@
   font-weight: bold;
 }
 
-.display-information-title {
+.display-section-title {
   padding: 0 0 0 0;
-}
-.display-ingredients-title {
-  padding: 0 0 0 0;
-}
-.display-instructions-title {
-  padding: 0 0 0 0;
-}
-
-.display-information-title,
-.display-ingredients-title,
-.display-instructions-title {
   margin-bottom: 10px;
 }
 .ingredient-container {
@@ -94,9 +83,23 @@ ol > li::marker {
 .btn-likes {
   color: coral;
 }
-.btn-likes:hover {
-  color: #e83c3c;
+.btn-likes:hover:not(:active) {
+  color: coral;
+  opacity: 0.75;
 }
 .btn-likes:focus {
   box-shadow: none !important;
+}
+.btn-share:hover {
+  cursor: pointer;
+}
+.btn-share:hover:not(:active) {
+  opacity: 0.75;
+}
+
+.social-media-share-icon {
+  vertical-align: top;
+  display: inline-block;
+  margin-right: 15px;
+  text-align: center;
 }

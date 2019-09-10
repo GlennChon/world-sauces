@@ -3,6 +3,22 @@ import Display from "./common/display";
 import * as authService from "../services/authService";
 import * as recipeService from "../services/recipeService";
 import * as userService from "../services/userService";
+import {
+  FacebookShareButton,
+  FacebookIcon,
+  TwitterShareButton,
+  TwitterIcon,
+  VKShareButton,
+  VKIcon,
+  WhatsappShareButton,
+  WhatsappIcon,
+  LineShareButton,
+  LineIcon,
+  PinterestShareButton,
+  PinterestIcon,
+  EmailShareButton,
+  EmailIcon
+} from "react-share";
 
 class RecipeDisplay extends Display {
   state = {
@@ -96,14 +112,95 @@ class RecipeDisplay extends Display {
           </span>
           {/*RECIPE WRAPPER*/}
           <div className="recipe-display-wrapper">
-            {/*RECIPE NAME*/}
-            {this.renderMainTitle("title")}
-            {/*LIKES*/}
-            {this.renderLikes(this.state.data.likes)}
+            <div className="row">
+              <div className="col">
+                <div className="row">
+                  {this.renderMainTitle("title")}
+                  {/*LIKES*/}
+                  {this.renderLikes(this.state.data.likes)}
+                </div>
+                {/*RECIPE NAME*/}
+              </div>
+              <div className="col">
+                <div classNamme="row">
+                  {/*SOCIAL MEDIA SHARE LINKS*/}
+                  <div className="social-media-share-icon">
+                    <FacebookShareButton
+                      className="btn-share"
+                      url={window.location.href}
+                      quote={"World Sauces : " + this.state.data.title}
+                      hashtag="#WorldSauces"
+                    >
+                      <FacebookIcon size={32} round />
+                    </FacebookShareButton>
+                  </div>
+                  <div className="social-media-share-icon">
+                    <TwitterShareButton
+                      url={window.location.href}
+                      title={"World Sauces : " + this.state.data.title}
+                      className="btn-share"
+                    >
+                      <TwitterIcon size={32} round />
+                    </TwitterShareButton>
+                  </div>
+                  <div className="social-media-share-icon">
+                    <WhatsappShareButton
+                      url={window.location.href}
+                      title={"World Sauces : " + this.state.data.title}
+                      separator=":: "
+                      className="btn-share"
+                    >
+                      <WhatsappIcon size={32} round />
+                    </WhatsappShareButton>
+                  </div>
+                  <div className="social-media-share-icon">
+                    <LineShareButton
+                      url={window.location.href}
+                      title={"World Sauces : " + this.state.data.title}
+                      className="btn-share"
+                    >
+                      <LineIcon size={32} round />
+                    </LineShareButton>
+                  </div>
+                  <div className="social-media-share-icon">
+                    <PinterestShareButton
+                      url={window.location.href}
+                      media={this.state.data.image_link}
+                      title={"World Sauces : " + this.state.data.title}
+                      description={this.state.data.description}
+                      className="btn-share"
+                    >
+                      <PinterestIcon size={32} round />
+                    </PinterestShareButton>
+                  </div>
+                  <div className="social-media-share-icon">
+                    <VKShareButton
+                      url={window.location.href}
+                      title={"World Sauces : " + this.state.data.title}
+                      description={this.state.data.description}
+                      className="btn-share"
+                    >
+                      <VKIcon size={32} round />
+                    </VKShareButton>
+                  </div>
+                  <div className="social-media-share-icon">
+                    <EmailShareButton
+                      url={window.location.href}
+                      subject={"Check out this sauce recipe!"}
+                      body={"World Sauces Recipe for " + this.state.data.title}
+                      separator=" : "
+                      className="btn-share"
+                    >
+                      <EmailIcon size={32} round />
+                    </EmailShareButton>
+                  </div>
+                </div>
+              </div>
+            </div>
             {/*INFORMATION*/}
             <div className="row">
               <div className="col">
-                <h2 className="display-information-title">Information</h2>
+                <h2 className="display-section-title">Information</h2>
               </div>
             </div>
             <div className="row">
@@ -122,7 +219,7 @@ class RecipeDisplay extends Display {
             {/*INGREDIENTS*/}
             <div className="row">
               <div className="col-md-4">
-                <h2 className="display-ingredients-title">Ingredients</h2>
+                <h2 className="display-section-title">Ingredients</h2>
                 {this.renderList(
                   "ingredients",
                   "list-unstyled ingredient-container",
@@ -131,7 +228,7 @@ class RecipeDisplay extends Display {
               </div>
               {/*INSTRUCTIONS*/}
               <div className="col-md-8">
-                <h2 className="display-instructions-title">Instructions</h2>
+                <h2 className="display-section-title">Instructions</h2>
                 {this.renderNumberedList(
                   "instructions",
                   "list-styled instruction-container",
