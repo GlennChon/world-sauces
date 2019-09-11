@@ -99,7 +99,7 @@ class RecipeDisplay extends Display {
   render() {
     return (
       <React.Fragment>
-        <div className="recipe-display-container">
+        <div className="display-container">
           {/*IMAGE*/}
           {this.renderImg("image_link", "display-img")}
           {/*TASTE PROFILE*/}
@@ -114,15 +114,17 @@ class RecipeDisplay extends Display {
           <div className="recipe-display-wrapper">
             <div className="row">
               <div className="col">
-                <div className="row">
+                <div className="row display-main-title">
                   {this.renderMainTitle("title")}
                   {/*LIKES*/}
+                </div>
+                <div className="row">
                   {this.renderLikes(this.state.data.likes)}
                 </div>
                 {/*RECIPE NAME*/}
               </div>
-              <div className="col">
-                <div classNamme="row">
+              <div className="col share-col ">
+                <div classNamme="row share-row ">
                   {/*SOCIAL MEDIA SHARE LINKS*/}
                   <div className="social-media-share-icon">
                     <FacebookShareButton
