@@ -1,0 +1,21 @@
+.display-container {
+  margin: 5% 15% 0 15%;
+  padding-bottom: 5%;
+  width: 70%;
+  background-color: white;
+}
+
+@media only screen and (max-width: 1200px) {
+  .display-container {
+    margin: 5% 10% 0 10%;
+    padding-bottom: 5%;
+    width: 80%;
+  }
+}
+@media only screen and (max-width: 810px) {
+  .display-container {
+    margin: 0;
+    width: 100%;
+    padding: 0;
+  }
+}
