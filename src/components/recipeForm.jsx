@@ -90,6 +90,13 @@ class RecipeForm extends Form {
     await this.fillCheckedItems();
   }
 
+  componentDidUpdate = async nextProps => {
+    if (nextProps.match.params.id !== this.props.match.params.id) {
+      await this.populateRecipe();
+      await this.fillCheckedItems();
+    }
+  };
+
   setAuthor = async () => {
     // set author
     const user = authService.getCurrentUser();
@@ -125,9 +132,29 @@ class RecipeForm extends Form {
   populateRecipe = async () => {
     try {
       const { id } = this.props.match.params;
-      if (id === "new") return;
+      if (id === "new") {
+        this.setState({
+          data: {
+            title: "",
+            origin_country: "",
+            author: "",
+            likes: 0,
+            image_link: "",
+            description: "",
+            taste_profile: [],
+            ingredients: [],
+            instructions: []
+          },
+          disabled: false
+        });
+        return;
+      }
 
       const recipe = await recipeService.getRecipe(id);
+      const user = authService.getCurrentUser();
+      if (user.username !== recipe.data.author) {
+        this.props.history.push("/recipe/" + recipe.data._id);
+      }
       this.setState({ data: this.mapToViewModel(recipe), disabled: true });
     } catch (ex) {
       if (ex.response && ex.response.status === 404) {
@@ -154,7 +181,6 @@ class RecipeForm extends Form {
 
   render() {
     if (!authService.getCurrentUser()) return <Redirect to="/" />;
-    //const { data: recipe, countries, taste_profiles } = this.state.data;
     const isDisabled = this.state.disabled;
     return (
       <React.Fragment>
@@ -190,9 +216,7 @@ class RecipeForm extends Form {
             this.state.data.instructions,
             "e.g. Toast spices."
           )}
-
-          <br />
-          {this.renderButton("Save")}
+          <div className="btn-edit">{this.renderButton("Save")}</div>
         </form>
       </React.Fragment>
     );
