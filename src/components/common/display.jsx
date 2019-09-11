@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import Img from "react-image";
+import moment from "moment";
 import { defaultImg, loaderImg } from "../../config.json";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import * as solid from "@fortawesome/free-solid-svg-icons";
@@ -99,14 +100,25 @@ class Display extends Component {
     );
   };
 
-  renderChildTitle = (name, label = null, name2 = null) => {
+  renderChildTitle = (title, label = null, itemName = null) => {
     const data = { ...this.state.data };
     let item;
-    if (name2) {
-      item = data[name][name2];
+    if (itemName) {
+      item = data[title][itemName];
     } else {
-      item = data[name];
+      item = data[title];
     }
+    return (
+      <React.Fragment>
+        <label>{label ? label : ""}</label>
+        <p>{item}</p>
+      </React.Fragment>
+    );
+  };
+  renderDate = (title, label = null) => {
+    const data = { ...this.state.data };
+    let item = moment(data[title]).format("YYYY MMM DD");
+    if (item === "Invalid date") return;
     return (
       <React.Fragment>
         <label>{label ? label : ""}</label>
