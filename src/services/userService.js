@@ -15,8 +15,8 @@ export async function getMeInfo(username) {
   return http.post(apiEndpoint + "/me", { username: username });
 }
 
-export function getUserInfoById(id) {
-  return http.get(apiEndpoint + "/" + id);
+export function getUserInfo(username) {
+  return http.get(apiEndpoint + "/" + username);
 }
 
 export function updateUser(user) {
