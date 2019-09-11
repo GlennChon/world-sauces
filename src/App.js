@@ -16,11 +16,10 @@ import Logout from "./components/logout";
 import NotFound from "./components/notFound";
 import LoginForm from "./components/loginForm";
 import RecipeForm from "./components/recipeForm";
-import RecipeDisplay from "./components/recipeDisplay";
-
-import Profile from "./components/profile";
 import ProfileForm from "./components/profileForm";
 import RegisterForm from "./components/registerForm";
+import RecipeDisplay from "./components/recipeDisplay";
+import ProfileDisplay from "./components/profileDisplay";
 import ProtectedRoute from "./components/common/protectedRoute";
 
 class App extends Component {
@@ -45,19 +44,17 @@ class App extends Component {
         <header className="page-header header container-fluid"></header>
         <main className="container-fluid">
           <Switch>
-            <Route path="/login" component={LoginForm} />
             <Route path="/logout" component={Logout} />
-            <ProtectedRoute path="/recipe/edit/:id" component={RecipeForm} />
-            <ProtectedRoute path="/recipe/new" component={RecipeForm} />
-            <Route path="/recipe/:id" component={RecipeDisplay} />
-            <Route
-              path="/recipes"
-              render={props => <Recipes {...props} user={this.state.user} />}
-            />
+            <Route path="/login" component={LoginForm} />
             <Route path="/not-found" component={NotFound} />
 
-            <ProtectedRoute path="/profile/edit" component={ProfileForm} />
-            <Route path="/profile" component={Profile} />
+            <ProtectedRoute path="/recipe/edit/:id" component={RecipeForm} />
+            <Route path="/recipe/:id" component={RecipeDisplay} />
+            <Route path="/recipes" component={Recipes} />
+
+            <ProtectedRoute path="/profile/edit/:id" component={ProfileForm} />
+            <Route path="/profile/:username" component={ProfileDisplay} />
+
             <Route path="/register" component={RegisterForm} />
             <Route path="/" exact component={Home} />
             <Redirect from="/home" to="/" />
