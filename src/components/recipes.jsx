@@ -82,6 +82,7 @@ class Recipes extends Component {
   render() {
     return (
       <React.Fragment>
+        <br />
         {/*Search*/}
         <SearchBar
           handleFormSubmit={this.searchRecipes}
