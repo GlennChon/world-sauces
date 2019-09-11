@@ -1,5 +1,7 @@
-import React, { Component } from "react";
-class ProfileForm extends Component {
+import React from "react";
+import Form from "./common/form";
+
+class ProfileForm extends Form {
   state = {};
   render() {
     return (
