@@ -9,7 +9,6 @@ class SearchBar extends Component {
   };
 
   handleCountryChange = e => {
-    console.log(e.target.value);
     this.setState({ searchCountry: e.target.value });
   };
 

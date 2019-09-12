@@ -74,7 +74,6 @@ class ProfileDisplay extends Display {
 
   renderPersonalInfo = () => {
     if (this.state.user.username === this.state.data.username) {
-      console.log("test");
       return (
         <React.Fragment>
           <div className="row justify-content-center">

@@ -75,7 +75,6 @@ class Recipes extends Component {
     if (!searchQuery) searchQuery = "";
     if (!searchCountry || searchCountry === "any") searchCountry = "";
     let json = await recipeService.getRecipes(searchQuery, searchCountry);
-    console.log(json);
     this.setState({ recipes: json, searchQuery });
   };
 

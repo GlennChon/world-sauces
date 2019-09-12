@@ -165,14 +165,12 @@ class RecipeForm extends Form {
 
   doSubmit = async () => {
     // Call the server
-    console.log(this.state.data);
     try {
       let result = await recipeService.saveRecipe(this.state.data);
       this.props.history.push("/recipe/" + result.data._id);
     } catch (ex) {
       if (ex.response && ex.response.status === 400) {
         let errors = { ...this.state.errors };
-        console.log(ex.response);
 
         this.setState({ errors });
       }
