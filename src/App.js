@@ -50,7 +50,7 @@ class App extends Component {
             <Route path="/recipe/:id" component={RecipeDisplay} />
             <Route path="/recipes" component={Recipes} />
 
-            <ProtectedRoute path="/profile/edit/:id" component={ProfileForm} />
+            <ProtectedRoute path="/profile/me" component={ProfileForm} />
             <Route path="/profile/:username" component={ProfileDisplay} />
 
             <Route path="/register" component={RegisterForm} />
