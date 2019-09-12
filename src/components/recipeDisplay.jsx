@@ -124,7 +124,7 @@ class RecipeDisplay extends Display {
                 {/*RECIPE NAME*/}
               </div>
               <div className="col share-col ">
-                <div classNamme="row share-row ">
+                <div className="row share-row ">
                   {/*SOCIAL MEDIA SHARE LINKS*/}
                   <div className="social-media-share-icon">
                     <FacebookShareButton

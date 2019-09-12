@@ -147,6 +147,7 @@ class Form extends Component {
   renderButton(label) {
     return (
       <button
+        aria-label={"Button " + label}
         disabled={this.validate()}
         className="btn btn-primary form-control"
       >

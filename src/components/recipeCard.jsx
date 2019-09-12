@@ -12,9 +12,11 @@ const RecipeCard = ({ recipe }) => {
 
   return (
     <React.Fragment>
-      <div className="recipe-card-image-container">
+      <div className="recipe-card-image-container" aria-label="recipe card">
         <Img
           src={image_link}
+          alt={title + " Image"}
+          className="cover"
           loader={
             <img
               src={window.location.origin + loaderImg}
@@ -25,7 +27,6 @@ const RecipeCard = ({ recipe }) => {
           unloader={
             <img src={defaultImg} className="cover" alt="placeholder" />
           }
-          className="cover"
         />
         <div className="recipe-card-likes">
           <FontAwesomeIcon icon={faHeart} className="card-icon" />

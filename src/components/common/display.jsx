@@ -56,6 +56,7 @@ class Display extends Component {
     return (
       <React.Fragment>
         <button
+          aria-label="Button Edit"
           className={"btn " + btnClassName}
           onClick={e => this.handleEditClick(e)}
         >
@@ -71,21 +72,22 @@ class Display extends Component {
       <React.Fragment>
         <Img
           src={data[name]}
+          alt={data["title"] + " Image"}
+          className={"cover " + imgClassName}
           loader={
             <img
               src={window.location.origin + loaderImg}
               className={"cover " + imgClassName}
-              alt="sauce"
+              alt="Loading Gif"
             />
           }
           unloader={
             <img
               src={defaultImg}
               className={"cover " + imgClassName}
-              alt="placeholder"
+              alt="Placeholder Image"
             />
           }
-          className={"cover " + imgClassName}
         />
       </React.Fragment>
     );
