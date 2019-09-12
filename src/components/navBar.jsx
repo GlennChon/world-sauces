@@ -40,10 +40,7 @@ const NavBar = ({ user }) => {
                 <NavLink className="nav-item nav-link" to="/recipe/edit/new">
                   <h4>Add Recipe</h4>
                 </NavLink>
-                <NavLink
-                  className="nav-item nav-link"
-                  to={"/profile/" + user.username}
-                >
+                <NavLink className="nav-item nav-link" to={"/profile/me"}>
                   <h4>{user.username}</h4>
                 </NavLink>
                 <NavLink className="nav-item nav-link" to="/logout">
