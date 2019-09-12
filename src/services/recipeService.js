@@ -48,8 +48,8 @@ export function deleteRecipe(recipeId) {
   return http.delete(recipeUrl(recipeId));
 }
 
-export function getRecipesLikedByUser(likes) {
+export function getRecipesLiked(likes) {
   return http.get(apiEndpoint + "/likes", {
-    likes: likes
+    likes
   });
 }
