@@ -12,6 +12,7 @@ import * as recipeService from "../services/recipeService";
 class RecipeForm extends Form {
   state = {
     data: {
+      _id: "",
       title: "",
       origin_country: "",
       author: "",
@@ -83,7 +84,6 @@ class RecipeForm extends Form {
   };
 
   async componentDidMount() {
-    await this.setAuthor();
     await this.populateTasteProfiles();
     await this.populateCountries();
     await this.populateRecipe();
@@ -97,13 +97,6 @@ class RecipeForm extends Form {
     }
   };
 
-  setAuthor = async () => {
-    // set author
-    const user = authService.getCurrentUser();
-    let data = this.state.data;
-    data.author = user.username;
-    this.setState({ data });
-  };
   populateCountries = async () => {
     const { data: countries } = await getCountries();
     this.setState({ countries });
@@ -133,11 +126,13 @@ class RecipeForm extends Form {
     try {
       const { id } = this.props.match.params;
       if (id === "new") {
+        const user = authService.getCurrentUser();
+        let author = user.username;
         this.setState({
           data: {
             title: "",
             origin_country: "",
-            author: "",
+            author: author,
             likes: 0,
             image_link: "",
             description: "",
