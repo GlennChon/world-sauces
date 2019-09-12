@@ -1,5 +1,13 @@
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
+## TODO:
+
+Enable social media logins - Google - Facebook
+
+Enable Captcha on form submits
+
+Implement an image CDN api to handle images
+
 ## Available Scripts
 
 In the project directory, you can run:
