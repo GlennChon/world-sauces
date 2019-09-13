@@ -208,15 +208,11 @@ class RecipeDisplay extends Display {
               </div>
             </div>
             <div className="row">
-              <div className="col-md-6">
+              <div className="col-md-4">
                 {this.renderChildTitle("origin_country", "Country")}
-              </div>
-              <div className="col-md-6">
                 {this.renderChildTitle("author", "Author")}
               </div>
-            </div>
-            <div className="row">
-              <div className="col-md">
+              <div className="col-md-8">
                 {this.renderChildTitle("description", "Description")}
               </div>
             </div>
