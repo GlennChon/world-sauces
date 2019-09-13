@@ -18,6 +18,7 @@
   height: inherit;
   padding-bottom: 40px;
   margin: 10px;
+  max-width: 425px;
 }
 .recipe-card-wrapper:hover {
   cursor: pointer;
@@ -85,13 +86,14 @@ h3 {
   border-bottom: 2px double;
 
   border-color: coral;
-  border-bottom-left-radius: 100%;
   color: coral;
+  border-bottom-left-radius: 100%;
 }
 .recipe-card-likes > h5,
 .recipe-card-likes > .card-icon {
   float: right;
   margin-left: 25%;
+  text-shadow: 1px 1px white;
 }
 
 @media only screen and (max-width: 1200px) {
