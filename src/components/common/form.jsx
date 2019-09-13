@@ -149,7 +149,7 @@ class Form extends Component {
       <button
         aria-label={"Button " + label}
         disabled={this.validate()}
-        className="btn btn-primary form-control"
+        className="btn btn-warning form-control"
       >
         {label}
       </button>
