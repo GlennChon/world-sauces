@@ -47,9 +47,8 @@ class Display extends Component {
           onClick={e => this.handleLikeClick(e)}
         >
           <FontAwesomeIcon icon={icon} className="card-icon" />
-
-          <h5>{likes}</h5>
         </button>
+        <h5>{likes}</h5>
       </React.Fragment>
     );
   };
