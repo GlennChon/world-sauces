@@ -20,6 +20,8 @@ import {
   EmailIcon
 } from "react-share";
 
+import "../css/recipeDisplay.css";
+
 class RecipeDisplay extends Display {
   state = {
     data: {

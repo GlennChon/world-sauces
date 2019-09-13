@@ -22,6 +22,8 @@ import RecipeDisplay from "./components/recipeDisplay";
 import ProfileDisplay from "./components/profileDisplay";
 import ProtectedRoute from "./components/common/protectedRoute";
 
+import "./css/App.css";
+
 class App extends Component {
   state = {};
 

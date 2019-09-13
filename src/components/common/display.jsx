@@ -7,6 +7,8 @@ import * as solid from "@fortawesome/free-solid-svg-icons";
 import * as regular from "@fortawesome/free-regular-svg-icons";
 import * as userService from "../../services/userService";
 
+import "../../css/display.css";
+
 const { faHeart: heartSolid } = solid;
 const { faHeart: heartRegular } = regular;
 

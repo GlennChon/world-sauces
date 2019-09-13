@@ -9,6 +9,8 @@ import { getCountries } from "../services/countryService";
 import { getTasteProfiles } from "../services/tasteProfileService";
 import * as recipeService from "../services/recipeService";
 
+import "../css/recipeForm.css";
+
 class RecipeForm extends Form {
   state = {
     data: {

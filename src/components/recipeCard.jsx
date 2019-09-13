@@ -5,6 +5,8 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faHeart } from "@fortawesome/free-solid-svg-icons";
 import { defaultImg, loaderImg } from "../config.json";
 
+import "../css/recipeCard.css";
+
 const RecipeCard = ({ recipe }) => {
   const { image_link, taste_profile, title, origin_country, likes } = {
     ...recipe
