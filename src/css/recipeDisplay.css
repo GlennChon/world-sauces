@@ -77,16 +77,7 @@ ol > li::marker {
   padding: 0;
   margin: 20px;
 }
-.btn-likes {
-  color: coral;
-}
-.btn-likes:hover:not(:active) {
-  color: coral;
-  opacity: 0.75;
-}
-.btn-likes:focus {
-  box-shadow: none !important;
-}
+
 .btn-share:hover {
   cursor: pointer;
 }
