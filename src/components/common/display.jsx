@@ -87,7 +87,7 @@ class Display extends Component {
             <img
               src={defaultImg}
               className={"cover " + imgClassName}
-              alt="Placeholder Image"
+              alt="Placeholder"
             />
           }
         />
