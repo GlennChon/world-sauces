@@ -49,7 +49,7 @@ export function deleteRecipe(recipeId) {
 }
 
 export function getRecipesLiked(likes) {
-  return http.get(apiEndpoint + "/likes", {
-    likes
+  return http.post(apiEndpoint + "/likes", {
+    likes: likes
   });
 }
