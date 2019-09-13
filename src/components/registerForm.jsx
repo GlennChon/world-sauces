@@ -27,8 +27,12 @@ class RegisterForm extends Form {
       .max(30)
       .required()
       .label("Password"),
-    firstName: Joi.string().label("First Name"),
-    lastName: Joi.string().label("Last Name")
+    firstName: Joi.string()
+      .allow("", null)
+      .label("First Name"),
+    lastName: Joi.string()
+      .allow("", null)
+      .label("Last Name")
   };
 
   doSubmit = async () => {
