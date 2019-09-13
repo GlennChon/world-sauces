@@ -81,7 +81,7 @@ h3 {
   position: relative;
   top: -100%;
   left: calc(100% - 90px);
-  background-color: rgba(255, 255, 255, 0.9);
+  background-color: rgba(0, 0, 0, 0.35);
   border-left: 20px double;
   border-bottom: 2px double;
 
@@ -93,7 +93,6 @@ h3 {
 .recipe-card-likes > .card-icon {
   float: right;
   margin-left: 25%;
-  text-shadow: 1px 1px white;
 }
 
 @media only screen and (max-width: 1200px) {
