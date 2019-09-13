@@ -42,3 +42,13 @@ p {
   font-family: "Museo Sans Rounded", "Roboto Condensed", "Roboto", "Arial",
     "sans-serif";
 }
+
+.red .active a,
+.red .active a:hover {
+  background-color: red;
+}
+
+.coral .active a,
+.coral .active a:hover {
+  background-color: coral;
+}
