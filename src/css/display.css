@@ -5,6 +5,21 @@
   background-color: white;
 }
 
+.btn-likes > h5 {
+  color: coral;
+}
+.btn-likes:hover:not(:active) {
+  opacity: 0.75;
+}
+
+.btn-likes:focus {
+  box-shadow: none !important;
+}
+
+.card-icon {
+  color: coral;
+}
+
 @media only screen and (max-width: 1200px) {
   .display-container {
     margin: 5% 10% 0 10%;
