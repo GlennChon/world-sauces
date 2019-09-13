@@ -20,7 +20,7 @@ export function getUserInfo(username) {
 }
 
 export function updateUser(user) {
-  return http.put(apiEndpoint, {
+  return http.put(apiEndpoint + "/me", {
     _id: user._id,
     firstName: user.firstName,
     lastName: user.lastName,
