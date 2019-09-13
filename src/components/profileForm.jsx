@@ -7,6 +7,8 @@ import { Redirect } from "react-router-dom";
 import * as authService from "../services/authService";
 import * as userService from "../services/userService";
 import * as recipeService from "../services/recipeService";
+import { toast } from "react-toastify";
+import { Tab, Row, Col, Nav } from "react-bootstrap";
 
 class ProfileForm extends Form {
   state = {
@@ -18,6 +20,7 @@ class ProfileForm extends Form {
       about: "",
       email: "",
       registerDate: "",
+      emailVerified: false,
       likes: []
     },
     errors: {},
@@ -26,27 +29,31 @@ class ProfileForm extends Form {
   };
 
   schema = {
-    firstName: Joi.string().label("First Name"),
-    lastName: Joi.string().label("Last Name"),
-    about: Joi.string()
-      .max(1000)
-      .label("About"),
+    _id: Joi.string(),
+    username: Joi.string(),
     email: Joi.string()
       .email()
-      .label("Email")
+      .required()
+      .label("Email"),
+    firstName: Joi.string().label("First Name"),
+    lastName: Joi.string().label("Last Name"),
+    about: Joi.string().label("About"),
+    registerDate: Joi.string(),
+    emailVerified: Joi.boolean(),
+    likes: Joi.array()
   };
 
   mapUserToViewModel(user) {
-    const data = user.data;
     return {
-      _id: data._id,
-      username: data.username,
-      firstName: data.firstName,
-      lastName: data.lastName,
-      about: data.about,
-      email: data.email,
-      registerDate: data.registerDate,
-      likes: data.likes
+      _id: user._id,
+      username: user.username,
+      firstName: user.firstName,
+      lastName: user.lastName,
+      about: user.about,
+      email: user.email,
+      registerDate: user.registerDate,
+      emailVerified: user.emailVerified,
+      likes: user.likes
     };
   }
 
@@ -54,15 +61,13 @@ class ProfileForm extends Form {
     await this.populateUser();
     await this.getUserRecipes();
     await this.getUserLikes();
-    console.log(this.state.errors);
   };
 
   populateUser = async () => {
     try {
       const user = await authService.getCurrentUser();
-      if (!user) return this.props.history.replace("/not-found");
-      const userInfo = await userService.getMeInfo(user.username);
-      console.log(userInfo);
+      if (!user) this.props.history.replace("/not-found");
+      const { data: userInfo } = await userService.getMeInfo(user.username);
       this.setState({ data: this.mapUserToViewModel(userInfo) });
     } catch (ex) {
       if (ex.response && ex.response.status === 400) {
@@ -90,13 +95,32 @@ class ProfileForm extends Form {
   };
 
   doSubmit = async () => {
-    // Call the server
+    const toastOptions = {
+      autoClose: 2000
+    };
     try {
-      await userService.updateUser(this.state.data);
+      const { data: user } = this.state;
+      const updatedUserInfo = {
+        _id: user._id,
+        firstName: user.firstName,
+        lastName: user.lastName,
+        about: user.about,
+        email: user.email
+      };
+      const result = await userService.updateUser(updatedUserInfo);
+      if (result.status === 200) {
+        toast.success(`${user.username} Profile Updated`, toastOptions);
+      } else {
+        toast.error(
+          `Error code: ${result.status} - ${result.statusText}`,
+          toastOptions
+        );
+      }
     } catch (ex) {
+      console.log(ex);
       if (ex.response && ex.response.status === 400) {
         let errors = { ...this.state.errors };
-
+        toast.error(ex.response.status + " " + ex.response, toastOptions);
         this.setState({ errors });
       }
     }
@@ -106,13 +130,48 @@ class ProfileForm extends Form {
     if (!authService.getCurrentUser()) return <Redirect to="/" />;
     return (
       <React.Fragment>
-        <form onSubmit={this.handleSubmit}>
-          {this.renderInput("firstName", "First Name")}
-          {this.renderInput("lastName", "Last Name")}
-          {this.renderInput("about", "About")}
-          {this.renderInput("email", "Email")}
-          <div className="btn-edit"> {this.renderButton("Save")} </div>
-        </form>
+        <Tab.Container id="left-tabs-example" defaultActiveKey="first">
+          <Row>
+            <Col sm={3}>
+              <Nav variant="pills" className="flex-column">
+                <Nav.Item>
+                  <Nav.Link eventKey="first">Profile</Nav.Link>
+                </Nav.Item>
+                <Nav.Item>
+                  <Nav.Link eventKey="second">Likes</Nav.Link>
+                </Nav.Item>
+                <Nav.Item>
+                  <Nav.Link eventKey="third">My Recipes</Nav.Link>
+                </Nav.Item>
+                <Nav.Item>
+                  <Nav.Link eventKey="fourth">Password</Nav.Link>
+                </Nav.Item>
+              </Nav>
+            </Col>
+            <Col sm={9}>
+              <Tab.Content>
+                <Tab.Pane eventKey="first">
+                  <form onSubmit={this.handleSubmit}>
+                    {this.renderInput("firstName", "First Name")}
+                    {this.renderInput("lastName", "Last Name")}
+                    {this.renderInput("about", "About")}
+                    {this.renderInput("email", "Email")}
+                    {this.renderButton("Save")}
+                  </form>
+                </Tab.Pane>
+                <Tab.Pane eventKey="second">
+                  <p>text 2</p>
+                </Tab.Pane>
+              </Tab.Content>
+              <Tab.Pane eventKey="third">
+                <p>text 3</p>
+              </Tab.Pane>
+              <Tab.Pane eventKey="fourth">
+                <p>text 4</p>
+              </Tab.Pane>
+            </Col>
+          </Row>
+        </Tab.Container>
       </React.Fragment>
     );
   }
