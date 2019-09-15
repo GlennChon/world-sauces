@@ -1,5 +1,5 @@
 {
-  "apiUrl": "http://192.168.1.54:3333/api",
+  "apiUrl": "https://world-sauces-api.herokuapp.com/api",
   "tokenKey": "token",
   "defaultImg": "https://upload.wikimedia.org/wikipedia/commons/a/a8/Emojione_BW_1F372.svg",
   "loaderImg": "/img/loader.gif"
