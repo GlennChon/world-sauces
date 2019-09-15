@@ -28,11 +28,11 @@ class Display extends Component {
 
     const isLiked = this.state.isLiked;
     if (isLiked === true) {
-      await userService.removeLike(this.state.user._id, this.state.data._id);
       this.setState({ isLiked: false });
+      await userService.removeLike(this.state.user._id, this.state.data._id);
     } else {
-      await userService.saveLike(this.state.user._id, this.state.data._id);
       this.setState({ isLiked: true });
+      await userService.saveLike(this.state.user._id, this.state.data._id);
     }
     this.doLike();
   };
