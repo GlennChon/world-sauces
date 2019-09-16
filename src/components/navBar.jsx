@@ -6,7 +6,7 @@ const NavBar = ({ user }) => {
     <React.Fragment>
       <nav className="navbar navbar-expand-lg navbar-light bg-light">
         <Link className="navbar-brand" to="/">
-          <h2>World Sauces</h2>
+          <h2>Sauce Nerd</h2>
         </Link>
         <button
           className="navbar-toggler"
