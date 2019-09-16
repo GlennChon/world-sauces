@@ -65,7 +65,7 @@ class RecipeDisplay extends Display {
   };
 
   doLike = async () => {
-    //await this.populateRecipe();
+    this.populateRecipe();
   };
   updateCurrentUser = async () => {
     const user = await authService.getCurrentUser();
