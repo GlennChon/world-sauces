@@ -81,7 +81,7 @@ class RecipeDisplay extends Display {
         );
       }
 
-      this.setState({ data: result });
+      this.setState({ data: result.data });
     } catch (ex) {
       console.log(ex);
     }
