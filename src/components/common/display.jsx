@@ -34,7 +34,7 @@ class Display extends Component {
       });
     }
 
-    const { isLiked, data } = this.state.data;
+    let { isLiked, data } = this.state;
     if (isLiked === true) {
       isLiked = false;
       data.likes -= 1;
