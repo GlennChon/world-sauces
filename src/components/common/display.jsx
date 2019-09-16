@@ -41,7 +41,7 @@ class Display extends Component {
 
   renderLikes = (likes = 0) => {
     const { isLiked, data } = this.state;
-    let icon = isLiked ? heartSolid : heartRegular;
+    let icon = isLiked ? heartRegular : heartSolid;
     if (data.likes) {
       likes = this.state.data.likes;
     }
