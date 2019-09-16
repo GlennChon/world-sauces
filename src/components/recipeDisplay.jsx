@@ -67,16 +67,18 @@ class RecipeDisplay extends Display {
 
   doLike = async () => {
     let { isLiked, data } = this.state;
+    console.log("Before: " + data.likes);
 
-    if (isLiked) {
+    if (isLiked === true) {
       isLiked = false;
-      data.likes += 1;
-      userService.saveLike(this.state.user._id, this.state.data._id);
-    } else {
-      isLiked = true;
       data.likes -= 1;
       userService.removeLike(this.state.user._id, this.state.data._id);
+    } else {
+      isLiked = true;
+      data.likes += 1;
+      userService.saveLike(this.state.user._id, this.state.data._id);
     }
+    console.log("After: " + data.likes);
     this.setState({ isLiked, data });
   };
   updateCurrentUser = async () => {
@@ -88,10 +90,7 @@ class RecipeDisplay extends Display {
     const userInfo = await userService.getMeInfo(username);
     const { _id: recipeId } = this.state.data;
     const userLikes = userInfo.data.likes;
-    let isLiked = false;
-    if (userLikes.includes(recipeId)) {
-      isLiked = true;
-    }
+    let isLiked = userLikes.includes(recipeId) ? true : false;
     this.setState({ isLiked });
   };
 
