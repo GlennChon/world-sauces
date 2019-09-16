@@ -5,7 +5,8 @@ import { defaultImg, loaderImg } from "../../config.json";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import * as solid from "@fortawesome/free-solid-svg-icons";
 import * as regular from "@fortawesome/free-regular-svg-icons";
-import * as userService from "../../services/userService";
+
+import { toast } from "react-toastify";
 
 import "../../css/display.css";
 
@@ -22,26 +23,21 @@ class Display extends Component {
   };
 
   handleLikeClick = e => {
-    // e.preventDefault();
-    const user = this.state.user;
-    if (!user) return;
+    e.preventDefault();
+    // add handling of unregistered user here
 
-    let isLiked = this.state.isLiked;
-    let data = this.state.data;
-    if (isLiked) {
-      isLiked = false;
-      data.likes -= 1;
-    } else {
-      isLiked = true;
-      data.likes += 1;
+    const user = this.state.user;
+    if (!user) {
+      toast.error("Please login to save recipes", {
+        autoClose: 3000
+      });
     }
-    this.setState({ isLiked, data });
     this.doLike();
   };
 
   renderLikes = (likes = 0) => {
     const { isLiked, data } = this.state;
-    let icon = isLiked ? heartRegular : heartSolid;
+    let icon = isLiked ? heartSolid : heartRegular;
     if (data.likes) {
       likes = this.state.data.likes;
     }
