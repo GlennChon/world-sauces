@@ -151,8 +151,8 @@ class RecipeDisplay extends Display {
                     <FacebookShareButton
                       className="btn-share"
                       url={window.location.href}
-                      quote={"World Sauces : " + this.state.data.title}
-                      hashtag="#WorldSauces"
+                      quote={"Sauce Nerd : " + this.state.data.title}
+                      hashtag="#SauceNerd"
                     >
                       <FacebookIcon size={32} round />
                     </FacebookShareButton>
@@ -160,7 +160,7 @@ class RecipeDisplay extends Display {
                   <div className="social-media-share-icon">
                     <TwitterShareButton
                       url={window.location.href}
-                      title={"World Sauces : " + this.state.data.title}
+                      title={"Sauce Nerd : " + this.state.data.title}
                       className="btn-share"
                     >
                       <TwitterIcon size={32} round />
@@ -169,7 +169,7 @@ class RecipeDisplay extends Display {
                   <div className="social-media-share-icon">
                     <WhatsappShareButton
                       url={window.location.href}
-                      title={"World Sauces : " + this.state.data.title}
+                      title={"Sauce Nerd : " + this.state.data.title}
                       separator=":: "
                       className="btn-share"
                     >
@@ -179,7 +179,7 @@ class RecipeDisplay extends Display {
                   <div className="social-media-share-icon">
                     <LineShareButton
                       url={window.location.href}
-                      title={"World Sauces : " + this.state.data.title}
+                      title={"Sauce Nerd : " + this.state.data.title}
                       className="btn-share"
                     >
                       <LineIcon size={32} round />
@@ -189,7 +189,7 @@ class RecipeDisplay extends Display {
                     <PinterestShareButton
                       url={window.location.href}
                       media={this.state.data.image_link}
-                      title={"World Sauces : " + this.state.data.title}
+                      title={"Sauce Nerd : " + this.state.data.title}
                       description={this.state.data.description}
                       className="btn-share"
                     >
@@ -199,7 +199,7 @@ class RecipeDisplay extends Display {
                   <div className="social-media-share-icon">
                     <VKShareButton
                       url={window.location.href}
-                      title={"World Sauces : " + this.state.data.title}
+                      title={"Sauce Nerd : " + this.state.data.title}
                       description={this.state.data.description}
                       className="btn-share"
                     >
@@ -210,7 +210,7 @@ class RecipeDisplay extends Display {
                     <EmailShareButton
                       url={window.location.href}
                       subject={"Check out this sauce recipe!"}
-                      body={"World Sauces Recipe for " + this.state.data.title}
+                      body={"Sauce Nerd Recipe for " + this.state.data.title}
                       separator=" : "
                       className="btn-share"
                     >
