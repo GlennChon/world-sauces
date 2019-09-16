@@ -3,6 +3,7 @@ import Display from "./common/display";
 import * as authService from "../services/authService";
 import * as recipeService from "../services/recipeService";
 import * as userService from "../services/userService";
+import { Row, Col } from "react-bootstrap";
 import {
   FacebookShareButton,
   FacebookIcon,
@@ -66,9 +67,9 @@ class RecipeDisplay extends Display {
 
   doLike = async () => {
     if (this.state.isLiked) {
-      await userService.removeLike(this.state.user._id, this.state.data._id);
-    } else {
       await userService.saveLike(this.state.user._id, this.state.data._id);
+    } else {
+      await userService.removeLike(this.state.user._id, this.state.data._id);
     }
   };
   updateCurrentUser = async () => {
@@ -118,19 +119,17 @@ class RecipeDisplay extends Display {
           </span>
           {/*RECIPE WRAPPER*/}
           <div className="recipe-display-wrapper">
-            <div className="row">
-              <div className="col">
-                <div className="row display-main-title">
+            <Row>
+              <Col>
+                <Row className="display-main-title">
                   {this.renderMainTitle("title")}
-                  {/*LIKES*/}
-                </div>
-                <div className="row">
-                  {this.renderLikes(this.state.data.likes)}
-                </div>
+                </Row>
+                {/*LIKES*/}
+                <Row>{this.renderLikes()}</Row>
                 {/*RECIPE NAME*/}
-              </div>
-              <div className="col share-col ">
-                <div className="row share-row ">
+              </Col>
+              <Col className="share-col ">
+                <Row className="share-row ">
                   {/*SOCIAL MEDIA SHARE LINKS*/}
                   <div className="social-media-share-icon">
                     <FacebookShareButton
@@ -202,44 +201,44 @@ class RecipeDisplay extends Display {
                       <EmailIcon size={32} round />
                     </EmailShareButton>
                   </div>
-                </div>
-              </div>
-            </div>
+                </Row>
+              </Col>
+            </Row>
             {/*INFORMATION*/}
-            <div className="row">
-              <div className="col">
+            <Row>
+              <Col>
                 <h2 className="display-section-title">Information</h2>
-              </div>
-            </div>
-            <div className="row">
-              <div className="col-md-4">
+              </Col>
+            </Row>
+            <Row>
+              <Col className="col-md-4">
                 {this.renderChildTitle("origin_country", "Country")}
                 {this.renderChildTitle("author", "Author")}
-              </div>
-              <div className="col-md-8">
+              </Col>
+              <Col className="col-md-8">
                 {this.renderChildTitle("description", "Description")}
-              </div>
-            </div>
+              </Col>
+            </Row>
             {/*INGREDIENTS*/}
-            <div className="row">
-              <div className="col-md-4">
+            <Row>
+              <Col className="col-md-4">
                 <h2 className="display-section-title">Ingredients</h2>
                 {this.renderList(
                   "ingredients",
                   "list-unstyled ingredient-container",
                   "ingredient-wrapper"
                 )}
-              </div>
+              </Col>
               {/*INSTRUCTIONS*/}
-              <div className="col-md-8">
+              <Col className="col-md-8">
                 <h2 className="display-section-title">Instructions</h2>
                 {this.renderNumberedList(
                   "instructions",
                   "list-styled instruction-container",
                   "instruction-wrapper"
                 )}
-              </div>
-            </div>
+              </Col>
+            </Row>
           </div>
         </div>
         <div className="btn-edit">

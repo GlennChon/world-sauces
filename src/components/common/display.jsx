@@ -42,8 +42,11 @@ class Display extends Component {
   };
 
   renderLikes = (likes = 0) => {
-    const { isLiked } = this.state;
+    const { isLiked, data } = this.state;
     let icon = isLiked ? heartSolid : heartRegular;
+    if (data.likes) {
+      likes = this.state.data.likes;
+    }
     return (
       <React.Fragment>
         <button
