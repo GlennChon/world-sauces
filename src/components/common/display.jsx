@@ -32,6 +32,7 @@ class Display extends Component {
       toast.error("Please login to save recipes", {
         autoClose: 3000
       });
+      return;
     }
 
     let { isLiked, data } = this.state;
