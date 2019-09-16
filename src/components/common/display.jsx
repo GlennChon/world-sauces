@@ -27,13 +27,17 @@ class Display extends Component {
     if (!user) return;
 
     const isLiked = this.state.isLiked;
+    let data = this.state.data;
+    let likes = data.likes;
+
     if (isLiked === true) {
-      this.setState({ isLiked: false });
-      await userService.removeLike(this.state.user._id, this.state.data._id);
+      likes += 1;
+      isliked = false;
     } else {
-      this.setState({ isLiked: true });
-      await userService.saveLike(this.state.user._id, this.state.data._id);
+      likes -= 1;
+      isLiked = true;
     }
+    this.setState({ isLiked, data });
     this.doLike();
   };
 
