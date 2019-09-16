@@ -89,10 +89,6 @@ class Home extends Component {
   }
 
   render() {
-    // redirect to domain name
-    if (window.location.href === "https://world-sauces.herokuapp.com/") {
-      window.location.replace = "http://www.saucenerd.com";
-    }
     return (
       <React.Fragment>
         <h1>Most Popular</h1>
