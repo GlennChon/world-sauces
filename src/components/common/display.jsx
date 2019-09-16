@@ -21,19 +21,23 @@ class Display extends Component {
     this.doEdit();
   };
 
-  handleLikeClick = async e => {
+  handleLikeClick = e => {
     e.preventDefault();
     const user = this.state.user;
     if (!user) return;
 
-    let { isLiked } = this.state;
-
+    let isLiked = this.state.isLiked;
+    let likesCount = this.state.data.likes;
     if (isLiked === true) {
       isLiked = false;
+      likesCount += 1;
     } else {
       isLiked = true;
+      likesCount -= 1;
     }
-    this.setState({ isLiked });
+    let data = { likes: likesCount };
+    this.setState({ isLiked, data });
+
     this.doLike();
   };
 
