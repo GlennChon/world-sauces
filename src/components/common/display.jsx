@@ -27,7 +27,8 @@ class Display extends Component {
     if (!user) return;
 
     let isLiked = this.state.isLiked;
-    let likesCount = this.state.data.likes;
+    let data = this.state.data;
+    let likesCount = data.likes;
     if (isLiked === true) {
       isLiked = false;
       likesCount -= 1;
@@ -35,7 +36,7 @@ class Display extends Component {
       isLiked = true;
       likesCount += 1;
     }
-    this.setState({ isLiked, data: { likes: likesCount } });
+    this.setState({ isLiked, data });
     this.doLike();
   };
 
