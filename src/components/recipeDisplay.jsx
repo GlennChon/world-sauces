@@ -66,9 +66,9 @@ class RecipeDisplay extends Display {
   };
 
   doLike = async () => {
-    let data = this.state.data;
+    let { isLiked, data } = this.state;
 
-    if (this.state.isLiked) {
+    if (isLiked) {
       isLiked = false;
       data.likes -= 1;
       userService.removeLike(this.state.user._id, this.state.data._id);
