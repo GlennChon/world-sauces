@@ -30,14 +30,12 @@ class Display extends Component {
     let likesCount = this.state.data.likes;
     if (isLiked === true) {
       isLiked = false;
-      likesCount += 1;
+      likesCount -= 1;
     } else {
       isLiked = true;
-      likesCount -= 1;
+      likesCount += 1;
     }
-    let data = { likes: likesCount };
-    this.setState({ isLiked, data });
-
+    this.setState({ isLiked, data: { likes: likesCount } });
     this.doLike();
   };
 
