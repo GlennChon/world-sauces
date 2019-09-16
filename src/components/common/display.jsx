@@ -22,19 +22,18 @@ class Display extends Component {
   };
 
   handleLikeClick = e => {
-    e.preventDefault();
+    // e.preventDefault();
     const user = this.state.user;
     if (!user) return;
 
     let isLiked = this.state.isLiked;
     let data = this.state.data;
-    let likesCount = data.likes;
-    if (isLiked === true) {
+    if (isLiked) {
       isLiked = false;
-      likesCount -= 1;
+      data.likes -= 1;
     } else {
       isLiked = true;
-      likesCount += 1;
+      data.likes += 1;
     }
     this.setState({ isLiked, data });
     this.doLike();
