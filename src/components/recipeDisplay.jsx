@@ -132,7 +132,9 @@ class RecipeDisplay extends Display {
                   {this.renderMainTitle("title")}
                 </Row>
                 {/*LIKES*/}
-                <Row>{this.renderLikes()}</Row>
+                <Row>
+                  {this.renderLikes(this.state.likes, this.state.isLiked)}
+                </Row>
                 {/*RECIPE NAME*/}
               </Col>
               <Col className="share-col ">
