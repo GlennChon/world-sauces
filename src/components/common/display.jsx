@@ -36,7 +36,7 @@ class Display extends Component {
   };
 
   renderLikes = (likes = 0, isLiked = false) => {
-    let icon = isLiked ? heartSolid : heartRegular;
+    let icon = !isLiked ? heartSolid : heartRegular;
     likes = this.state.data.likes;
     return (
       <React.Fragment>
