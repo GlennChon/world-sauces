@@ -70,12 +70,12 @@ class RecipeDisplay extends Display {
 
     if (isLiked) {
       isLiked = false;
-      data.likes -= 1;
-      userService.removeLike(this.state.user._id, this.state.data._id);
-    } else {
-      isLiked = true;
       data.likes += 1;
       userService.saveLike(this.state.user._id, this.state.data._id);
+    } else {
+      isLiked = true;
+      data.likes -= 1;
+      userService.removeLike(this.state.user._id, this.state.data._id);
     }
     this.setState({ isLiked, data });
   };
