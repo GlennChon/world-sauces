@@ -26,7 +26,7 @@ class Display extends Component {
     const user = this.state.user;
     if (!user) return;
 
-    const isLiked = this.state.isLiked;
+    let isLiked = this.state.isLiked;
     let data = this.state.data;
     let likes = data.likes;
 
