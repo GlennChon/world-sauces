@@ -32,7 +32,7 @@ class Display extends Component {
 
     if (isLiked === true) {
       likes += 1;
-      isliked = false;
+      isLiked = false;
     } else {
       likes -= 1;
       isLiked = true;
