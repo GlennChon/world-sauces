@@ -24,6 +24,7 @@ class Display extends Component {
 
   handleLikeClick = e => {
     e.preventDefault();
+
     // add handling of unregistered user here
 
     const user = this.state.user;
@@ -32,6 +33,18 @@ class Display extends Component {
         autoClose: 3000
       });
     }
+
+    const { isLiked, data } = this.state.data;
+    if (isLiked === true) {
+      isLiked = false;
+      data.likes -= 1;
+    } else {
+      isLiked = true;
+      data.likes += 1;
+    }
+
+    this.setState({ isLiked, data });
+
     this.doLike();
   };
 
