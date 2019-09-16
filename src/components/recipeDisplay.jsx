@@ -64,13 +64,18 @@ class RecipeDisplay extends Display {
     }
   };
 
-  doLike = () => {
-    const isLiked = this.state.isLiked;
-    if (isLiked === true) {
+  doLike = async () => {
+    let { data } = this.state.data;
+    let { likes } = data;
+    if (this.state.isLiked === true) {
+      likes += 1;
       userService.saveLike(this.state.user._id, this.state.data._id);
     } else {
+      likes -= 1;
       userService.removeLike(this.state.user._id, this.state.data._id);
     }
+
+    this.setState({ data });
   };
   updateCurrentUser = async () => {
     const user = await authService.getCurrentUser();
