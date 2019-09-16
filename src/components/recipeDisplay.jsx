@@ -71,6 +71,7 @@ class RecipeDisplay extends Display {
     } else {
       await userService.removeLike(this.state.user._id, this.state.data._id);
     }
+    this.populateRecipe();
   };
   updateCurrentUser = async () => {
     const user = await authService.getCurrentUser();
