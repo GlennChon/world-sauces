@@ -9,6 +9,15 @@ export function register(user) {
   });
 }
 
+export function updateEmailandPass(user) {
+  return http.put(apiEndpoint + "/account", {
+    email: user.email,
+    password: user.password,
+    username: user.username,
+    newPass: user.newPass
+  });
+}
+
 export async function getMeInfo(username) {
   return http.post(apiEndpoint + "/me", { username: username });
 }
