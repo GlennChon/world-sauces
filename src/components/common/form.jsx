@@ -6,6 +6,7 @@ import Input from "./input";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTimesCircle } from "@fortawesome/free-regular-svg-icons";
 
+// todo  make separate components for account update and profile update instead of using this wack lazy setup
 class Form extends Component {
   state = {
     data: {},
