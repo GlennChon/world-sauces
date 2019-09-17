@@ -15,7 +15,7 @@ class Home extends Component {
   async componentDidMount() {
     await this.loadPopularRecipes();
     await this.loadRandomRecipes();
-    setTimeout(this.apiResponseCheck(), 4000);
+    setTimeout(this.apiResponseCheck(), 5000);
   }
 
   // Temporary solution for spin up time of heroku free tier
