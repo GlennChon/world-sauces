@@ -52,7 +52,9 @@ class ProfileForm extends Form {
       .label("About"),
     registerDate: Joi.string(),
     emailVerified: Joi.boolean(),
-    likes: Joi.array(),
+    likes: Joi.array()
+  };
+  accountSchema = {
     email: Joi.string()
       .email()
       .required()
@@ -64,6 +66,7 @@ class ProfileForm extends Form {
     password: Joi.string()
       .min(6)
       .max(30)
+      .required()
       .label("Current Password")
   };
 
