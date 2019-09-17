@@ -17,14 +17,14 @@ class Form extends Component {
 
   validate = () => {
     const options = { abortEarly: false };
-    let error;
+    let data;
     if (this.state.navItem === "fourth") {
       data = Joi.validate(this.state.data, this.accountSchema, options);
     } else {
       data = Joi.validate(this.state.data, this.schema, options);
     }
 
-    error = data.error;
+    const { error } = data;
 
     if (!error) return null;
 
