@@ -64,7 +64,7 @@ class ProfileForm extends Form {
     password: Joi.string()
       .min(6)
       .max(30)
-      .label("Old Password")
+      .label("Current Password")
   };
 
   mapUserToViewModel(user) {
@@ -170,7 +170,7 @@ class ProfileForm extends Form {
     if (this.state.navItem === "third") {
       await this.updateUser();
     } else if (this.state.navItem === "fourth") {
-      await this.updateAccountInfo();
+      await this.updateAccount();
     }
   };
 
@@ -228,7 +228,11 @@ class ProfileForm extends Form {
                   <form onSubmit={this.handleSubmit}>
                     {this.renderInput("email", "Email")}
                     {this.renderInput("newPass", "New Password", "password")}
-                    {this.renderInput("password", "Old Password", "password")}
+                    {this.renderInput(
+                      "password",
+                      "Current Password",
+                      "password"
+                    )}
                     {this.renderButton("Submit")}
                   </form>
                 </Tab.Pane>
