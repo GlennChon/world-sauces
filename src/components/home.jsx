@@ -14,13 +14,13 @@ class Home extends Component {
   };
   async componentDidMount() {
     await this.loadPopularRecipes();
-    let response = await this.loadRandomRecipes();
-    this.apiResponseCheck(response);
+    await this.loadRandomRecipes();
+    setTimeout(this.apiResponseCheck(), 4000);
   }
 
   // Temporary solution for spin up time of heroku free tier
-  apiResponseCheck = response => {
-    if (!response) {
+  apiResponseCheck = () => {
+    if (this.state.popular == null) {
       window.location.reload();
     }
     return;
