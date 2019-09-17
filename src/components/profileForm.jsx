@@ -163,7 +163,7 @@ class ProfileForm extends Form {
     } catch (ex) {
       console.log(ex);
       if (ex.response && ex.response.status === 400) {
-        let errors = { ...this.state.accountErrors };
+        let accountErrors = { ...this.state.accountErrors };
         toast.error(ex.response.status + " " + ex.response, this.toastOptions);
         this.setState({ accountErrors });
       }
