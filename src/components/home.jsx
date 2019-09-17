@@ -14,8 +14,17 @@ class Home extends Component {
   };
   async componentDidMount() {
     await this.loadPopularRecipes();
-    await this.loadRandomRecipes();
+    let response = await this.loadRandomRecipes();
+    this.apiResponseCheck(response);
   }
+
+  // Temporary solution for spin up time of heroku free tier
+  apiResponseCheck = response => {
+    if (!response) {
+      window.location.reload();
+    }
+    return;
+  };
   handleCardClick = (recipeId, e) => {
     e.preventDefault();
     this.props.history.push("/recipe/" + recipeId);
