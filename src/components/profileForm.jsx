@@ -24,7 +24,9 @@ class ProfileForm extends Form {
       email: "",
       registerDate: "",
       emailVerified: false,
-      likes: []
+      likes: [],
+      password: "",
+      newPass: ""
     },
     errors: {},
     authoredRecipes: {},
@@ -39,10 +41,6 @@ class ProfileForm extends Form {
   schema = {
     _id: Joi.string(),
     username: Joi.string(),
-    email: Joi.string()
-      .email()
-      .required()
-      .label("Email"),
     firstName: Joi.string()
       .allow("", null)
       .label("First Name"),
@@ -54,7 +52,19 @@ class ProfileForm extends Form {
       .label("About"),
     registerDate: Joi.string(),
     emailVerified: Joi.boolean(),
-    likes: Joi.array()
+    likes: Joi.array(),
+    email: Joi.string()
+      .email()
+      .required()
+      .label("Email"),
+    newPass: Joi.string()
+      .min(6)
+      .allow("", null)
+      .label("New Password"),
+    password: Joi.string()
+      .min(6)
+      .max(30)
+      .label("Old Password")
   };
 
   mapUserToViewModel(user) {
@@ -107,8 +117,7 @@ class ProfileForm extends Form {
         _id: user._id,
         firstName: user.firstName,
         lastName: user.lastName,
-        about: user.about,
-        email: user.email
+        about: user.about
       };
       const result = await userService.updateUser(updatedUserInfo);
       if (result.status === 200) {
@@ -129,11 +138,39 @@ class ProfileForm extends Form {
     }
   };
 
+  updateAccount = async () => {
+    try {
+      const { data: user } = this.state;
+      const updatedAccountInfo = {
+        username: user.username,
+        email: user.email,
+        password: user.password,
+        newPass: user.newPass
+      };
+      const result = await userService.updateEmailandPass(updatedAccountInfo);
+      if (result.status === 200) {
+        toast.success(`${user.username} Account Updated`, this.toastOptions);
+      } else {
+        toast.error(
+          `Error code: ${result.status} - ${result.statusText}`,
+          this.toastOptions
+        );
+      }
+    } catch (ex) {
+      console.log(ex);
+      if (ex.response && ex.response.status === 400) {
+        let errors = { ...this.state.errors };
+        toast.error(ex.response.status + " " + ex.response, this.toastOptions);
+        this.setState({ errors });
+      }
+    }
+  };
+
   doSubmit = async () => {
     if (this.state.navItem === "third") {
       await this.updateUser();
     } else if (this.state.navItem === "fourth") {
-      console.log("button in fourth pushed");
+      await this.updateAccountInfo();
     }
   };
 
@@ -163,7 +200,7 @@ class ProfileForm extends Form {
                   <Nav.Link eventKey="third">Profile</Nav.Link>
                 </Nav.Item>
                 <Nav.Item>
-                  <Nav.Link eventKey="fourth">Password</Nav.Link>
+                  <Nav.Link eventKey="fourth">Account</Nav.Link>
                 </Nav.Item>
               </Nav>
             </Col>
@@ -183,13 +220,15 @@ class ProfileForm extends Form {
                     {this.renderInput("firstName", "First Name")}
                     {this.renderInput("lastName", "Last Name")}
                     {this.renderInput("about", "About")}
-                    {this.renderInput("email", "Email")}
                     {this.renderButton("Save")}
                   </form>
                 </Tab.Pane>
-                {/* Password */}
+                {/* Account */}
                 <Tab.Pane eventKey="fourth" className="tab-pane">
                   <form onSubmit={this.handleSubmit}>
+                    {this.renderInput("email", "Email")}
+                    {this.renderInput("newPass", "New Password", "password")}
+                    {this.renderInput("password", "Old Password", "password")}
                     {this.renderButton("Submit")}
                   </form>
                 </Tab.Pane>
