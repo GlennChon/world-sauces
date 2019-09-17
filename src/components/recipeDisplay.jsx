@@ -229,7 +229,13 @@ class RecipeDisplay extends Display {
             <Row>
               <Col className="col-md-4">
                 {this.renderChildTitle("origin_country", "Country")}
-                {this.renderChildTitle("author", "Author")}
+                <a
+                  href={
+                    "http://www.saucenerd.com/profile/" + this.state.data.author
+                  }
+                >
+                  {this.renderChildTitle("author", "Author")}
+                </a>
               </Col>
               <Col className="col-md-8">
                 {this.renderChildTitle("description", "Description")}
