@@ -77,13 +77,21 @@ class AccountInfoForm extends Form {
       if (result.status === 200) {
         toast.success(`${user.username} Account Updated`, this.toastOptions);
       }
-      authService.logout();
-      authService.loginWithJwt(result.headers["ws-auth-token"]);
+      await authService.logout();
+      await authService.loginWithJwt(result.headers["ws-auth-token"]);
+      let newUser = await authService.getCurrentUser();
+
+      this.setState({ user: newUser });
+      window.location = "/profile/" + newUser.username;
     } catch (err) {
-      toast.error(
-        `Error code: ${err.response.status} - ${err.response.data}`,
-        this.toastOptions
-      );
+      if (err.response) {
+        toast.error(
+          `Error code: ${err.response.status} - ${err.response.data}`,
+          this.toastOptions
+        );
+      } else {
+        toast.error(err, this.toastOptions);
+      }
     }
   };
 
