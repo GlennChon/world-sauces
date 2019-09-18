@@ -21,7 +21,7 @@ class AccountInfoForm extends Form {
   };
 
   toastOptions = {
-    autoClose: 2000
+    autoClose: 3000
   };
 
   schema = {
@@ -75,14 +75,17 @@ class AccountInfoForm extends Form {
 
       const result = await userService.updateEmailandPass(updatedAccountInfo);
       if (result.status === 200) {
-        toast.success(`${user.username} Account Updated`, this.toastOptions);
+        toast.success(
+          `${user.username} Account Updated, Please Login Again`,
+          this.toastOptions
+        );
       }
-      await authService.logout();
+      // replace existing token
       await authService.loginWithJwt(result.headers["ws-auth-token"]);
-      let newUser = await authService.getCurrentUser();
-
-      this.setState({ user: newUser });
-      window.location = "/profile/" + newUser.username;
+      // wait 3 seconds then send to login screen
+      setTimeout(function() {
+        window.location = "/login";
+      }, 3000);
     } catch (err) {
       if (err.response) {
         toast.error(
