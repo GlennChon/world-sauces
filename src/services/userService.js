@@ -11,16 +11,12 @@ export function register(user) {
 }
 
 export async function updateEmailandPass(user) {
-  const result = await http.put(apiEndpoint + "/account", {
+  return http.put(apiEndpoint + "/account", {
     email: user.email,
     password: user.password,
     username: user.username,
     newPass: user.newPass
   });
-  if (result.status === 200) {
-    localStorage.setItem(tokenKey, result.data);
-  }
-  return result;
 }
 
 export async function getMeInfo(username) {

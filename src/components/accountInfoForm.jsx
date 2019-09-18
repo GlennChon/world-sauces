@@ -72,14 +72,13 @@ class AccountInfoForm extends Form {
         password: user.password,
         newPass: user.newPass
       };
-      const result = await userService.updateEmailandPass(updatedAccountInfo);
 
+      const result = await userService.updateEmailandPass(updatedAccountInfo);
       if (result.status === 200) {
         toast.success(`${user.username} Account Updated`, this.toastOptions);
-        console.log(result);
       }
+      authService.logout();
       authService.loginWithJwt(result.headers["ws-auth-token"]);
-      //window.location.reload();
     } catch (err) {
       toast.error(
         `Error code: ${err.response.status} - ${err.response.data}`,
