@@ -1,5 +1,4 @@
 import http from "./httpService";
-import { tokenKey } from "../config.json";
 const apiEndpoint = "/users";
 
 export function register(user) {
@@ -10,7 +9,7 @@ export function register(user) {
   });
 }
 
-export async function updateEmailandPass(user) {
+export function updateEmailandPass(user) {
   return http.put(apiEndpoint + "/account", {
     email: user.email,
     password: user.password,
