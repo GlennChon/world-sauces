@@ -1,4 +1,5 @@
 import http from "./httpService";
+import { tokenKey } from "../config.json";
 const apiEndpoint = "/users";
 
 export function register(user) {
@@ -9,13 +10,17 @@ export function register(user) {
   });
 }
 
-export function updateEmailandPass(user) {
-  return http.put(apiEndpoint + "/account", {
+export async function updateEmailandPass(user) {
+  const result = await http.put(apiEndpoint + "/account", {
     email: user.email,
     password: user.password,
     username: user.username,
     newPass: user.newPass
   });
+  if (result.status === 200) {
+    localStorage.setItem(tokenKey, result.data);
+  }
+  return result;
 }
 
 export async function getMeInfo(username) {

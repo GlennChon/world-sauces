@@ -28,7 +28,6 @@ class LoginForm extends Form {
       // Get json webtoken on proper login
       await authService.login(data.username, data.password);
       // Redirect as logged in user
-
       const { state } = this.props.location;
       window.location = state ? state.from.pathname : "/";
     } catch (ex) {

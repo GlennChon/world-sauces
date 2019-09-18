@@ -6,27 +6,18 @@ import Input from "./input";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTimesCircle } from "@fortawesome/free-regular-svg-icons";
 
-// todo  make separate components for account update and profile update instead of using this wack lazy setup
 class Form extends Component {
   state = {
     data: {},
     checkedItems: new Map(),
     dynamicInputs: new Map(),
     errors: {},
-    accountErrors: {},
     disabled: false
   };
 
   validate = () => {
     const options = { abortEarly: false };
-    let data;
-    if (this.state.navItem === "fourth") {
-      data = Joi.validate(this.state.data, this.accountSchema, options);
-    } else {
-      data = Joi.validate(this.state.data, this.schema, options);
-    }
-
-    const { error } = data;
+    const { error } = Joi.validate(this.state.data, this.schema, options);
 
     if (!error) return null;
 
@@ -53,21 +44,16 @@ class Form extends Component {
     const errors = this.validate();
     // Pass empty object to errors if it's empty
 
-    if (this.state.navItem === "fourth") {
-      this.setState({ accountErrors: errors || {} });
-    } else {
-      this.setState({ errors: errors || {} });
-    }
+    this.setState({ errors: errors || {} });
+
     if (errors) return;
     this.doSubmit();
   };
 
   handleChange = ({ currentTarget: input }) => {
     // Clone all in state.errors
-    const errors =
-      this.state.navItem === "fourth"
-        ? this.state.accountErrors
-        : this.state.errors;
+    const errors = { ...this.state.errors };
+
     const errorMessage = this.validateProperty(input);
     if (errorMessage) {
       errors[input.name] = errorMessage;
@@ -80,9 +66,7 @@ class Form extends Component {
     // Takes name of target inputs and sets value based on name
     data[input.name] = input.value;
     // Set state with new data
-    this.state.navItem === "fourth"
-      ? this.setState({ data, accountErrors: errors })
-      : this.setState({ data, errors });
+    this.setState({ data, errors });
   };
 
   handleDynamicInputAdd = input => {
@@ -176,16 +160,14 @@ class Form extends Component {
   }
 
   renderInput(name, label, type = "text") {
-    const { data, errors, accountErrors } = this.state;
+    const { data, errors } = this.state;
     return (
       <Input
         name={name}
         type={type}
         label={label}
-        value={data[name]}
-        error={
-          this.state.navItem === "fourth" ? accountErrors[name] : errors[name]
-        }
+        value={data[name] || ""}
+        error={errors[name]}
         onChange={this.handleChange}
       />
     );
