@@ -2,7 +2,7 @@ import React from "react";
 
 import Display from "./common/display";
 import * as userService from "../services/userService";
-import * as recipeService from "../services/recipeService";
+//import * as recipeService from "../services/recipeService";
 
 class ProfileDisplay extends Display {
   state = {
