@@ -6,14 +6,15 @@ import { paginate } from "../utils/paginate";
 import { getCountries } from "../services/countryService";
 import SearchBar from "./common/searchBar";
 import RecipeList from "./recipeList";
+import Pagination from "./common/pagination";
 
 class Recipes extends Component {
   state = {
     data: { selectValue: "" },
-    recipes: {},
+    recipes: [],
     countries: [],
     currentPage: 1,
-    pageSize: 4,
+    pageSize: 12,
     searchQuery: "",
     searchCountry: "",
     searchAuthor: "",
@@ -32,7 +33,7 @@ class Recipes extends Component {
 
   popularRecipes = async () => {
     let json = await recipeService.getPopular();
-    this.setState({ recipes: json });
+    this.setState({ recipes: json.data });
   };
 
   handlePageChange = page => {
@@ -75,10 +76,28 @@ class Recipes extends Component {
     if (!searchQuery) searchQuery = "";
     if (!searchCountry || searchCountry === "any") searchCountry = "";
     let json = await recipeService.getRecipes(searchQuery, searchCountry);
-    this.setState({ recipes: json, searchQuery });
+    this.setState({ recipes: json.data.data, searchQuery });
   };
 
   render() {
+    const { length: count } = this.state.recipes;
+    const { pageSize, currentPage, recipes: allRecipes } = this.state;
+
+    console.log(count);
+    console.log(allRecipes);
+    if (count === 0)
+      return (
+        <React.Fragment>
+          {/*Search*/}
+          <SearchBar
+            handleFormSubmit={this.searchRecipes}
+            countries={this.state.countries}
+          />
+          <p>No Recipes Found</p>
+        </React.Fragment>
+      );
+
+    const recipes = paginate(allRecipes, currentPage, pageSize);
     return (
       <React.Fragment>
         <br />
@@ -88,7 +107,13 @@ class Recipes extends Component {
           countries={this.state.countries}
         />
         {/*Recipe List */}
-        <RecipeList recipes={this.state.recipes.data} />
+        <RecipeList recipes={recipes} />
+        <Pagination
+          itemsCount={count}
+          pageSize={pageSize}
+          currentPage={currentPage}
+          onPageChange={this.handlePageChange}
+        />
       </React.Fragment>
     );
   }
