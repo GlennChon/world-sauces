@@ -22,19 +22,10 @@ class Recipes extends Component {
   };
 
   async componentDidMount() {
-    await this.populateCountries();
-    await this.popularRecipes();
+    const { data: recipes } = await recipeService.getPopular();
+    const { data: countries } = await getCountries();
+    this.setState({ recipes, countries });
   }
-
-  populateCountries = async () => {
-    const countries = await getCountries();
-    this.setState({ countries: countries.data });
-  };
-
-  popularRecipes = async () => {
-    let json = await recipeService.getPopular();
-    this.setState({ recipes: json.data });
-  };
 
   handlePageChange = page => {
     this.setState({ currentPage: page });
@@ -75,19 +66,21 @@ class Recipes extends Component {
   searchRecipes = async (searchQuery, searchCountry) => {
     if (!searchQuery) searchQuery = "";
     if (!searchCountry || searchCountry === "any") searchCountry = "";
-    let json = await recipeService.getRecipes(searchQuery, searchCountry);
-    this.setState({ recipes: json.data.data, searchQuery });
+    const { data: recipes } = await recipeService.getRecipes(
+      searchQuery,
+      searchCountry
+    );
+    this.setState({ recipes, searchQuery });
   };
 
   render() {
     const { length: count } = this.state.recipes;
-    const { pageSize, currentPage, recipes: allRecipes } = this.state;
+    const { pageSize, currentPage } = this.state;
 
-    console.log(count);
-    console.log(allRecipes);
     if (count === 0)
       return (
         <React.Fragment>
+          <br />
           {/*Search*/}
           <SearchBar
             handleFormSubmit={this.searchRecipes}
@@ -97,7 +90,7 @@ class Recipes extends Component {
         </React.Fragment>
       );
 
-    const recipes = paginate(allRecipes, currentPage, pageSize);
+    const { data: recipes } = this.getPagedData();
     return (
       <React.Fragment>
         <br />
