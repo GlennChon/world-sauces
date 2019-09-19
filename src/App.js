@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { ToastContainer } from "react-toastify";
 import { Route, Redirect, Switch } from "react-router-dom";
-
+import HttpsRedirect from "react-https-redirect";
 // Services
 import auth from "./services/authService";
 
@@ -38,30 +38,32 @@ class App extends Component {
   render() {
     const { user } = this.state;
     return (
-      <React.Fragment>
-        <ToastContainer />
-        <NavBar user={user} />
-        <header className="page-header header container-fluid"></header>
-        <main className="container-fluid">
-          <Switch>
-            <Route path="/logout" component={Logout} />
-            <Route path="/login" component={LoginForm} />
-            <Route path="/not-found" component={NotFound} />
+      <HttpsRedirect>
+        <React.Fragment>
+          <ToastContainer />
+          <NavBar user={user} />
+          <header className="page-header header container-fluid"></header>
+          <main className="container-fluid">
+            <Switch>
+              <Route path="/logout" component={Logout} />
+              <Route path="/login" component={LoginForm} />
+              <Route path="/not-found" component={NotFound} />
 
-            <ProtectedRoute path="/recipe/edit/:id" component={RecipeForm} />
-            <Route path="/recipe/:id" component={RecipeDisplay} />
-            <Route path="/recipes" component={Recipes} />
+              <ProtectedRoute path="/recipe/edit/:id" component={RecipeForm} />
+              <Route path="/recipe/:id" component={RecipeDisplay} />
+              <Route path="/recipes" component={Recipes} />
 
-            <ProtectedRoute path="/profile/me" component={ProfileForm} />
-            <Route path="/profile/:username" component={ProfileDisplay} />
+              <ProtectedRoute path="/profile/me" component={ProfileForm} />
+              <Route path="/profile/:username" component={ProfileDisplay} />
 
-            <Route path="/register" component={RegisterForm} />
-            <Route path="/" exact component={Home} />
-            <Redirect from="/home" to="/" />
-            <Redirect to="/not-found" />
-          </Switch>
-        </main>
-      </React.Fragment>
+              <Route path="/register" component={RegisterForm} />
+              <Route path="/" exact component={Home} />
+              <Redirect from="/home" to="/" />
+              <Redirect to="/not-found" />
+            </Switch>
+          </main>
+        </React.Fragment>
+      </HttpsRedirect>
     );
   }
 }
