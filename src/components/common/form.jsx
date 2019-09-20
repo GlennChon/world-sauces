@@ -69,10 +69,10 @@ class Form extends Component {
     this.setState({ data, errors });
   };
 
-  handleDynamicInputAdd = input => {
-    input.preventDefault();
+  handleDynamicInputAdd = e => {
+    e.preventDefault();
     const { data, errors, dynamicInputs } = this.state;
-    const name = input.currentTarget.name;
+    const name = e.currentTarget.name;
     //get dynamic input field from map and push value
     const list = data[name];
     const text = dynamicInputs[name];
@@ -119,6 +119,7 @@ class Form extends Component {
       dynamicInputs.set(item, "");
     }
     dynamicInputs[item] = input.value;
+
     this.setState({ dynamicInputs });
   };
 
@@ -202,7 +203,7 @@ class Form extends Component {
               type={type}
               value={dynamicInputs[name] || ""}
               onKeyDown={e => this.keyPress(e)}
-              onChange={e => this.handleDynamicInputChange(e)}
+              onChange={e => this.handleDynamicInputChange(e, name)}
             />
           </div>
           <ul className="list-group">
