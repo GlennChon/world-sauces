@@ -1,3 +1,15 @@
+.recipe-form-container {
+  margin: 10%;
+}
+
 .dynamic-input-list-item {
   padding: 3px 20px;
+}
+
+.btn-submit {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  margin: 20px;
 }
