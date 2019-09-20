@@ -4,7 +4,6 @@ import { Route, Redirect, Switch } from "react-router-dom";
 import HttpsRedirect from "react-https-redirect";
 // Services
 import auth from "./services/authService";
-
 // Components
 import Home from "./components/home";
 // import Logo from "./components/logo";
@@ -69,13 +68,3 @@ class App extends Component {
 }
 
 export default App;
-
-/*
-            <Route path="/logOut" component={LogOut} />
-            <Route path="/recipes/:id" component={RecipeForm} />
-            <Route path="/recipes" component={Recipes} />
-            <Route path="/profiles/:id" component={ProfileForm} />
-            <Route path="/profiles" component={Profiles} />
-            <Route path="/taste-profiles" component={TasteProfiles} />
-            <Route path="/countries" component={Countries} />
-*/
