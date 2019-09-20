@@ -229,11 +229,7 @@ class RecipeDisplay extends Display {
             <Row>
               <Col className="col-md-4">
                 {this.renderChildTitle("origin_country", "Country")}
-                <a
-                  href={
-                    "http://www.saucenerd.com/profile/" + this.state.data.author
-                  }
-                >
+                <a href={"/profile/" + this.state.data.author}>
                   {this.renderChildTitle("author", "Author")}
                 </a>
               </Col>
@@ -266,7 +262,7 @@ class RecipeDisplay extends Display {
         <div className="btn-edit">
           {this.state.user &&
             (this.state.user.username === this.state.data.author &&
-              this.renderEditButton("btn-warning"))}
+              this.renderEditButton("Edit", "btn-warning"))}
         </div>
       </React.Fragment>
     );
