@@ -65,17 +65,15 @@ class Display extends Component {
     );
   };
 
-  renderEditButton = (btnClassName = "") => {
+  renderEditButton = (label, btnClassName = "") => {
     return (
-      <React.Fragment>
-        <button
-          aria-label="Button Edit"
-          className={"btn " + btnClassName}
-          onClick={e => this.handleEditClick(e)}
-        >
-          Edit
-        </button>
-      </React.Fragment>
+      <button
+        aria-label="Button Edit"
+        className={"btn " + btnClassName}
+        onClick={e => this.handleEditClick(e)}
+      >
+        {label}
+      </button>
     );
   };
 
