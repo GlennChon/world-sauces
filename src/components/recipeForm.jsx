@@ -179,40 +179,42 @@ class RecipeForm extends Form {
     const isDisabled = this.state.disabled;
     return (
       <React.Fragment>
-        <h1>Recipe</h1>
-        <form onSubmit={this.handleSubmit}>
-          {this.renderInput("title", "Title")}
-          {this.renderCheckboxes(
-            "taste_profile",
-            "Taste Profile",
-            this.state.taste_profiles,
-            this.state.checkedItems
-          )}
-          {this.renderSelect(
-            "origin_country",
-            "Country",
-            this.state.countries,
-            isDisabled
-          )}
-          {this.renderInput("description", "Description")}
-          {this.renderInput("image_link", "Image Link")}
-          {/* Dynamic Ingredients*/}
-          {this.renderDynamicInputs(
-            "ingredients",
-            "Ingredients",
-            this.state.data.ingredients,
-            "e.g. 1/4 Cup Vinegar"
-          )}
-          <br />
-          {/* Dynamic Instructions*/}
-          {this.renderDynamicInputs(
-            "instructions",
-            "Instructions",
-            this.state.data.instructions,
-            "e.g. Toast spices."
-          )}
-          <div className="btn-edit">{this.renderButton("Save")}</div>
-        </form>
+        <div className="recipe-form-container">
+          <h1>Recipe</h1>
+          <form onSubmit={this.handleSubmit}>
+            {this.renderInput("title", "Title")}
+            {this.renderCheckboxes(
+              "taste_profile",
+              "Taste Profile",
+              this.state.taste_profiles,
+              this.state.checkedItems
+            )}
+            {this.renderSelect(
+              "origin_country",
+              "Country",
+              this.state.countries,
+              isDisabled
+            )}
+            {this.renderInput("description", "Description")}
+            {this.renderInput("image_link", "Image Link")}
+            {/* Dynamic Ingredients*/}
+            {this.renderDynamicInputs(
+              "ingredients",
+              "Ingredients",
+              this.state.data.ingredients,
+              "e.g. 1/4 Cup Vinegar"
+            )}
+            <br />
+            {/* Dynamic Instructions*/}
+            {this.renderDynamicInputs(
+              "instructions",
+              "Instructions",
+              this.state.data.instructions,
+              "e.g. Toast spices."
+            )}
+            <div className="btn-submit">{this.renderButton("Save")}</div>
+          </form>
+        </div>
       </React.Fragment>
     );
   }
