@@ -7,6 +7,8 @@ import RecipeCard from "./recipeCard";
 import RegisterForm from "./registerForm";
 import authService from "../services/authService";
 
+import "../css/home.css";
+
 class Home extends Component {
   state = {
     popular: {},
@@ -100,12 +102,14 @@ class Home extends Component {
   render() {
     return (
       <React.Fragment>
-        <h1>Most Popular</h1>
-        <div className="recipe-card-container">{this.renderPopular()}</div>
-        <br />
-        <h1>Random</h1>
-        <div className="recipe-card-container">{this.renderRandom()}</div>
-        {this.renderLoggedOutInMsg()}
+        <div className="home-container">
+          <h1>Most Popular</h1>
+          <div className="recipe-card-container">{this.renderPopular()}</div>
+          <br />
+          <h1>Random</h1>
+          <div className="recipe-card-container">{this.renderRandom()}</div>
+          {this.renderLoggedOutInMsg()}
+        </div>
       </React.Fragment>
     );
   }
