@@ -134,18 +134,18 @@ class RecipeDisplay extends Display {
           {/*RECIPE WRAPPER*/}
           <div className="recipe-display-wrapper">
             <Row>
-              <Col>
-                <Row className="display-main-title">
+              <Col xs lg={"auto"}>
+                <div className="display-main-title">
                   {this.renderMainTitle("title")}
-                </Row>
+                </div>
                 {/*LIKES*/}
                 <Row>
                   {this.renderLikes(this.state.likes, this.state.isLiked)}
                 </Row>
-                {/*RECIPE NAME*/}
               </Col>
-              <Col className="share-col ">
-                <Row className="share-row ">
+              {/*RECIPE NAME*/}
+              <Col sm lg={6}>
+                <Row>
                   {/*SOCIAL MEDIA SHARE LINKS*/}
                   <div className="social-media-share-icon">
                     <FacebookShareButton
@@ -227,19 +227,19 @@ class RecipeDisplay extends Display {
               </Col>
             </Row>
             <Row>
-              <Col className="col-md-4">
+              <Col me={4}>
                 {this.renderChildTitle("origin_country", "Country")}
                 <a href={"/profile/" + this.state.data.author}>
                   {this.renderChildTitle("author", "Author")}
                 </a>
               </Col>
-              <Col className="col-md-8">
+              <Col md={8}>
                 {this.renderChildTitle("description", "Description")}
               </Col>
             </Row>
             {/*INGREDIENTS*/}
             <Row>
-              <Col className="col-md-4">
+              <Col md={4} sm={1}>
                 <h2 className="display-section-title">Ingredients</h2>
                 {this.renderList(
                   "ingredients",
@@ -248,7 +248,7 @@ class RecipeDisplay extends Display {
                 )}
               </Col>
               {/*INSTRUCTIONS*/}
-              <Col className="col-md-8">
+              <Col md={8} sm={1}>
                 <h2 className="display-section-title">Instructions</h2>
                 {this.renderNumberedList(
                   "instructions",
