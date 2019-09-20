@@ -1,9 +1,10 @@
 .recipe-card-container {
   align-items: flex-start;
   display: flex;
+  justify-content: center;
   flex-direction: row;
   flex-flow: row wrap;
-  margin: 0 5% 0 5%;
+  margin: 0 5%;
   width: 90%;
 }
 

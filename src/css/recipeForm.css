@@ -1,5 +1,5 @@
 .recipe-form-container {
-  margin: 10%;
+  margin: 50px 10%;
 }
 
 .dynamic-input-list-item {
@@ -11,5 +11,5 @@
   align-items: center;
   justify-content: center;
   padding: 0;
-  margin: 20px;
+  width: 100px;
 }
