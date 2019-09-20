@@ -262,7 +262,7 @@ class RecipeDisplay extends Display {
         <div className="btn-edit">
           {this.state.user &&
             (this.state.user.username === this.state.data.author &&
-              this.renderEditButton("Edit", "btn-warning"))}
+              this.renderButton("Edit", "btn-warning"))}
         </div>
       </React.Fragment>
     );
