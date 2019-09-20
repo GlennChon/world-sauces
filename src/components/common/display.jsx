@@ -16,7 +16,7 @@ const { faHeart: heartRegular } = regular;
 class Display extends Component {
   state = { data: {}, isLiked: false };
 
-  handleEditClick = e => {
+  handleBtnClick = e => {
     e.preventDefault();
     // take recipe id and open recipeForm
     this.doEdit();
@@ -65,12 +65,12 @@ class Display extends Component {
     );
   };
 
-  renderEditButton = (label, btnClassName = "") => {
+  renderButton = (label, btnClassName = "") => {
     return (
       <button
-        aria-label="Button Edit"
+        aria-label={"Button " + label}
         className={"btn " + btnClassName}
-        onClick={e => this.handleEditClick(e)}
+        onClick={e => this.handleBtnClick(e)}
       >
         {label}
       </button>
