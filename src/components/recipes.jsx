@@ -96,7 +96,7 @@ class Recipes extends Component {
     const { data: recipes } = this.getPagedData();
     return (
       <React.Fragment>
-        <Col xs={12} className="container recipes-container">
+        <div className="nerd-container">
           {/*Search*/}
           <div className="search-bar">
             <SearchBar
@@ -114,7 +114,7 @@ class Recipes extends Component {
               onPageChange={this.handlePageChange}
             />
           </div>
-        </Col>
+        </div>
       </React.Fragment>
     );
   }

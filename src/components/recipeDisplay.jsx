@@ -120,7 +120,7 @@ class RecipeDisplay extends Display {
   render() {
     return (
       <React.Fragment>
-        <div className="display-container">
+        <div className="nerd-container">
           {/*IMAGE*/}
           {this.renderImg("image_link", "display-img")}
           {/*TASTE PROFILE*/}

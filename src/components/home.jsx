@@ -102,7 +102,7 @@ class Home extends Component {
   render() {
     return (
       <React.Fragment>
-        <div className="home-container">
+        <div className="nerd-container">
           <h1>Most Popular</h1>
           <div className="recipe-card-container">{this.renderPopular()}</div>
           <br />
