@@ -105,6 +105,7 @@ class Form extends Component {
     }
     this.setState({ errors, data });
   };
+
   keyPress(e) {
     if (e.keyCode === 13) {
       this.handleDynamicInputAdd(e);
@@ -204,6 +205,12 @@ class Form extends Component {
               value={dynamicInputs[name] || ""}
               onKeyDown={e => this.keyPress(e)}
               onChange={e => this.handleDynamicInputChange(e, name)}
+            />
+            <input
+              type="button"
+              name={name}
+              value=" + "
+              onClick={e => this.handleDynamicInputAdd(e)}
             />
           </div>
           <ul className="list-group">
