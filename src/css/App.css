@@ -55,3 +55,14 @@ p {
 .coral .active a:hover {
   background-color: coral;
 }
+
+@media only screen and (max-width: 1200px) {
+  .nerd-container {
+    margin: 25px 3%;
+  }
+}
+@media only screen and (max-width: 810px) {
+  .nerd-container {
+    margin: 0%;
+  }
+}

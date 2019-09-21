@@ -1,5 +1,11 @@
+.recipe-display-container {
+  background: white;
+  margin: 0 10%;
+}
+
 .recipe-display-wrapper {
-  padding: 5%;
+  margin: 5%;
+  padding: 0 2% 5% 2%;
 }
 
 .display-profile-container {
@@ -99,4 +105,15 @@ ol > li::marker {
 .share-row {
   padding: 0;
   margin: 0;
+}
+
+@media only screen and (max-width: 1200px) {
+  .recipe-display-container {
+    margin: 0 5%;
+  }
+}
+@media only screen and (max-width: 810px) {
+  .recipe-display-container {
+    margin: 0%;
+  }
 }

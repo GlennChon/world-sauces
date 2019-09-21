@@ -121,142 +121,144 @@ class RecipeDisplay extends Display {
     return (
       <React.Fragment>
         <div className="nerd-container">
-          {/*IMAGE*/}
-          {this.renderImg("image_link", "display-img")}
-          {/*TASTE PROFILE*/}
-          <span className="display-profile-container">
-            {this.renderHorizontalList(
-              "taste_profile",
-              "display-profile-wrapper",
-              "display-profile-item"
-            )}
-          </span>
-          {/*RECIPE WRAPPER*/}
-          <div className="recipe-display-wrapper">
-            <Row>
-              <Col xs={12} md={6}>
-                <div className="display-main-title">
-                  {this.renderMainTitle("title")}
-                </div>
-                {/*LIKES*/}
-                <Row>
-                  {this.renderLikes(this.state.likes, this.state.isLiked)}
-                </Row>
-              </Col>
-              {/*RECIPE NAME*/}
-              <Col xs={12} md={6}>
-                <Row>
-                  {/*SOCIAL MEDIA SHARE LINKS*/}
-                  <div className="social-media-share-icon">
-                    <FacebookShareButton
-                      className="btn-share"
-                      url={window.location.href}
-                      quote={"Sauce Nerd : " + this.state.data.title}
-                      hashtag="#SauceNerd"
-                    >
-                      <FacebookIcon size={32} round />
-                    </FacebookShareButton>
+          <div className="recipe-display-container">
+            {/*IMAGE*/}
+            {this.renderImg("image_link", "display-img")}
+            {/*TASTE PROFILE*/}
+            <span className="display-profile-container">
+              {this.renderHorizontalList(
+                "taste_profile",
+                "display-profile-wrapper",
+                "display-profile-item"
+              )}
+            </span>
+            {/*RECIPE WRAPPER*/}
+            <div className="recipe-display-wrapper">
+              <Row>
+                <Col xs={12} md={6}>
+                  <div className="display-main-title">
+                    {this.renderMainTitle("title")}
                   </div>
-                  <div className="social-media-share-icon">
-                    <TwitterShareButton
-                      url={window.location.href}
-                      title={"Sauce Nerd : " + this.state.data.title}
-                      className="btn-share"
-                    >
-                      <TwitterIcon size={32} round />
-                    </TwitterShareButton>
-                  </div>
-                  <div className="social-media-share-icon">
-                    <WhatsappShareButton
-                      url={window.location.href}
-                      title={"Sauce Nerd : " + this.state.data.title}
-                      separator=":: "
-                      className="btn-share"
-                    >
-                      <WhatsappIcon size={32} round />
-                    </WhatsappShareButton>
-                  </div>
-                  <div className="social-media-share-icon">
-                    <LineShareButton
-                      url={window.location.href}
-                      title={"Sauce Nerd : " + this.state.data.title}
-                      className="btn-share"
-                    >
-                      <LineIcon size={32} round />
-                    </LineShareButton>
-                  </div>
-                  <div className="social-media-share-icon">
-                    <PinterestShareButton
-                      url={window.location.href}
-                      media={this.state.data.image_link}
-                      title={"Sauce Nerd : " + this.state.data.title}
-                      description={this.state.data.description}
-                      className="btn-share"
-                    >
-                      <PinterestIcon size={32} round />
-                    </PinterestShareButton>
-                  </div>
-                  <div className="social-media-share-icon">
-                    <VKShareButton
-                      url={window.location.href}
-                      title={"Sauce Nerd : " + this.state.data.title}
-                      description={this.state.data.description}
-                      className="btn-share"
-                    >
-                      <VKIcon size={32} round />
-                    </VKShareButton>
-                  </div>
-                  <div className="social-media-share-icon">
-                    <EmailShareButton
-                      url={window.location.href}
-                      subject={"Check out this sauce recipe!"}
-                      body={"Sauce Nerd Recipe for " + this.state.data.title}
-                      separator=" : "
-                      className="btn-share"
-                    >
-                      <EmailIcon size={32} round />
-                    </EmailShareButton>
-                  </div>
-                </Row>
-              </Col>
-            </Row>
-            {/*INFORMATION*/}
-            <Row>
-              <Col>
-                <h2 className="display-section-title">Information</h2>
-              </Col>
-            </Row>
-            <Row>
-              <Col me={4}>
-                {this.renderChildTitle("origin_country", "Country")}
-                <a href={"/profile/" + this.state.data.author}>
-                  {this.renderChildTitle("author", "Author")}
-                </a>
-              </Col>
-              <Col md={8}>
-                {this.renderChildTitle("description", "Description")}
-              </Col>
-            </Row>
-            {/*INGREDIENTS*/}
-            <Row>
-              <Col md={4} sm={12}>
-                <h2 className="display-section-title">Ingredients</h2>
-                {this.renderList(
-                  "ingredients",
-                  "list-unstyled ingredient-container",
-                  "ingredient-wrapper"
-                )}
-              </Col>
-              {/*INSTRUCTIONS*/}
-              <Col md={8} sm={12}>
-                <h2 className="display-section-title">Instructions</h2>
-                {this.renderNumberedList(
-                  "instructions",
-                  "list-styled instruction-container",
-                  "instruction-wrapper"
-                )}
-              </Col>
-            </Row>
+                  {/*LIKES*/}
+                  <Row>
+                    {this.renderLikes(this.state.likes, this.state.isLiked)}
+                  </Row>
+                </Col>
+                {/*RECIPE NAME*/}
+                <Col xs={12} md={6}>
+                  <Row>
+                    {/*SOCIAL MEDIA SHARE LINKS*/}
+                    <div className="social-media-share-icon">
+                      <FacebookShareButton
+                        className="btn-share"
+                        url={window.location.href}
+                        quote={"Sauce Nerd : " + this.state.data.title}
+                        hashtag="#SauceNerd"
+                      >
+                        <FacebookIcon size={32} round />
+                      </FacebookShareButton>
+                    </div>
+                    <div className="social-media-share-icon">
+                      <TwitterShareButton
+                        url={window.location.href}
+                        title={"Sauce Nerd : " + this.state.data.title}
+                        className="btn-share"
+                      >
+                        <TwitterIcon size={32} round />
+                      </TwitterShareButton>
+                    </div>
+                    <div className="social-media-share-icon">
+                      <WhatsappShareButton
+                        url={window.location.href}
+                        title={"Sauce Nerd : " + this.state.data.title}
+                        separator=":: "
+                        className="btn-share"
+                      >
+                        <WhatsappIcon size={32} round />
+                      </WhatsappShareButton>
+                    </div>
+                    <div className="social-media-share-icon">
+                      <LineShareButton
+                        url={window.location.href}
+                        title={"Sauce Nerd : " + this.state.data.title}
+                        className="btn-share"
+                      >
+                        <LineIcon size={32} round />
+                      </LineShareButton>
+                    </div>
+                    <div className="social-media-share-icon">
+                      <PinterestShareButton
+                        url={window.location.href}
+                        media={this.state.data.image_link}
+                        title={"Sauce Nerd : " + this.state.data.title}
+                        description={this.state.data.description}
+                        className="btn-share"
+                      >
+                        <PinterestIcon size={32} round />
+                      </PinterestShareButton>
+                    </div>
+                    <div className="social-media-share-icon">
+                      <VKShareButton
+                        url={window.location.href}
+                        title={"Sauce Nerd : " + this.state.data.title}
+                        description={this.state.data.description}
+                        className="btn-share"
+                      >
+                        <VKIcon size={32} round />
+                      </VKShareButton>
+                    </div>
+                    <div className="social-media-share-icon">
+                      <EmailShareButton
+                        url={window.location.href}
+                        subject={"Check out this sauce recipe!"}
+                        body={"Sauce Nerd Recipe for " + this.state.data.title}
+                        separator=" : "
+                        className="btn-share"
+                      >
+                        <EmailIcon size={32} round />
+                      </EmailShareButton>
+                    </div>
+                  </Row>
+                </Col>
+              </Row>
+              {/*INFORMATION*/}
+              <Row>
+                <Col>
+                  <h2 className="display-section-title">Information</h2>
+                </Col>
+              </Row>
+              <Row>
+                <Col me={4}>
+                  {this.renderChildTitle("origin_country", "Country")}
+                  <a href={"/profile/" + this.state.data.author}>
+                    {this.renderChildTitle("author", "Author")}
+                  </a>
+                </Col>
+                <Col md={8}>
+                  {this.renderChildTitle("description", "Description")}
+                </Col>
+              </Row>
+              {/*INGREDIENTS*/}
+              <Row>
+                <Col md={4} sm={12}>
+                  <h2 className="display-section-title">Ingredients</h2>
+                  {this.renderList(
+                    "ingredients",
+                    "list-unstyled ingredient-container",
+                    "ingredient-wrapper"
+                  )}
+                </Col>
+                {/*INSTRUCTIONS*/}
+                <Col md={8} sm={12}>
+                  <h2 className="display-section-title">Instructions</h2>
+                  {this.renderNumberedList(
+                    "instructions",
+                    "list-styled instruction-container",
+                    "instruction-wrapper"
+                  )}
+                </Col>
+              </Row>
+            </div>
           </div>
         </div>
         <div className="btn-edit">
