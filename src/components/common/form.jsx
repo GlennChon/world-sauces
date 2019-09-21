@@ -76,6 +76,11 @@ class Form extends Component {
     //get dynamic input field from map and push value
     const list = data[name];
     const text = dynamicInputs[name];
+    if (text.length < 5) {
+      errors[name] = name + " can't be less than 5 characters";
+      this.setState({ errors, data, dynamicInputs });
+      return;
+    }
     list.push({ value: text });
     dynamicInputs[name] = "";
     const obj = { name: name, value: data[name] };
@@ -213,6 +218,9 @@ class Form extends Component {
               onClick={e => this.handleDynamicInputAdd(e)}
             />
           </div>
+          {errors[name] && (
+            <div className="alert alert-danger">{errors[name]}</div>
+          )}
           <ul className="list-group">
             {options.map((item, i) => (
               <li
@@ -229,9 +237,6 @@ class Form extends Component {
               </li>
             ))}
           </ul>
-          {errors[name] && (
-            <div className="alert alert-danger">{errors[name]}</div>
-          )}
         </div>
       </React.Fragment>
     );
