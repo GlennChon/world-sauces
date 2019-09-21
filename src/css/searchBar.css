@@ -14,18 +14,15 @@ input {
 }
 
 .search-btn {
-  text-align: center;
-  padding: 0;
-  width: 25%;
-  margin-left: 5px;
+  position: absolute;
+  top: 0;
+  right: 0;
+  margin: 30px 0;
 }
 
 @media (max-width: 368px) {
   input {
     font-size: 20px;
     width: 70%;
-  }
-  .search-btn {
-    width: 30%;
   }
 }

@@ -45,11 +45,17 @@ class SearchBar extends Component {
                 placeholder="Search Recipes..."
                 onChange={this.handleSearchChange}
                 value={this.state.searchQuery}
-                className="form-control"
+                className="form-control input-group"
               />
-              <button className="btn" type="submit" onClick={this.handleSubmit}>
-                <FontAwesomeIcon icon={faSearch} />
-              </button>
+              <div class="input-group-append">
+                <button
+                  className="btn btn-secondary"
+                  type="submit"
+                  onClick={this.handleSubmit}
+                >
+                  <FontAwesomeIcon icon={faSearch} />
+                </button>
+              </div>
             </div>
           </div>
         </form>
