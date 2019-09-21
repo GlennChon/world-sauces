@@ -199,45 +199,43 @@ class Form extends Component {
     const { errors, dynamicInputs } = this.state;
     return (
       <React.Fragment>
-        <div className="form-group">
-          <label htmlFor={name}>{label}</label>
-          <div className="input-group">
-            <input
-              name={name}
-              placeholder={"Press 'enter' to add: " + placeholder}
-              className="form-control"
-              type={type}
-              value={dynamicInputs[name] || ""}
-              onKeyDown={e => this.keyPress(e)}
-              onChange={e => this.handleDynamicInputChange(e, name)}
-            />
-            <input
-              type="button"
-              name={name}
-              value=" + "
-              onClick={e => this.handleDynamicInputAdd(e)}
-            />
-          </div>
-          {errors[name] && (
-            <div className="alert alert-danger">{errors[name]}</div>
-          )}
-          <ul className="list-group">
-            {options.map((item, i) => (
-              <li
-                key={i}
-                className="list-group-item d-flex justify-content-between align-items-center dynamic-input-list-item"
-              >
-                {item.value}
-                <button
-                  className="btn dynamic-input-btn"
-                  onClick={e => this.handleDynamicInputRemove(e, name, i)}
-                >
-                  <FontAwesomeIcon icon={faTimesCircle} />
-                </button>
-              </li>
-            ))}
-          </ul>
+        <label htmlFor={name}>{label}</label>
+        <div className="input-group">
+          <input
+            name={name}
+            placeholder={"Press 'enter' to add: " + placeholder}
+            className="form-control"
+            type={type}
+            value={dynamicInputs[name] || ""}
+            onKeyDown={e => this.keyPress(e)}
+            onChange={e => this.handleDynamicInputChange(e, name)}
+          />
+          <input
+            type="button"
+            name={name}
+            value=" + "
+            onClick={e => this.handleDynamicInputAdd(e)}
+          />
         </div>
+        {errors[name] && (
+          <div className="alert alert-danger">{errors[name]}</div>
+        )}
+        <ul className="list-group">
+          {options.map((item, i) => (
+            <li
+              key={i}
+              className="list-group-item d-flex justify-content-between align-items-center"
+            >
+              {item.value}
+              <button
+                className="btn dynamic-input-btn"
+                onClick={e => this.handleDynamicInputRemove(e, name, i)}
+              >
+                <FontAwesomeIcon icon={faTimesCircle} />
+              </button>
+            </li>
+          ))}
+        </ul>
       </React.Fragment>
     );
   }
