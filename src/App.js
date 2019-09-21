@@ -3,6 +3,7 @@ import { ToastContainer } from "react-toastify";
 import { Route, Redirect, Switch } from "react-router-dom";
 import HttpsRedirect from "react-https-redirect";
 // Services
+import ReactGA from "react-ga";
 import auth from "./services/authService";
 // Components
 import Home from "./components/home";
@@ -27,12 +28,15 @@ class App extends Component {
   state = {};
 
   componentDidMount() {
+    this.initializeReactGA();
     const user = auth.getCurrentUser();
     this.setState({ user });
   }
-  searchRecipes = () => {
-    console.log("search recipes");
-  };
+
+  initializeReactGA() {
+    ReactGA.initialize("UA-148433046-1");
+    ReactGA.pageview("/homepage");
+  }
 
   render() {
     const { user } = this.state;
