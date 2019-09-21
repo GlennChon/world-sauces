@@ -7,6 +7,8 @@ import { getCountries } from "../services/countryService";
 import SearchBar from "./common/searchBar";
 import RecipeList from "./recipeList";
 import Pagination from "./common/pagination";
+import "../css/recipes.css";
+import { Row, Col } from "react-bootstrap";
 
 class Recipes extends Component {
   state = {
@@ -14,7 +16,7 @@ class Recipes extends Component {
     recipes: [],
     countries: [],
     currentPage: 1,
-    pageSize: 12,
+    pageSize: 6,
     searchQuery: "",
     searchCountry: "",
     searchAuthor: "",
@@ -58,9 +60,9 @@ class Recipes extends Component {
 
     const sorted = _.orderBy(filtered);
 
-    const movies = paginate(sorted, currentPage, pageSize);
+    const pagedRecipes = paginate(sorted, currentPage, pageSize);
 
-    return { totalCount: filtered.length, data: movies };
+    return { totalCount: filtered.length, data: pagedRecipes };
   };
 
   searchRecipes = async (searchQuery, searchCountry) => {
@@ -80,33 +82,39 @@ class Recipes extends Component {
     if (count === 0)
       return (
         <React.Fragment>
-          <br />
-          {/*Search*/}
-          <SearchBar
-            handleFormSubmit={this.searchRecipes}
-            countries={this.state.countries}
-          />
-          <p>No Recipes Found</p>
+          <Col xs={12} className="container recipes-container">
+            {/*Search*/}
+            <SearchBar
+              handleFormSubmit={this.searchRecipes}
+              countries={this.state.countries}
+            />
+            <p>No Recipes Found</p>
+          </Col>
         </React.Fragment>
       );
 
     const { data: recipes } = this.getPagedData();
     return (
       <React.Fragment>
-        <br />
-        {/*Search*/}
-        <SearchBar
-          handleFormSubmit={this.searchRecipes}
-          countries={this.state.countries}
-        />
-        {/*Recipe List */}
-        <RecipeList recipes={recipes} />
-        <Pagination
-          itemsCount={count}
-          pageSize={pageSize}
-          currentPage={currentPage}
-          onPageChange={this.handlePageChange}
-        />
+        <Col xs={12} className="container recipes-container">
+          {/*Search*/}
+          <div className="search-bar">
+            <SearchBar
+              handleFormSubmit={this.searchRecipes}
+              countries={this.state.countries}
+            />
+          </div>
+          {/*Recipe List */}
+          <RecipeList recipes={recipes} />
+          <div className="pagination d-flex justify-content-center">
+            <Pagination
+              itemsCount={count}
+              pageSize={pageSize}
+              currentPage={currentPage}
+              onPageChange={this.handlePageChange}
+            />
+          </div>
+        </Col>
       </React.Fragment>
     );
   }
