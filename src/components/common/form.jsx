@@ -106,8 +106,8 @@ class Form extends Component {
     this.setState({ errors, data });
   };
   keyPress(e) {
-    e.preventDefault();
     if (e.keyCode === 13) {
+      e.preventDefault();
       this.handleDynamicInputAdd(e);
     }
   }
