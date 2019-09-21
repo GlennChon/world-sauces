@@ -83,8 +83,8 @@ h3 {
   top: -100%;
   left: calc(100% - 90px);
   background-color: rgba(0, 0, 0, 0.35);
-  border-left: 20px double;
-  border-bottom: 2px double;
+  border-left: 15px solid;
+  border-bottom: 2px solid;
 
   border-color: coral;
   color: coral;
