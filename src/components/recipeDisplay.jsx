@@ -134,7 +134,7 @@ class RecipeDisplay extends Display {
           {/*RECIPE WRAPPER*/}
           <div className="recipe-display-wrapper">
             <Row>
-              <Col xs lg={"auto"}>
+              <Col xs={12} md={6}>
                 <div className="display-main-title">
                   {this.renderMainTitle("title")}
                 </div>
@@ -144,7 +144,7 @@ class RecipeDisplay extends Display {
                 </Row>
               </Col>
               {/*RECIPE NAME*/}
-              <Col sm lg={6}>
+              <Col xs={12} md={6}>
                 <Row>
                   {/*SOCIAL MEDIA SHARE LINKS*/}
                   <div className="social-media-share-icon">
@@ -239,7 +239,7 @@ class RecipeDisplay extends Display {
             </Row>
             {/*INGREDIENTS*/}
             <Row>
-              <Col md={4} sm={1}>
+              <Col md={4} sm={12}>
                 <h2 className="display-section-title">Ingredients</h2>
                 {this.renderList(
                   "ingredients",
@@ -248,7 +248,7 @@ class RecipeDisplay extends Display {
                 )}
               </Col>
               {/*INSTRUCTIONS*/}
-              <Col md={8} sm={1}>
+              <Col md={8} sm={12}>
                 <h2 className="display-section-title">Instructions</h2>
                 {this.renderNumberedList(
                   "instructions",
