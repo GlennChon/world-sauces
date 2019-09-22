@@ -1,0 +1,13 @@
+.home-container {
+  align-items: flex-start;
+  display: flex;
+  flex-direction: row;
+  flex-flow: row wrap;
+  margin: 20px auto;
+  width: 90%;
+}
+
+.register-container {
+  margin: 100px auto 50px;
+  width: 90%;
+}

@@ -14,9 +14,6 @@
   margin: 0;
   padding: 0;
 }
-.nerd-container {
-  margin: 50px 5%;
-}
 
 h1,
 h2,
@@ -54,15 +51,4 @@ p {
 .coral .active a,
 .coral .active a:hover {
   background-color: coral;
-}
-
-@media only screen and (max-width: 1200px) {
-  .nerd-container {
-    margin: 25px 3%;
-  }
-}
-@media only screen and (max-width: 810px) {
-  .nerd-container {
-    margin: 0%;
-  }
 }

@@ -96,7 +96,7 @@ class Recipes extends Component {
     const { data: recipes } = this.getPagedData();
     return (
       <React.Fragment>
-        <div className="nerd-container">
+        <div className="recipes-container">
           {/*Search*/}
           <div className="search-bar">
             <SearchBar

@@ -48,8 +48,10 @@ class Home extends Component {
     } else {
       return (
         <React.Fragment>
-          <h1>{msg}</h1>
-          <RegisterForm></RegisterForm>
+          <div className="register-container">
+            <h1>{msg}</h1>
+            <RegisterForm></RegisterForm>
+          </div>
         </React.Fragment>
       );
     }
@@ -102,14 +104,14 @@ class Home extends Component {
   render() {
     return (
       <React.Fragment>
-        <div className="nerd-container">
+        <div className="home-container">
           <h1>Most Popular</h1>
           <div className="recipe-card-container">{this.renderPopular()}</div>
           <br />
           <h1>Random</h1>
           <div className="recipe-card-container">{this.renderRandom()}</div>
-          {this.renderLoggedOutInMsg()}
         </div>
+        {this.renderLoggedOutInMsg()}
       </React.Fragment>
     );
   }

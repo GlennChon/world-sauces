@@ -6,6 +6,8 @@ import Form from "./common/form";
 
 import * as authService from "../services/authService";
 
+import "../css/loginForm.css";
+
 class LoginForm extends Form {
   state = {
     data: { username: "", password: "" },
@@ -41,16 +43,17 @@ class LoginForm extends Form {
 
   render() {
     if (authService.getCurrentUser()) return <Redirect to="/" />;
-    // object destructuring to preven writing this.state....
     return (
       <React.Fragment>
-        <div className="nerd-container">
-          <h1>Login</h1>
-          <form onSubmit={this.handleSubmit}>
-            {this.renderInput("username", "Username")}
-            {this.renderInput("password", "Password", "password")}
-            {this.renderButton("Login")}
-          </form>
+        <div className="login-form-container">
+          <div className="login-form-wrapper">
+            <h1>Login</h1>
+            <form onSubmit={this.handleSubmit}>
+              {this.renderInput("username", "Username")}
+              {this.renderInput("password", "Password", "password")}
+              <div className="btn-submit">{this.renderButton("Login")}</div>
+            </form>
+          </div>
         </div>
       </React.Fragment>
     );

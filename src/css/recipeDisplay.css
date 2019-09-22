@@ -1,6 +1,10 @@
 .recipe-display-container {
   background: white;
-  margin: 0 10%;
+  margin: 5% 15% 0 15%;
+
+  -moz-box-shadow: 0 0 10px lightGrey;
+  -webkit-box-shadow: 0 0 10px lightGrey;
+  box-shadow: 0 0 10px lightGrey;
 }
 
 .recipe-display-wrapper {
@@ -77,11 +81,8 @@ ol > li::marker {
 }
 
 .btn-edit {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 0;
-  margin: 20px;
+  max-width: 80px;
+  margin: 40px auto;
 }
 
 .btn-share:hover {

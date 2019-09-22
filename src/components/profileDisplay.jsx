@@ -50,7 +50,7 @@ class ProfileDisplay extends Display {
   render() {
     return (
       <React.Fragment>
-        <div className="nerd-container">
+        <div className="profile-container">
           <div className="row justify-content-center">
             {this.renderMainTitle("username")}
           </div>

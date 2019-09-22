@@ -5,6 +5,7 @@ import { Redirect } from "react-router-dom";
 import Form from "./common/form";
 import * as userService from "../services/userService";
 import authService from "../services/authService";
+import "../css/registerForm.css";
 
 class RegisterForm extends Form {
   state = {
@@ -58,13 +59,17 @@ class RegisterForm extends Form {
     if (authService.getCurrentUser()) return <Redirect to="/" />;
     return (
       <React.Fragment>
-        <h1>Register</h1>
-        <form onSubmit={this.handleSubmit}>
-          {this.renderInput("email", "Email")}
-          {this.renderInput("username", "Username")}
-          {this.renderInput("password", "Password", "password")}
-          {this.renderButton("Register")}
-        </form>
+        <div className="register-form-container">
+          <div className="register-form-wrapper">
+            <h1>Register</h1>
+            <form onSubmit={this.handleSubmit}>
+              {this.renderInput("email", "Email")}
+              {this.renderInput("username", "Username")}
+              {this.renderInput("password", "Password", "password")}
+              <div className="btn-submit">{this.renderButton("Register")}</div>
+            </form>
+          </div>
+        </div>
       </React.Fragment>
     );
   }

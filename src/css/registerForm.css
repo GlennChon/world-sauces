@@ -1,26 +1,30 @@
-.recipe-form-container {
-  margin: 50px 10%;
-  padding: 50px;
+.register-form-container {
+  width: 700px;
+  max-width: 100%;
+  margin: 8% auto 0 auto;
+
   background-color: white;
   -moz-box-shadow: 0 0 10px lightGrey;
   -webkit-box-shadow: 0 0 10px lightGrey;
   box-shadow: 0 0 10px lightGrey;
 }
 
-.recipe-form-btn-container {
-  display: inline-flex;
+.register-form-wrapper {
+  max-width: 75%;
   margin: 0 auto;
+  padding: 50px;
 }
 .btn-submit {
-  max-width: 90px;
+  max-width: 80px;
   margin: 40px auto 0 auto;
 }
-
 @media only screen and (max-width: 1200px) {
+  .register-form-wrapper {
+    max-width: 85%;
+  }
 }
 @media only screen and (max-width: 810px) {
-  .recipe-form-container {
-    margin: 0;
-    padding: 25px;
+  .register-form-wrapper {
+    max-width: 100%;
   }
 }

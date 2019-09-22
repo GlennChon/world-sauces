@@ -20,6 +20,10 @@
   padding-bottom: 40px;
   margin: 10px;
   max-width: 425px;
+
+  -moz-box-shadow: 0 0 10px lightGrey;
+  -webkit-box-shadow: 0 0 10px lightGrey;
+  box-shadow: 0 0 10px lightGrey;
 }
 .recipe-card-wrapper:hover {
   cursor: pointer;

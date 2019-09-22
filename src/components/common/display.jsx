@@ -9,7 +9,7 @@ import * as regular from "@fortawesome/free-regular-svg-icons";
 import { toast } from "react-toastify";
 
 import "../../css/display.css";
-
+import { Button } from "react-bootstrap";
 const { faHeart: heartSolid } = solid;
 const { faHeart: heartRegular } = regular;
 
@@ -65,15 +65,16 @@ class Display extends Component {
     );
   };
 
-  renderButton = (label, btnClassName = "") => {
+  renderButton = label => {
     return (
-      <button
+      <Button
+        size="lg"
+        variant="warning"
         aria-label={"Button " + label}
-        className={"btn " + btnClassName}
         onClick={e => this.handleBtnClick(e)}
       >
         {label}
-      </button>
+      </Button>
     );
   };
 

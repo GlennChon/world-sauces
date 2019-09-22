@@ -89,19 +89,11 @@ class ProfileForm extends Component {
               <Tab.Content>
                 {/* Likes */}
                 <Tab.Pane eventKey="first" className="tab-pane">
-                  {this.state.likedRecipes === null ? (
-                    <p>Nothing Saved</p>
-                  ) : (
-                    <RecipeList recipes={this.state.likedRecipes} />
-                  )}
+                  {<RecipeList recipes={this.state.likedRecipes} />}
                 </Tab.Pane>
                 {/* My Recipes */}
                 <Tab.Pane eventKey="second" className="tab-pane">
-                  {this.state.authoredRecipes == null ? (
-                    <p>No Recipes Submitted :(</p>
-                  ) : (
-                    <RecipeList recipes={this.state.authoredRecipes} />
-                  )}
+                  {<RecipeList recipes={this.state.authoredRecipes} />}
                 </Tab.Pane>
                 {/* Profile */}
                 <Tab.Pane eventKey="third" className="tab-pane">
