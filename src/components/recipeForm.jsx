@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import Joi from "joi-browser";
 import { Redirect } from "react-router-dom";
 
@@ -9,6 +9,7 @@ import { getCountries } from "../services/countryService";
 import { getTasteProfiles } from "../services/tasteProfileService";
 import * as recipeService from "../services/recipeService";
 
+import { Modal, Button, Row, Col } from "react-bootstrap";
 import "../css/recipeForm.css";
 
 class RecipeForm extends Form {
@@ -174,46 +175,76 @@ class RecipeForm extends Form {
     }
   };
 
+  doDelete = async () => {
+    try {
+      await recipeService.deleteRecipe(this.state.data._id);
+      this.props.history.push("/");
+    } catch (ex) {
+      if (ex.response && ex.response.status === 400) {
+        let errors = { ...this.state.errors };
+
+        this.setState({ errors });
+      }
+    }
+  };
+
   render() {
     if (!authService.getCurrentUser()) return <Redirect to="/" />;
     const isDisabled = this.state.disabled;
     return (
       <React.Fragment>
-        <div className="nerd-container">
-          <h1>Recipe</h1>
-          <form onSubmit={this.handleSubmit}>
-            {this.renderInput("title", "Title")}
-            {this.renderCheckboxes(
-              "taste_profile",
-              "Taste Profile",
-              this.state.taste_profiles,
-              this.state.checkedItems
-            )}
-            {this.renderSelect(
-              "origin_country",
-              "Country",
-              this.state.countries,
-              isDisabled
-            )}
-            {this.renderInput("description", "Description")}
-            {this.renderInput("image_link", "Image Link")}
-            {/* Dynamic Ingredients*/}
-            {this.renderDynamicInputs(
-              "ingredients",
-              "Ingredients",
-              this.state.data.ingredients,
-              "e.g. 1/4 Cup Vinegar"
-            )}
-            <br />
-            {/* Dynamic Instructions*/}
-            {this.renderDynamicInputs(
-              "instructions",
-              "Instructions",
-              this.state.data.instructions,
-              "e.g. Toast spices."
-            )}
-            <div className="btn-submit">{this.renderButton("Save")}</div>
-          </form>
+        <div className="recipe-form-container">
+          <div className="recipe-form-wrapper">
+            <h1>Recipe</h1>
+            <form onSubmit={this.handleSubmit}>
+              {this.renderInput("title", "Title")}
+              {this.renderCheckboxes(
+                "taste_profile",
+                "Taste Profile",
+                this.state.taste_profiles,
+                this.state.checkedItems
+              )}
+              {this.renderSelect(
+                "origin_country",
+                "Country",
+                this.state.countries,
+                isDisabled
+              )}
+              {this.renderInput("description", "Description")}
+              {this.renderInput("image_link", "Image Link")}
+              {/* Dynamic Ingredients*/}
+              {this.renderDynamicInputs(
+                "ingredients",
+                "Ingredients",
+                this.state.data.ingredients,
+                "e.g. 1/4 Cup Vinegar"
+              )}
+              <br />
+              {/* Dynamic Instructions*/}
+              {this.renderDynamicInputs(
+                "instructions",
+                "Instructions",
+                this.state.data.instructions,
+                "e.g. Toast spices."
+              )}
+              <Row>
+                <div className="recipe-form-btn-container">
+                  <Col>
+                    <div className="btn-submit">
+                      {this.props.match.params.id === "new" ? null : (
+                        <div>{this.renderDeleteButton("Delete")}</div>
+                      )}
+                    </div>
+                  </Col>
+                  <Col>
+                    <div className="btn-submit">
+                      {this.renderButton("Save")}
+                    </div>
+                  </Col>
+                </div>
+              </Row>
+            </form>
+          </div>
         </div>
       </React.Fragment>
     );

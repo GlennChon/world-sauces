@@ -5,7 +5,7 @@ import Select from "./select";
 import Input from "./input";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTimesCircle } from "@fortawesome/free-regular-svg-icons";
-
+import { Button } from "react-bootstrap";
 class Form extends Component {
   state = {
     data: {},
@@ -50,6 +50,12 @@ class Form extends Component {
     this.doSubmit();
   };
 
+  handleDelete = e => {
+    // Prevents full page reload on submit
+    e.preventDefault();
+    this.doDelete();
+  };
+
   handleChange = ({ currentTarget: input }) => {
     // Clone all in state.errors
     const errors = { ...this.state.errors };
@@ -76,7 +82,7 @@ class Form extends Component {
     //get dynamic input field from map and push value
     const list = data[name];
     const text = dynamicInputs[name];
-    if (text.length < 5) {
+    if (typeof text === "undefined" || text.length < 5) {
       errors[name] = name + " can't be less than 5 characters";
       this.setState({ errors, data, dynamicInputs });
       return;
@@ -156,13 +162,31 @@ class Form extends Component {
 
   renderButton(label) {
     return (
-      <button
+      <Button
+        size="lg"
+        variant="warning"
         aria-label={"Button " + label}
         disabled={this.validate()}
-        className="btn btn-warning form-control"
+        className="form-control"
+        onClick={e => this.handleSubmit(e)}
       >
         {label}
-      </button>
+      </Button>
+    );
+  }
+
+  renderDeleteButton(label) {
+    return (
+      <Button
+        size="lg"
+        variant="warning"
+        aria-label={"Button " + label}
+        disabled={this.validate()}
+        className="form-control"
+        onClick={e => this.handleDelete(e)}
+      >
+        {label}
+      </Button>
     );
   }
 
