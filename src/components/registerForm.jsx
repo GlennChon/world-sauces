@@ -40,7 +40,7 @@ class RegisterForm extends Form {
     // Call the server
     try {
       const response = await userService.register(this.state.data);
-      authService.loginWithJwt(response.headers["x-auth-token"]);
+      authService.loginWithJwt(response.headers["ws-auth-token"]);
       window.location = "/";
     } catch (ex) {
       if (ex.response && ex.response.status === 400) {
@@ -66,7 +66,7 @@ class RegisterForm extends Form {
               {this.renderInput("email", "Email")}
               {this.renderInput("username", "Username")}
               {this.renderInput("password", "Password", "password")}
-              <div className="btn-submit">{this.renderButton("Register")}</div>
+              <div className="btn-submit">{this.renderButton("Submit")}</div>
             </form>
           </div>
         </div>
