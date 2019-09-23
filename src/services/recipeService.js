@@ -44,8 +44,7 @@ export function saveRecipe(recipe) {
 }
 
 export function deleteRecipe(recipeId) {
-  const body = { id: recipeId };
-  return http.delete(apiEndpoint, body);
+  return http.delete(apiEndpoint + "/" + recipeId);
 }
 
 export function getRecipesLiked(likes) {
