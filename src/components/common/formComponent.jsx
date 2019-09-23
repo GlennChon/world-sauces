@@ -4,8 +4,9 @@ import Joi from "joi-browser";
 import Select from "./select";
 import Input from "./input";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faTimesCircle } from "@fortawesome/free-regular-svg-icons";
-import { Button, Form } from "react-bootstrap";
+import { faPlus, faTimes } from "@fortawesome/free-solid-svg-icons";
+import { Button, Form, InputGroup, ListGroup, Row, Col } from "react-bootstrap";
+import "../../css/formComponent.css";
 
 class FormComponent extends Component {
   state = {
@@ -196,14 +197,19 @@ class FormComponent extends Component {
   renderInput(name, label, type = "text") {
     const { data, errors } = this.state;
     return (
-      <Input
-        name={name}
-        type={type}
-        label={label}
-        value={data[name] || ""}
-        error={errors[name]}
-        onChange={this.handleChange}
-      />
+      <Form.Group>
+        <Form.Label htmlFor={name}>{label}</Form.Label>
+        <InputGroup controlId={"input-" + label}>
+          <Input
+            name={name}
+            type={type}
+            label={label}
+            value={data[name] || ""}
+            error={errors[name]}
+            onChange={this.handleChange}
+          />
+        </InputGroup>
+      </Form.Group>
     );
   }
 
@@ -226,43 +232,48 @@ class FormComponent extends Component {
     const { errors, dynamicInputs } = this.state;
     return (
       <React.Fragment>
-        <label htmlFor={name}>{label}</label>
-        <div className="input-group">
-          <input
-            name={name}
-            placeholder={"Press 'enter' to add: " + placeholder}
-            className="form-control"
-            type={type}
-            value={dynamicInputs[name] || ""}
-            onKeyDown={e => this.keyPress(e)}
-            onChange={e => this.handleDynamicInputChange(e, name)}
-          />
-          <input
-            type="button"
-            name={name}
-            value=" + "
-            onClick={e => this.handleDynamicInputAdd(e)}
-          />
-        </div>
-        {errors[name] && (
-          <div className="alert alert-danger">{errors[name]}</div>
-        )}
-        <ul className="list-group">
+        <Form.Label htmlFor={name}>{label}</Form.Label>
+        <Form.Group>
+          <InputGroup>
+            <Input
+              name={name}
+              placeholder={"Press 'enter' to add: " + placeholder}
+              className="form-control"
+              type={type}
+              value={dynamicInputs[name] || ""}
+              onKeyDown={e => this.keyPress(e)}
+              onChange={e => this.handleDynamicInputChange(e, name)}
+            />
+            <InputGroup.Append>
+              <Button
+                variant="outline-secondary"
+                type="button"
+                name={name}
+                onClick={e => this.handleDynamicInputAdd(e)}
+              >
+                <FontAwesomeIcon icon={faPlus} />
+              </Button>
+            </InputGroup.Append>
+          </InputGroup>
+          {errors[name] && (
+            <div className="alert alert-danger">{errors[name]}</div>
+          )}
+        </Form.Group>
+        <ListGroup variant="flush">
           {options.map((item, i) => (
-            <li
-              key={i}
-              className="list-group-item d-flex justify-content-between align-items-center"
-            >
-              {item.value}
-              <button
-                className="btn dynamic-input-btn"
+            <Row className="justify-content-sm-center">
+              <ListGroup.Item key={i}>{item.value}</ListGroup.Item>
+              <Button
+                variant="outline-secondary"
+                size="sm"
+                className="dynamic-input-btn"
                 onClick={e => this.handleDynamicInputRemove(e, name, i)}
               >
-                <FontAwesomeIcon icon={faTimesCircle} />
-              </button>
-            </li>
+                <FontAwesomeIcon icon={faTimes} />
+              </Button>
+            </Row>
           ))}
-        </ul>
+        </ListGroup>
       </React.Fragment>
     );
   }
@@ -271,7 +282,7 @@ class FormComponent extends Component {
     const { errors } = this.state;
     return (
       <React.Fragment>
-        <div className="form-group">
+        <Form.Group>
           <label htmlFor={name}>{label}</label>
           <br />
           {options.map(item => (
@@ -293,7 +304,7 @@ class FormComponent extends Component {
           {errors[name] && (
             <div className="alert alert-danger">{errors[name]}</div>
           )}
-        </div>
+        </Form.Group>
       </React.Fragment>
     );
   }

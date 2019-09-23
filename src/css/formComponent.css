@@ -1,0 +1,7 @@
+.list-group-item {
+  width: 80%;
+}
+.list-group .btn {
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
+}
