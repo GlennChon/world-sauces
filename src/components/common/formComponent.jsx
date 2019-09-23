@@ -5,8 +5,9 @@ import Select from "./select";
 import Input from "./input";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTimesCircle } from "@fortawesome/free-regular-svg-icons";
-import { Button } from "react-bootstrap";
-class Form extends Component {
+import { Button, Form } from "react-bootstrap";
+
+class FormComponent extends Component {
   state = {
     data: {},
     checkedItems: new Map(),
@@ -164,6 +165,7 @@ class Form extends Component {
     return (
       <Button
         size="lg"
+        type="submit"
         variant="warning"
         aria-label={"Button " + label}
         disabled={this.validate()}
@@ -179,6 +181,7 @@ class Form extends Component {
     return (
       <Button
         size="lg"
+        type="button"
         variant="warning"
         aria-label={"Button " + label}
         disabled={this.validate()}
@@ -296,4 +299,4 @@ class Form extends Component {
   }
 }
 
-export default Form;
+export default FormComponent;

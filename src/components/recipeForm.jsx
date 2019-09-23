@@ -2,17 +2,17 @@ import React, { useState } from "react";
 import Joi from "joi-browser";
 import { Redirect } from "react-router-dom";
 
-import Form from "./common/form";
+import FormComponent from "./common/formComponent";
 
 import * as authService from "../services/authService";
 import { getCountries } from "../services/countryService";
 import { getTasteProfiles } from "../services/tasteProfileService";
 import * as recipeService from "../services/recipeService";
 
-import { Modal, Button, Row, Col } from "react-bootstrap";
+import { Modal, Button, Row, Col, Form } from "react-bootstrap";
 import "../css/recipeForm.css";
 
-class RecipeForm extends Form {
+class RecipeForm extends FormComponent {
   state = {
     data: {
       _id: "",
@@ -196,7 +196,7 @@ class RecipeForm extends Form {
         <div className="recipe-form-container">
           <div className="recipe-form-wrapper">
             <h1>Recipe</h1>
-            <form onSubmit={this.handleSubmit}>
+            <Form onSubmit={this.handleSubmit}>
               {this.renderInput("title", "Title")}
               {this.renderCheckboxes(
                 "taste_profile",
@@ -243,7 +243,7 @@ class RecipeForm extends Form {
                   </Col>
                 </div>
               </Row>
-            </form>
+            </Form>
           </div>
         </div>
       </React.Fragment>

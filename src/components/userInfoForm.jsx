@@ -3,11 +3,11 @@ import Joi from "joi-browser";
 
 import * as authService from "../services/authService";
 import * as userService from "../services/userService";
-import Form from "./common/form";
+import FormComponent from "./common/formComponent";
 
 import { toast } from "react-toastify";
-
-class UserInfoForm extends Form {
+import { Form } from "react-bootstrap";
+class UserInfoForm extends FormComponent {
   state = {
     data: {
       _id: "",
@@ -81,13 +81,13 @@ class UserInfoForm extends Form {
   render() {
     return (
       <React.Fragment>
-        <form onSubmit={this.handleSubmit}>
+        <Form onSubmit={this.handleSubmit}>
           <h2>{this.state.username}</h2>
           {this.renderInput("firstName", "First Name")}
           {this.renderInput("lastName", "Last Name")}
           {this.renderInput("about", "About")}
           {this.renderButton("Update")}
-        </form>
+        </Form>
       </React.Fragment>
     );
   }

@@ -2,12 +2,13 @@ import React from "react";
 import Joi from "joi-browser";
 import { Redirect } from "react-router-dom";
 
-import Form from "./common/form";
+import FormComponent from "./common/formComponent";
 import * as userService from "../services/userService";
 import authService from "../services/authService";
 import "../css/registerForm.css";
+import { Form } from "react-bootstrap";
 
-class RegisterForm extends Form {
+class RegisterForm extends FormComponent {
   state = {
     data: { email: "", username: "", password: "" },
     errors: {}
@@ -62,12 +63,12 @@ class RegisterForm extends Form {
         <div className="register-form-container">
           <div className="register-form-wrapper">
             <h1>Register</h1>
-            <form onSubmit={this.handleSubmit}>
+            <Form onSubmit={this.handleSubmit}>
               {this.renderInput("email", "Email")}
               {this.renderInput("username", "Username")}
               {this.renderInput("password", "Password", "password")}
               <div className="btn-submit">{this.renderButton("Submit")}</div>
-            </form>
+            </Form>
           </div>
         </div>
       </React.Fragment>

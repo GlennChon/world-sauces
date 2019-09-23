@@ -1,14 +1,15 @@
 import React from "react";
+import { Form } from "react-bootstrap";
 
 const Select = ({ name, label, options, error, isDisabled, ...rest }) => {
   return (
-    <div className="form-group">
-      <label htmlFor={name}>{label}</label>
-      <select
+    <Form.Group controlId={`input-select-${label}`}>
+      <Form.Label htmlFor={name}>{label}</Form.Label>
+      <Form.Control
+        as="select"
         name={name}
         id={name}
         {...rest}
-        className="form-control"
         disabled={isDisabled}
       >
         <option value="" />
@@ -17,9 +18,9 @@ const Select = ({ name, label, options, error, isDisabled, ...rest }) => {
             {option.name}
           </option>
         ))}
-      </select>
+      </Form.Control>
       {error && <div className="alert alert-danger">{error}</div>}
-    </div>
+    </Form.Group>
   );
 };
 

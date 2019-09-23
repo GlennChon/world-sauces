@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSearch } from "@fortawesome/free-solid-svg-icons";
+import { Form } from "react-bootstrap";
 class SearchBar extends Component {
   state = { searchQuery: "", searchCountry: "" };
 
@@ -23,7 +24,7 @@ class SearchBar extends Component {
   render() {
     return (
       <React.Fragment>
-        <form onSubmit={this.handleSubmit}>
+        <Form onSubmit={this.handleSubmit}>
           <div className="form-group">
             <div className="input-group">
               <select
@@ -58,7 +59,7 @@ class SearchBar extends Component {
               </div>
             </div>
           </div>
-        </form>
+        </Form>
       </React.Fragment>
     );
   }
