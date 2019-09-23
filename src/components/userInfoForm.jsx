@@ -86,7 +86,7 @@ class UserInfoForm extends FormComponent {
           {this.renderInput("firstName", "First Name")}
           {this.renderInput("lastName", "Last Name")}
           {this.renderInput("about", "About")}
-          {this.renderButton("Update")}
+          <div className="btn-submit">{this.renderButton("Update")}</div>
         </Form>
       </React.Fragment>
     );

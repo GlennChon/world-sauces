@@ -52,3 +52,8 @@ p {
 .coral .active a:hover {
   background-color: coral;
 }
+
+.btn-submit {
+  max-width: 120px;
+  margin: 40px auto 0 auto;
+}

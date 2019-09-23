@@ -106,7 +106,7 @@ class AccountInfoForm extends FormComponent {
           {this.renderInput("email", "Email")}
           {this.renderInput("newPass", "New Password", "password")}
           {this.renderInput("password", "Current Password", "password")}
-          {this.renderButton("Update")}
+          <div className="btn-submit">{this.renderButton("Update")}</div>
         </Form>
       </React.Fragment>
     );
