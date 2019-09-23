@@ -1,7 +1,9 @@
 .list-group-item {
-  width: 80%;
+  width: 75%;
 }
 .list-group .btn {
-  border-top-left-radius: 0;
-  border-bottom-left-radius: 0;
+  border-color: lightgrey;
+}
+.input-group .btn {
+  border-color: lightgrey;
 }

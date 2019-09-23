@@ -259,19 +259,21 @@ class FormComponent extends Component {
             <div className="alert alert-danger">{errors[name]}</div>
           )}
         </Form.Group>
-        <ListGroup variant="flush">
+        <ListGroup>
           {options.map((item, i) => (
-            <Row className="justify-content-sm-center">
-              <ListGroup.Item key={i}>{item.value}</ListGroup.Item>
-              <Button
-                variant="outline-secondary"
-                size="sm"
-                className="dynamic-input-btn"
-                onClick={e => this.handleDynamicInputRemove(e, name, i)}
-              >
-                <FontAwesomeIcon icon={faTimes} />
-              </Button>
-            </Row>
+            <Col xs={12}>
+              <Row className="justify-content-sm-center">
+                <ListGroup.Item key={i}>{item.value}</ListGroup.Item>
+                <Button
+                  variant="outline-secondary"
+                  size="sm"
+                  className="dynamic-input-btn"
+                  onClick={e => this.handleDynamicInputRemove(e, name, i)}
+                >
+                  <FontAwesomeIcon icon={faTimes} />
+                </Button>
+              </Row>
+            </Col>
           ))}
         </ListGroup>
       </React.Fragment>
