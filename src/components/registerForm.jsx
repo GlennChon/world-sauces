@@ -26,7 +26,7 @@ class RegisterForm extends FormComponent {
       .label("Username"),
     password: Joi.string()
       .min(6)
-      .max(30)
+      .max(128)
       .required()
       .label("Password"),
     firstName: Joi.string()
