@@ -30,17 +30,20 @@ class AccountInfoForm extends FormComponent {
     email: Joi.string()
       .email()
       .required()
+      .min(3)
+      .max(255)
       .label("Email"),
     username: Joi.string().required(),
     registerDate: Joi.string().allow("", null),
     emailVerified: Joi.boolean(),
     newPass: Joi.string()
       .min(6)
+      .max(128)
       .allow("", null)
       .label("New Password"),
     password: Joi.string()
       .min(6)
-      .max(30)
+      .max(128)
       .required()
       .label("Current Password")
   };

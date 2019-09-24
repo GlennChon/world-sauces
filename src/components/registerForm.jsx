@@ -17,11 +17,13 @@ class RegisterForm extends FormComponent {
   schema = {
     email: Joi.string()
       .email()
+      .min(5)
+      .max(255)
       .required()
       .label("Email"),
     username: Joi.string()
       .min(3)
-      .max(16)
+      .max(20)
       .required()
       .label("Username"),
     password: Joi.string()
