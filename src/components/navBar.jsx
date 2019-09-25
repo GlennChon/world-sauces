@@ -24,7 +24,6 @@ const NavBar = ({ user }) => {
             <NavLink className="nav-item nav-link" to="/recipes">
               <h4>Recipes</h4>
             </NavLink>
-
             {!user && (
               <React.Fragment>
                 <NavLink className="nav-item nav-link" to="/login">
@@ -40,6 +39,13 @@ const NavBar = ({ user }) => {
                 <NavLink className="nav-item nav-link" to="/recipe/edit/new">
                   <h4>Add Recipe</h4>
                 </NavLink>
+              </React.Fragment>
+            )}
+            <NavLink className="nav-item nav-link" to="/about">
+              <h4>About</h4>
+            </NavLink>
+            {user && (
+              <React.Fragment>
                 <NavLink className="nav-item nav-link" to={"/profile/me"}>
                   <h4>{user.username}</h4>
                 </NavLink>

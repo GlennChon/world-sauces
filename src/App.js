@@ -12,6 +12,7 @@ import Home from "./components/home";
 import NavBar from "./components/navBar";
 import Recipes from "./components/recipes";
 // import Footer from "./components/footer";
+import About from "./components/about";
 import Logout from "./components/logout";
 import NotFound from "./components/notFound";
 import LoginForm from "./components/loginForm";
@@ -50,6 +51,7 @@ class App extends Component {
             <Switch>
               <Route path="/logout" component={Logout} />
               <Route path="/login" component={LoginForm} />
+              <Route path="/about" component={About} />
               <Route path="/not-found" component={NotFound} />
 
               <ProtectedRoute path="/recipe/edit/:id" component={RecipeForm} />
