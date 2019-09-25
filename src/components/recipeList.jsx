@@ -1,26 +1,16 @@
 import React, { Component } from "react";
 import RecipeCard from "./recipeCard";
-import VisibilitySensor from "react-visibility-sensor";
 import { withRouter } from "react-router-dom";
 import { loaderImg } from "../config.json";
 import Img from "react-image";
 
 class RecipeList extends Component {
-  handleCardClick = (recipeId, e) => {
-    e.preventDefault();
-    this.props.history.push("/recipe/" + recipeId);
-  };
   mapRecipeList = () => {
     try {
       return this.props.recipes.map((recipe, i) => (
-        <VisibilitySensor key={i}>
-          <div
-            className="recipe-card-wrapper"
-            onClick={e => this.handleCardClick(recipe._id, e)}
-          >
-            <RecipeCard recipe={recipe} />
-          </div>
-        </VisibilitySensor>
+        <div key={i} className="recipe-card-wrapper">
+          <RecipeCard recipe={recipe} />
+        </div>
       ));
     } catch (err) {
       console.log(err);
