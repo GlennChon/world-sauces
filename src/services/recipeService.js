@@ -7,6 +7,8 @@ function recipeUrl(id) {
 }
 
 export function getRecipes(
+  page = 1,
+  size = 10,
   search = "",
   country = "",
   author = "",
@@ -14,17 +16,17 @@ export function getRecipes(
 ) {
   let url =
     apiEndpoint +
-    `/?search=${search}&country=${country}&author=${author}&sort=${sort}`;
+    `/?search=${search}&country=${country}&author=${author}&sort=${sort}&page=${page}&size=${size}`;
   return http.get(url);
 }
 
-export function getPopular() {
-  let url = apiEndpoint + "/popular";
+export function getPopular(page = 1, size = 10) {
+  let url = apiEndpoint + `/popular?page=${page}&size=${size}`;
   return http.get(url);
 }
 
-export function getRandom() {
-  let url = apiEndpoint + "/random";
+export function getRandom(page = 1, size = 6) {
+  let url = apiEndpoint + `/random?&page=${page}&size=${size}`;
   return http.get(url);
 }
 
