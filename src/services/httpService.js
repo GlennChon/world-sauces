@@ -12,6 +12,7 @@ axios.interceptors.response.use(null, error => {
 
   if (!expectedError) {
     logger.log(error);
+    console.log(JSON.stringify(error));
     toast.error(JSON.stringify(error));
   }
 
