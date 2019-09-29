@@ -1,6 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import _ from "lodash";
+import { Pagination as Paginate } from "react-bootstrap";
 
 const Pagination = ({ itemsCount, pageSize, currentPage, onPageChange }) => {
   const pagesCount = Math.ceil(itemsCount / pageSize);
@@ -9,18 +10,17 @@ const Pagination = ({ itemsCount, pageSize, currentPage, onPageChange }) => {
 
   return (
     <nav>
-      <ul className="pagination">
+      <Paginate>
         {pages.map(page => (
-          <li
+          <Paginate.Item
             key={page}
-            className={page === currentPage ? "page-item active" : "page-item"}
+            onClick={() => onPageChange(page)}
+            className={page === currentPage ? "active" : ""}
           >
-            <a className="page-link" onClick={() => onPageChange(page)}>
-              {page}
-            </a>
-          </li>
+            {page}
+          </Paginate.Item>
         ))}
-      </ul>
+      </Paginate>
     </nav>
   );
 };
