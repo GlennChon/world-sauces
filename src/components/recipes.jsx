@@ -79,7 +79,11 @@ class Recipes extends Component {
       searchQuery,
       searchCountry
     );
-    if (recipes.length > 0) {
+    if (recipes.length === 0) {
+      this.setState({ hasMoreRecipes: false, hasRecipes: false });
+    } else if (recipes.length < this.state.pageSize) {
+      this.setState({ hasMoreRecipes: false, hasRecipes: true });
+    } else {
       this.setState({
         recipes,
         searchQuery,
@@ -88,8 +92,6 @@ class Recipes extends Component {
         hasRecipes: true,
         hasMoreRecipes: true
       });
-    } else {
-      this.setState({ hasMoreRecipes: false, hasRecipes: false });
     }
   };
 
