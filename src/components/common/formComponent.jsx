@@ -4,7 +4,7 @@ import Joi from "joi-browser";
 import Select from "./select";
 import Input from "./input";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faPlus, faTimes } from "@fortawesome/free-solid-svg-icons";
+import { faPlus, faTimes, faSearch } from "@fortawesome/free-solid-svg-icons";
 import { Button, Form, InputGroup, ListGroup, Row, Col } from "react-bootstrap";
 import "../../css/formComponent.css";
 
@@ -177,7 +177,21 @@ class FormComponent extends Component {
       </Button>
     );
   }
-
+  renderSearchButton(label) {
+    return (
+      <Button
+        size="lg"
+        type="submit"
+        variant="warning"
+        aria-label={"Button " + label}
+        disabled={this.validate()}
+        className="form-control"
+        onClick={e => this.handleSearch(e)}
+      >
+        <FontAwesomeIcon icon={faSearch} />
+      </Button>
+    );
+  }
   renderDeleteButton(label) {
     return (
       <Button
