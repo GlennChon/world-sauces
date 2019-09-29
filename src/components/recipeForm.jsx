@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import Joi from "joi-browser";
 import { Redirect } from "react-router-dom";
 
@@ -9,7 +9,7 @@ import { getCountries } from "../services/countryService";
 import { getTasteProfiles } from "../services/tasteProfileService";
 import * as recipeService from "../services/recipeService";
 
-import { Modal, Button, Row, Col, Form } from "react-bootstrap";
+import { Row, Col, Form } from "react-bootstrap"; // modal and button might be used here
 import "../css/recipeForm.css";
 
 class RecipeForm extends FormComponent {
