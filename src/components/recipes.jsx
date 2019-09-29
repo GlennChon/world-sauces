@@ -52,15 +52,21 @@ class Recipes extends Component {
     );
 
     // if it getRecipes returns nothing, end of infinite scroll
-    if (newRecipes.data.length > 0) {
+    if (newRecipes.data.length < 1 || newRecipes.data.length < pageSize) {
       this.setState({
         recipes: recipes.concat(newRecipes.data),
         currentPage: currentPage + 1,
         totalCount: totalCount + newRecipes.length,
-        hasRecipes: true
+        hasMoreRecipes: false
       });
     } else {
-      this.setState({ hasMoreRecipes: false });
+      this.setState({
+        recipes: recipes.concat(newRecipes.data),
+        currentPage: currentPage + 1,
+        totalCount: totalCount + newRecipes.length,
+        hasMoreRecipes: true,
+        hasRecipes: true
+      });
     }
   };
 
