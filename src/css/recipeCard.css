@@ -20,7 +20,7 @@
   padding-bottom: 40px;
   margin: 10px;
   min-width: 275px;
-  max-width: 425px;
+  max-width: 400px;
 
   -moz-box-shadow: 0 0 10px lightGrey;
   -webkit-box-shadow: 0 0 10px lightGrey;
@@ -46,6 +46,10 @@ h3 {
   width: 100%;
   margin: 0;
   padding: 0;
+}
+.default-img {
+  min-width: 275px;
+  max-width: 400px;
 }
 .cover {
   height: 100%;
