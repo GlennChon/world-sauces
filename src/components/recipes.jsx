@@ -82,7 +82,14 @@ class Recipes extends Component {
     if (recipes.length === 0) {
       this.setState({ hasMoreRecipes: false, hasRecipes: false });
     } else if (recipes.length < this.state.pageSize) {
-      this.setState({ hasMoreRecipes: false, hasRecipes: true });
+      this.setState({
+        recipes,
+        searchQuery,
+        searchCountry,
+        currentPage: 1,
+        hasMoreRecipes: false,
+        hasRecipes: true
+      });
     } else {
       this.setState({
         recipes,
