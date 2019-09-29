@@ -3,6 +3,8 @@ import { Container, ListGroup, ListGroupItem, Col, Row } from "react-bootstrap";
 
 class About extends Component {
   state = {};
+
+  //Display this : As an Amazon Associate I earn from qualifying purchases.
   render() {
     return (
       <>
