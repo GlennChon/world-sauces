@@ -45,7 +45,7 @@ class Recipes extends Component {
     } = this.state;
 
     const newRecipes = await recipeService.getRecipes(
-      currentPage,
+      currentPage + 1,
       pageSize,
       searchQuery,
       searchCountry
@@ -71,7 +71,6 @@ class Recipes extends Component {
   };
 
   searchRecipes = async (searchQuery, searchCountry) => {
-    console.log(searchQuery + " " + searchCountry);
     searchCountry = searchCountry === "any" ? "" : searchCountry;
     const { data: recipes } = await recipeService.getRecipes(
       1,
