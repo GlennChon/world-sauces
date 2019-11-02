@@ -22,8 +22,10 @@ class Recipes extends Component {
     hasRecipes: true,
     hasMoreRecipes: true
   };
+  _isMounted = false;
 
   async componentDidMount() {
+    this._isMounted = true;
     const { data: recipes } = await recipeService.getRecipes(
       this.state.currentPage,
       this.state.pageSize,
@@ -31,7 +33,13 @@ class Recipes extends Component {
       this.state.searchCountry
     );
     const { data: countries } = await getCountries();
-    this.setState({ recipes, countries });
+    if (this._isMounted) {
+      this.setState({ recipes, countries });
+    }
+  }
+
+  async componentWillUnmount() {
+    this._isMounted = false;
   }
 
   fetchMoreRecipes = async () => {

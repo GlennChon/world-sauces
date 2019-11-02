@@ -10,14 +10,23 @@ import authService from "../services/authService";
 import "../css/home.css";
 
 class Home extends Component {
+  _isMounted = false;
   state = {
     popular: {},
     random: {}
   };
+
   async componentDidMount() {
-    await this.loadPopularRecipes();
-    await this.loadRandomRecipes();
-    setTimeout(this.apiResponseCheck(), 5000);
+    this._isMounted = true;
+    if (this._isMounted) {
+      await this.loadPopularRecipes();
+      await this.loadRandomRecipes();
+      setTimeout(this.apiResponseCheck(), 5000);
+    }
+  }
+
+  async componentWillUnmount() {
+    this._isMounted = false;
   }
 
   // Temporary solution for spin up time of heroku free tier
