@@ -45,6 +45,9 @@ class ProfileForm extends Component {
       const userRecipes = await recipeService.getRecipes(
         "",
         "",
+        "",
+        "",
+        "",
         userInfo.username
       );
 
