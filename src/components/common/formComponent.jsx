@@ -208,12 +208,12 @@ class FormComponent extends Component {
     );
   }
 
-  renderInput(name, label, type = "text") {
+  renderInput(name, label, type = "text", placeholder = "") {
     const { data, errors } = this.state;
     return (
       <Form.Group>
         <Form.Label htmlFor={name}>{label}</Form.Label>
-        <InputGroup controlId={"input-" + label}>
+        <InputGroup controlid={"input-" + label}>
           <Input
             name={name}
             type={type}
@@ -221,6 +221,7 @@ class FormComponent extends Component {
             value={data[name] || ""}
             error={errors[name]}
             onChange={this.handleChange}
+            placeholder={placeholder}
           />
         </InputGroup>
       </Form.Group>
@@ -275,7 +276,7 @@ class FormComponent extends Component {
         </Form.Group>
         <ListGroup>
           {options.map((item, i) => (
-            <Col xs={12}>
+            <Col xs={12} key={i}>
               <Row className="justify-content-sm-center">
                 <ListGroup.Item key={i}>{item.value}</ListGroup.Item>
                 <Button
@@ -303,9 +304,6 @@ class FormComponent extends Component {
           <br />
           {options.map(item => (
             <div className="form-check form-check-inline" key={item._id}>
-              <label htmlFor={item.name} className="form-check-label">
-                {item.name}
-              </label>
               <input
                 key={item._id}
                 id={item.name}
@@ -314,7 +312,10 @@ class FormComponent extends Component {
                 onChange={e => this.handleCheckboxChange(e, name)}
                 className="form-check-input"
                 type={type}
-              />
+              />{" "}
+              <label htmlFor={item.name} className="form-check-label">
+                {item.name}
+              </label>
             </div>
           ))}
           {errors[name] && (
