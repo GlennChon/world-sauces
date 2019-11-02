@@ -19,7 +19,7 @@ const RecipeCard = ({ recipe }) => {
       <VisibilitySensor>
         {({ isVisible }) => (
           <a
-            style={{ "text-decoration": "none" }}
+            style={{ textDecoration: "none" }}
             href={"/recipe/" + recipe._id}
             className="recipe-card"
           >

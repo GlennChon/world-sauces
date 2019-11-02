@@ -3,7 +3,7 @@ import { Form } from "react-bootstrap";
 
 const Select = ({ name, label, options, error, isDisabled, ...rest }) => {
   return (
-    <Form.Group controlId={`input-select-${label}`}>
+    <Form.Group controlid={`input-select-${label}`}>
       <Form.Label htmlFor={name}>{label}</Form.Label>
       <Form.Control
         as="select"

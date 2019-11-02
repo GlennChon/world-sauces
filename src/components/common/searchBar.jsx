@@ -48,7 +48,7 @@ class SearchBar extends Component {
                 value={this.state.searchQuery}
                 className="form-control input-group"
               />
-              <div class="input-group-append">
+              <div className="input-group-append">
                 <button
                   className="btn btn-secondary"
                   type="submit"
