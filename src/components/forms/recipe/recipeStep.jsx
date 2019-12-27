@@ -84,6 +84,7 @@ const RecipeStep = ({ next, values = null }) => (
             errors={errors}
             touched={touched}
           />
+
           <Button disabled={isSubmitting} type="submit">
             Next
           </Button>

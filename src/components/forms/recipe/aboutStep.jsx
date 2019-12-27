@@ -5,6 +5,7 @@ import * as Yup from "yup";
 
 //Inputs
 import FormItem from "../inputs/formItem";
+import DynamicTextDisplay from "../inputs/dynamicTextDisplay";
 
 import "../forms.css";
 
@@ -24,7 +25,8 @@ const AboutSchema = Yup.object().shape({
   sauce_type: Yup.string()
     .min(2, "Too Short!")
     .max(70, "Too Long!")
-    .required("Required")
+    .required("Required"),
+  test: Yup.array()
 });
 
 const AboutStep = ({ back, next, values = null }) => {
@@ -59,7 +61,8 @@ const AboutStep = ({ back, next, values = null }) => {
           taste_profile:
             values.taste_profile != null ? values.taste_profile : [],
           country: values.country != null ? values.country : "",
-          sauce_type: values.sauce_type != null ? values.sauce_type : ""
+          sauce_type: values.sauce_type != null ? values.sauce_type : "",
+          test: []
         }}
         validationSchema={AboutSchema}
         onSubmit={values => {
@@ -124,7 +127,7 @@ const AboutStep = ({ back, next, values = null }) => {
               touched={touched}
             />
             {
-              //Dynamic Checkboxes TasteProfile
+              //Checkboxes TasteProfile
             }
             <FormItem
               name="taste_profile"
@@ -146,7 +149,25 @@ const AboutStep = ({ back, next, values = null }) => {
               errors={errors}
               touched={touched}
             />
-
+            <FormItem
+              name="test"
+              label="Test"
+              type="dynamic-text"
+              placeholder="Test Form Item"
+              onChange={handleChange}
+              onBlur={handleBlur}
+              values={values}
+              errors={errors}
+              touched={touched}
+            />
+            <DynamicTextDisplay
+              name="testdisplay"
+              values={[
+                { value: "test 1" },
+                { value: "test 2" },
+                { value: "test 3" }
+              ]}
+            />
             <Row>
               <Button
                 disabled={isSubmitting}
