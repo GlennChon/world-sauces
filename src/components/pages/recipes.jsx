@@ -1,11 +1,11 @@
 import React, { Component } from "react";
 import _ from "lodash";
 import InfiniteScroll from "react-infinite-scroll-component";
-import * as recipeService from "../services/recipeService";
-import { getCountries } from "../services/countryService";
-import SearchBar from "./common/searchBar";
-import RecipeList from "./recipeList";
-import "../css/recipes.css";
+import * as recipeService from "../../services/recipeService";
+import SearchBar from "../common/searchBar";
+import RecipeList from "../recipeList";
+import "./recipes.css";
+import fetchCountries from "../../services/countryService";
 import { Col } from "react-bootstrap";
 
 class Recipes extends Component {
@@ -32,7 +32,8 @@ class Recipes extends Component {
       this.state.searchQuery,
       this.state.searchCountry
     );
-    const { data: countries } = await getCountries();
+
+    const { data: countries } = await fetchCountries();
     if (this._isMounted) {
       this.setState({ recipes, countries });
     }
@@ -41,6 +42,10 @@ class Recipes extends Component {
   async componentWillUnmount() {
     this._isMounted = false;
   }
+
+  getCountries = () => {
+    return JSON.parse(sessionStorage.getItem("countries"));
+  };
 
   fetchMoreRecipes = async () => {
     const {

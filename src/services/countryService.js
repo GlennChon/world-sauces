@@ -1,16 +1,25 @@
-import http from "./httpService";
+import axios from "axios";
+import { toast } from "react-toastify";
 
-export async function getCountries() {
-  // check session storage for countries
-  let countries;
-  let countriesString = localStorage.getItem("countries");
-  if (countriesString) {
-    countries = JSON.parse(countriesString);
-    return countries;
+const instance = axios.create({
+  baseURL: "https://restcountries.eu/rest/v2",
+  responseType: "json"
+});
+
+instance.interceptors.response.use(null, error => {
+  const expectedError =
+    error.response &&
+    error.response.status >= 400 &&
+    error.response.status < 500;
+
+  if (!expectedError) {
+    console.log(JSON.stringify(error));
+    toast.error(JSON.stringify(error.message));
   }
-  // get countries from api if none in session storage, set session storage
-  countries = await http.get("/countries");
-  localStorage.setItem("countries", JSON.stringify(countries));
 
-  return countries;
-}
+  return Promise.reject(error);
+});
+
+export default {
+  get: instance.get
+};

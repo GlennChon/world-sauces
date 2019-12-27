@@ -1,13 +1,13 @@
 import React, { Component } from "react";
-import * as recipeService from "../services/recipeService";
+import * as recipeService from "../../services/recipeService";
 import _ from "lodash";
 import { withRouter } from "react-router-dom";
 
-import RecipeCard from "./recipeCard";
-import RegisterForm from "./registerForm";
-import authService from "../services/authService";
+import RecipeCard from "../recipeCard";
+//import RegisterForm from "./registerForm";
+import authService from "../../services/authService";
 
-import "../css/home.css";
+import "./home.css";
 
 class Home extends Component {
   _isMounted = false;
@@ -50,21 +50,21 @@ class Home extends Component {
     this.setState({ random: json });
   };
 
-  renderLoggedOutInMsg = () => {
-    let msg = "Join the community!";
-    if (authService.getCurrentUser()) {
-      return;
-    } else {
-      return (
-        <React.Fragment>
-          <div className="register-container">
-            <h1>{msg}</h1>
-            <RegisterForm></RegisterForm>
-          </div>
-        </React.Fragment>
-      );
-    }
-  };
+  // renderLoggedOutInMsg = () => {
+  //   let msg = "Join the community!";
+  //   if (authService.getCurrentUser()) {
+  //     return;
+  //   } else {
+  //     return (
+  //       <React.Fragment>
+  //         <div className="register-container">
+  //           <h1>{msg}</h1>
+  //           <RegisterForm></RegisterForm>
+  //         </div>
+  //       </React.Fragment>
+  //     );
+  //   }
+  // };
 
   renderLoggedInMsg = () => {};
 
@@ -120,7 +120,9 @@ class Home extends Component {
           <h1>Random</h1>
           <div className="recipe-card-container">{this.renderRandom()}</div>
         </div>
-        {this.renderLoggedOutInMsg()}
+        {
+          //this.renderLoggedOutInMsg()
+        }
       </React.Fragment>
     );
   }
