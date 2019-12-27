@@ -5,6 +5,7 @@ const extractInputProps = ({ touched, errors, name, ...inputProps }) => {
     ...inputProps
   };
 
+  //Checkbox
   if (props.type === "checkbox") {
     props.value = inputProps.id;
     // check if inputProps[name] is undefined
@@ -22,6 +23,9 @@ const extractInputProps = ({ touched, errors, name, ...inputProps }) => {
         inputProps.checkhelper.remove(index);
       }
     };
+  } else if (props.type === "dynamic-text") {
+    props.type = "text";
+    // Select and TextArea
   } else if (props.type === "select" || props.type === "textarea") {
     props.as = inputProps.type;
   } else {

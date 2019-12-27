@@ -1,29 +1,25 @@
 import React from "react";
 import { useField, ErrorMessage } from "formik";
-import { Form } from "react-bootstrap";
+import { Form, InputGroup, Button } from "react-bootstrap";
 
-const DynamicTextInput = ({
-  name,
-  label,
-  error,
-  touched,
-  type = "text",
-  ...props
-}) => {
-  const [field, meta] = useField({ ...props });
-  const getStyles = () => {
-    if (error && touched) {
-      return {
-        border: "1px solid red"
-      };
-    }
-  };
+import extractInputProps from "./extractInputProps";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faPlus } from "@fortawesome/free-solid-svg-icons";
+
+const DynamicTextInput = props => {
   return (
-    <Form.Group controlId={name}>
-      <Form.Label>{label}</Form.Label>
-      <Form.Control {...props} as="input" style={getStyles()} />
-      {meta.touched && meta.error ? <ErrorMessage name={name} /> : null}
-    </Form.Group>
+    <InputGroup>
+      <Form.Control {...extractInputProps(props)} />
+      <InputGroup.Append>
+        <Button
+          variant="outline-secondary"
+          type="button"
+          onClick={e => this.handleDynamicInputAdd(e)}
+        >
+          <FontAwesomeIcon icon={faPlus} />
+        </Button>
+      </InputGroup.Append>
+    </InputGroup>
   );
 };
 
