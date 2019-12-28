@@ -8,7 +8,7 @@ import auth from "./services/authService";
 
 // Pages
 import Home from "./components/pages/home";
-import Recipes from "./components/pages/recipes";
+//import Recipes from "./components/pages/recipes";
 import AddRecipe from "./components/pages/addRecipe";
 // import Footer from "./components/footer";
 import Logout from "./components/pages/logout";
