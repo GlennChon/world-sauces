@@ -10,6 +10,7 @@
     "axios": "^0.19.0",
     "babel-standalone": "^6.26.0",
     "bootstrap": "^4.3.1",
+    "formik": "^2.0.8",
     "joi-browser": "^13.4.0",
     "jquery": "^3.4.1",
     "jwt-decode": "^2.2.0",
@@ -25,12 +26,13 @@
     "react-image": "^2.2.0",
     "react-infinite-scroll-component": "^4.5.3",
     "react-router-dom": "^5.0.1",
-    "react-scripts": "3.1.1",
+    "react-scripts": "^3.3.0",
     "react-share": "^3.0.1",
     "react-toastify": "^5.3.2",
     "react-visibility-sensor": "^5.1.1",
     "swearjar": "^0.2.0",
-    "webfontloader": "^1.6.28"
+    "webfontloader": "^1.6.28",
+    "yup": "^0.27.0"
   },
   "scripts": {
     "start": "react-scripts start",
