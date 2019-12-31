@@ -51,6 +51,7 @@ const AboutStep = ({ back, next, values = null }) => {
     return setCountries(JSON.parse(sessionStorage.getItem("countries")));
   };
 
+  console.log("about step values:", values);
   return (
     <div>
       <h1>About</h1>
@@ -103,11 +104,11 @@ const AboutStep = ({ back, next, values = null }) => {
               label="Sauce Type"
               placeholder="Sauce Type"
               options={[
-                { value: "Condiment" },
-                { value: "Dip" },
-                { value: "Sauce" },
-                { value: "Marinade" },
-                { value: "Other" }
+                { label: "Condiment", value: "Condiment" },
+                { label: "Dip", value: "Dip" },
+                { label: "Sauce", value: "Sauce" },
+                { label: "Marinade", value: "Marinade" },
+                { label: "Other", value: "Other" }
               ]}
               onChange={handleChange}
               onBlur={handleBlur}
@@ -152,7 +153,7 @@ const AboutStep = ({ back, next, values = null }) => {
             <FormItem
               name="test"
               label="Test"
-              type="dynamic-text"
+              type="dynamictext"
               placeholder="Test Form Item"
               onChange={handleChange}
               onBlur={handleBlur}

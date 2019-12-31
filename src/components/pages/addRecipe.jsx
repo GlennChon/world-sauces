@@ -10,10 +10,20 @@ import { Col } from "react-bootstrap";
 
 const AddRecipe = ({ user }) => {
   const [values, setValues] = useState({
-    ingredients: "",
-    instructions: "",
-    tips: ""
+    description: "",
+    taste_profile: [],
+    country: "",
+    sauce_type: "",
+    test: []
   });
+
+  const steps = [
+    {
+      component: AboutStep,
+      title: "About",
+      specialInputs: ["dynamictext", "checkbox"]
+    }
+  ];
 
   const doSubmit = values => {
     setValues(values);
@@ -26,9 +36,7 @@ const AddRecipe = ({ user }) => {
       <Col>
         <FormWizard
           initialState={values}
-          formComponents={{
-            about: AboutStep
-          }}
+          formComponents={steps}
           doSubmit={doSubmit}
         />
       </Col>

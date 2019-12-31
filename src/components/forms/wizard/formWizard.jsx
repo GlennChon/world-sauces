@@ -50,17 +50,29 @@ const FormWizard = ({ initialState, formComponents, doSubmit, ...props }) => {
     return setCurrentStep(currentStep - 1);
   };
 
+  //TODO:
+  const checkboxChangeHandler = () => {
+    return;
+  };
+
+  const dynamicChangeHandler = () => {
+    return;
+  };
+
   const displayStep = () => {
-    if (currentStep < Object.keys(formComponents).length) {
+    if (currentStep < formComponents.length) {
+      let stepProps = { next: next, back: back, values: formState };
+      if (formComponents[currentStep].specialInputs.includes("dynamictext")) {
+        stepProps = { ...stepProps, onDynamicChange: dynamicChangeHandler };
+      }
+      if (formComponents[currentStep].specialInputs.includes("checkbox")) {
+        stepProps = { ...stepProps, onDynamicChange: checkboxChangeHandler };
+      }
       return (
         <React.Fragment>
           {React.createElement(
-            formComponents[Object.keys(formComponents)[currentStep]],
-            (props = {
-              next: next,
-              back: back,
-              values: formState
-            })
+            formComponents[currentStep].component,
+            (props = stepProps)
           )}
         </React.Fragment>
       );
@@ -87,11 +99,11 @@ const FormWizard = ({ initialState, formComponents, doSubmit, ...props }) => {
   const StepProgress = () => {
     return (
       <Row>
-        {Object.keys(formComponents).map((step, i) => (
+        {formComponents.map((step, i) => (
           <Col key={i}>
             <Row>
               <Col>
-                {step}
+                {step.title}
                 <ProgressBar now={currentStep > i ? 100 : 0} />
               </Col>
             </Row>
