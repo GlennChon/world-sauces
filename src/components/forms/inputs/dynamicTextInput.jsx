@@ -6,6 +6,8 @@ import extractInputProps from "./extractInputProps";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPlus } from "@fortawesome/free-solid-svg-icons";
 
+import PropTypes from "prop-types";
+
 const DynamicTextInput = props => {
   return (
     <InputGroup>
@@ -21,6 +23,18 @@ const DynamicTextInput = props => {
       </InputGroup.Append>
     </InputGroup>
   );
+};
+
+DynamicTextInput.propTypes = {
+  type: "dynamictext",
+  label: PropTypes.string.isRequired,
+  name: PropTypes.string.isRequired,
+  onChange: PropTypes.func.isRequired,
+  onBlur: PropTypes.func.isRequired,
+  errors: PropTypes.object.isRequired,
+  touched: PropTypes.object.isRequired,
+  values: PropTypes.object.isRequired,
+  placeholder: PropTypes.string
 };
 
 export default DynamicTextInput;
