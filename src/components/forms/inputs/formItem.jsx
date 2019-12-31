@@ -19,7 +19,7 @@ const FormInput = props => {
       return CheckboxInput(props);
     case "select":
       return SelectInput(props);
-    case "dynamic-text":
+    case "dynamictext":
       return DynamicTextInput(props);
     case "textarea":
       return TextAreaInput(props);
