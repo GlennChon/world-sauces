@@ -6,6 +6,10 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 ## TODO:
 
+Incorporate react-material-formik-wizard library for recipe submissions
+
+Add more recipe properties (allergies, sauce_type, etc)
+
 Enable social media logins - Google - Facebook
 
 Enable Captcha on form submits
